@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>컨빌디자인 — 성도가 머물고 싶은 공간, 청년이 찾아오는 교회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/common.css">
+<script src="js/portfolio.js" defer></script>
+</head>
+<body>
+
+<!-- ============================================================
+  SHARED HEADER
+  ============================================================ -->
+<header class="site">
+  <div class="container nav">
+    <div class="brand" onclick="location.href='index.html'">
+      컨빌디자인
+      <small>CHURCH INTERIOR STUDIO</small>
+    </div>
+    <ul>
+      <li><a href="index.html#about" class="nav-link">소개</a></li>
+      <li><a href="index.html#portfolio" class="nav-link nav-active">포트폴리오</a></li>
+      <li><a href="index.html#paths" class="nav-link">서비스</a></li>
+      <li><a href="index.html#process" class="nav-link">프로세스</a></li>
+      <li><a href="youtube.html" class="nav-link">SNS</a></li>
+      <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+    </ul>
+    <span data-nav="page-main,cta" class="cta nav-link">무료 상담 신청</span>
+    <button class="nav-mobile-toggle" onclick="openMobileMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="closeMobileMenu()">✕</button>
+  <a href="index.html#about" class="nav-link" onclick="closeMobileMenu()">소개</a>
+  <a href="portfolio_list.html" class="nav-link" onclick="closeMobileMenu()">포트폴리오</a>
+  <a href="index.html#paths" class="nav-link" onclick="closeMobileMenu()">서비스</a>
+  <a href="index.html#process" class="nav-link" onclick="closeMobileMenu()">프로세스</a>
+  <a href="youtube.html" class="nav-link" onclick="closeMobileMenu()">SNS</a>
+  <a href="index.html#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
+  <a href="index.html#cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;display:inline-block;">무료 상담 신청</a>
+</div>
+
+
+<!-- ============================================================
+  PAGE 2: PORTFOLIO LIST
+  ============================================================ -->
+<div>
+
+  <!-- PAGE HEADER -->
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb">
+        <span data-nav="page-main" class="nav-link">Home</span>
+        <span class="sep">/</span>
+        Portfolio
+      </div>
+      <div class="page-eyebrow">— PORTFOLIO ARCHIVE</div>
+      <h1>컨빌이 함께한 교회 공간들</h1>
+      <p class="lead">한 교회, 한 교회의 이야기를 담았습니다.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECT -->
+  <section class="featured-pf">
+    <div class="container-wide">
+      <div class="featured-grid">
+        <div class="featured-img"></div>
+        <div class="featured-info">
+          <div class="pf-num-label">— Featured Project · 01</div>
+          <h2>빛이 머무는 본당,<br>새로운 예배의 시작</h2>
+          <p>30년 된 본당을 자연광 중심으로 재구성한 프로젝트. 강대상부터 성가대석, 영상부의 시야각까지 다시 설계하여, 1,200석 규모의 모든 자리에서 동일한 예배 경험을 누릴 수 있도록 했습니다.</p>
+          <dl class="featured-meta">
+            <div><dt>CHURCH</dt><dd>부산 ㅇㅇ교회</dd></div>
+            <div><dt>TYPE</dt><dd>본당 리모델링</dd></div>
+            <div><dt>SCALE</dt><dd>380평 · 1,200석</dd></div>
+            <div><dt>PERIOD</dt><dd>2024.03 — 06</dd></div>
+          </dl>
+          <span class="featured-cta nav-link" data-nav="page-pf-detail">프로젝트 자세히 보기 →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <div class="filter-bar">
+    <div class="container">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="pfSearch" class="search-input" placeholder="프로젝트 제목으로 검색해 보세요 (2글자 이상)" autocomplete="off" />
+        <button type="button" id="pfSearchClear" class="search-clear" aria-label="검색어 지우기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO GRID -->
+  <section class="pf-section">
+    <div class="container-wide">
+      <div class="pf-grid" id="pfGrid">
+        <article class="pf-item reveal" onclick="location.href='portfolio_detail.html'">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1519302959554-a75be0afc82a?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>빛이 머무는 본당, 새로운 예배의 시작</h3><span class="pf-sub">부산 ㅇㅇ교회 · 380평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1438032005730-c779502df39b?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>작은 채플, 깊은 묵상의 공간</h3><span class="pf-sub">광주 ㅇㅇ교회 · 80평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>청년이 머물고, 다시 찾아오는 라운지</h3><span class="pf-sub">서울 ㅇㅇ교회 · 120평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>사역의 흐름을 담는 사무 공간</h3><span class="pf-sub">부산 ㅇㅇ교회 · 95평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>마을과 함께 나누는 1층 카페</h3><span class="pf-sub">대구 ㅇㅇ교회 · 65평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>30년 본당의 새로운 호흡</h3><span class="pf-sub">인천 ㅇㅇ교회 · 250평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1568667256549-094345857637?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>자연광이 들어오는 교회 도서관</h3><span class="pf-sub">경기 ㅇㅇ교회 · 50평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1520637836862-4d197d17c50a?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>새가족을 위한 환영의 로비</h3><span class="pf-sub">서울 ㅇㅇ교회 · 70평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e85b56e16531?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>어린이 사역실, 함께 자라는 공간</h3><span class="pf-sub">부산 ㅇㅇ교회 · 110평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>노을빛이 닿는 작은 기도실</h3><span class="pf-sub">강원 ㅇㅇ교회 · 35평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>세대를 잇는 다목적 예배홀</h3><span class="pf-sub">울산 ㅇㅇ교회 · 190평</span></div>
+        </article>
+        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1507692812060-98338d07aca3?w=900&q=85')"></div>
+          <div class="pf-overlay"><h3>십자가가 있는 새로운 교회 외관</h3><span class="pf-sub">광주 ㅇㅇ교회 · —</span></div>
+        </article>
+        <div class="empty-state" id="emptyState" style="display:none;"><span class="em">No results</span>검색하신 키워드와 일치하는 프로젝트가 없습니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="container">
+      <span class="eyebrow">— LET'S WORK TOGETHER</span>
+      <h2>우리 교회도, 새로워질 수 있습니다.</h2>
+      <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br>혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+      <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span>
+    </div>
+  </section>
+
+</div><!-- /page-portfolio -->
+
+<!-- ============================================================
+  SHARED FOOTER
+  ============================================================ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">컨빌디자인 <small>Convill Church Studio</small></div>
+        <p>주식회사 컨빌 · 대표 박진하</p>
+        <p>부산광역시 / 서울특별시</p>
+        <p>사업자등록번호 000-00-00000</p>
+        <p>contact@convilldesign.com</p>
+      </div>
+      <div class="foot-col">
+        <h5>SERVICE</h5>
+        <ul>
+          <li><span data-nav="page-main,paths" class="nav-link">반셀프 인테리어 패키지</span></li>
+          <li><span data-nav="page-main,paths" class="nav-link">시공까지 한 번에</span></li>
+          <li><span data-nav="page-main,paths" class="nav-link">교회 브랜딩 패키지</span></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>STUDIO</h5>
+        <ul>
+          <li><span data-nav="page-main,about" class="nav-link">About</span></li>
+          <li><span data-nav="page-portfolio" class="nav-link">Portfolio</span></li>
+          <li><span data-nav="page-main,process" class="nav-link">Process</span></li>
+          <li><span data-nav="page-main,faq" class="nav-link">FAQ</span></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>SNS</h5>
+        <ul>
+          <li><span data-nav="page-sns-youtube" class="nav-link">YouTube</span></li>
+          <li><span data-nav="page-sns-magazine" class="nav-link">Magazine</span></li>
+          <li>KakaoTalk</li>
+          <li>Instagram</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Convill Design. All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>

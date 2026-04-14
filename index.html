@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>컨빌디자인 — 성도가 머물고 싶은 공간, 청년이 찾아오는 교회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/common.css">
+<script src="js/common.js" defer></script>
+</head>
+<body>
+
+<!-- ============================================================
+  SHARED HEADER
+  ============================================================ -->
+<header class="site">
+  <div class="container nav">
+    <div class="brand" onclick="showPage('page-main')">
+      컨빌디자인
+      <small>CHURCH INTERIOR STUDIO</small>
+    </div>
+    <ul>
+      <li><span data-nav="page-main,about" class="nav-link">소개</span></li>
+      <li><a href="portfolio_list.html" class="nav-link">포트폴리오</a></li>
+      <li><span data-nav="page-main,paths" class="nav-link">서비스</span></li>
+      <li><span data-nav="page-main,process" class="nav-link">프로세스</span></li>
+      <li><a href="youtube.html" class="nav-link">SNS</a></li>
+      <li><span data-nav="page-main,faq" class="nav-link">FAQ</span></li>
+    </ul>
+    <span data-nav="page-main,cta" class="cta nav-link">무료 상담 신청</span>
+    <button class="nav-mobile-toggle" onclick="openMobileMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="closeMobileMenu()">✕</button>
+  <span data-nav="page-main,about" class="nav-link" onclick="closeMobileMenu()">소개</span>
+  <span data-nav="page-main,portfolio" class="nav-link" onclick="closeMobileMenu()">포트폴리오</span>
+  <span data-nav="page-main,paths" class="nav-link" onclick="closeMobileMenu()">서비스</span>
+  <span data-nav="page-main,process" class="nav-link" onclick="closeMobileMenu()">프로세스</span>
+  <span data-nav="page-sns-youtube" class="nav-link" onclick="closeMobileMenu()">SNS</span>
+  <span data-nav="page-main,faq" class="nav-link" onclick="closeMobileMenu()">FAQ</span>
+  <span data-nav="page-main,cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;">무료 상담 신청</span>
+</div>
+
+<!-- ============================================================
+  PAGE 1: MAIN
+  ============================================================ -->
+<div class="page active" id="page-main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-inner">
+      <span class="eyebrow">CONVILL · CHURCH INTERIOR</span>
+      <h1>성도가 머물고 싶은 공간,<br>청년이 찾아오는 교회</h1>
+      <p class="lead">10년간 350개 공간을 디자인한 컨빌이,<br>이제 교회만을 위한 인테리어를 시작합니다.</p>
+      <div class="hero-ctas">
+        <span class="btn btn-gold nav-link" data-nav="page-main,cta">무료 상담 신청 →</span>
+        <span class="btn btn-outline nav-link" data-nav="page-portfolio">포트폴리오 보기</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="num">01<small class="why">Why we started<br>designing churches</small></div>
+      <div class="about-photo">
+        <img src="images/ceo.jpg" alt="대표 박진하" />
+        <div class="badge">
+          <p>"오직 성령이 너희에게 임하면 예루살렘과 온유대와 사마리아와 땅끝까지 증인되리라" <em>(사도행전 1:8)</em><br><br>교회는 이 부르심이 시작되는 자리입니다. 성도님들이 이곳에서 위로받고, 다시 세상으로 나아가실 수 있도록 — 컨빌은 한 평 한 평 사명으로 짓겠습니다.</p>
+          <div class="badge-sign">— 대표 박진하 <em>(Jinha Park)</em></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="eyebrow-row">— OUR STORY</div>
+        <h2>인테리어 회사가 아니라,<br>교회를 섬기는 한 사람으로<br>시작했습니다.</h2>
+        <p>10년 넘게 상업 공간을 디자인하면서 350개가 넘는 현장을 다녔습니다. 그러던 어느 날, 한 교회 리모델링 의뢰를 받았습니다.</p>
+        <p>한 푼 두 푼 모아온 헌금으로 마련된 공사 예산. 평생을 교회와 함께 걸어오신 나이 드신 성도님들께 앞으론 더 좋은 공간을 내어드리고 싶다는 목사님의 마음, 새롭게 찾아오시는 새가족들께는 공간을 통해 더 큰 은혜와 따뜻함이 전해지길 바라는 마음.</p>
+        <p>그 마음들이 저를 움직였습니다.<br>그날 결심했습니다.</p>
+        <p class="highlight-line">교회 공간만큼은, 사명으로 짓겠다고.</p>
+        <p>정직한 견적으로 시작합니다. 예배당에 들어선 성도님이 "아, 좋다"라고 한마디 하실 때까지 끝까지 마무리하겠습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 FEATURE CARDS -->
+  <section class="features">
+    <div class="container features-grid">
+      <div class="f-card reveal">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+        </div>
+        <h3>성도님의 헌금을<br>귀하게 여깁니다</h3>
+        <p>자재 단가부터 공정 비용, 마진까지 모두 공개합니다. 당회와 성도님께 떳떳한 투명한 견적을 약속드립니다.</p>
+      </div>
+      <div class="f-card dark reveal">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>우리 교회만의<br>이야기를 설계합니다</h3>
+        <p>같은 예배당은 하나도 없습니다. 목회 철학과 교회가 걸어온 길을 공간 안에 자연스럽게 녹여내는 단 하나의 설계를 약속드립니다.</p>
+      </div>
+      <div class="f-card reveal">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>350개 이상의 현장이<br>만든 확신</h3>
+        <p>10년 동안 350개 이상의 교회·상업 공간을 책임져 왔습니다. 신축부터 오래된 예배당의 리모델링까지, 경험이 만든 안정감을 드립니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO PREVIEW -->
+  <section class="portfolio reveal" id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-row">— PORTFOLIO</div>
+        <h2>컨빌이 함께한 교회 공간들</h2>
+        <p>지난 10년간 컨빌이 직접 디자인하고 시공한 교회 프로젝트들입니다.<br>본당부터 청년부 라운지, 사역자 사무실까지 모든 공간을 함께 만들어 왔습니다.</p>
+      </div>
+      <div class="pf-grid">
+        <div class="pf-card pf-1" onclick="showPage('page-pf-detail')">
+          <div class="img-wrap"><div class="pf-img"><span class="pf-num">01</span></div></div>
+          <div class="meta"><span class="tag">WORSHIP HALL · 2024</span><span class="arrow">↗</span></div>
+          <h3>빛이 머무는 본당,<br>새로운 예배의 시작</h3>
+          <div class="desc">30년 된 본당을 자연광 중심으로 재구성한 프로젝트. 1,200석 규모의 모든 자리에서 동일한 예배 경험을 누릴 수 있도록 했습니다.</div>
+          <div class="pf-foot"><span>부산 ㅇㅇ교회</span><span>본당 리모델링 · 380평</span></div>
+        </div>
+        <div class="pf-card pf-2" onclick="showPage('page-pf-detail')">
+          <div class="img-wrap"><div class="pf-img"><span class="pf-num">02</span></div></div>
+          <div class="meta"><span class="tag">CHAPEL · 2024</span><span class="arrow">↗</span></div>
+          <h3>작은 채플,<br>깊은 묵상의 공간</h3>
+          <div class="desc">평일 새벽기도와 소그룹 모임을 위한 채플 신축. 한정된 예산으로도 깊이 있는 예배 공간을 완성했습니다.</div>
+          <div class="pf-foot"><span>광주 ㅇㅇ교회</span><span>채플 신축 · 80평</span></div>
+        </div>
+        <div class="pf-card pf-3" onclick="showPage('page-pf-detail')">
+          <div class="img-wrap"><div class="pf-img"><span class="pf-num">03</span></div></div>
+          <div class="meta"><span class="tag">YOUTH LOUNGE · 2023</span><span class="arrow">↗</span></div>
+          <h3>청년이 머물고,<br>다시 찾아오는 라운지</h3>
+          <div class="desc">청년부 전용 카페·라운지·미디어룸을 한 공간에 통합. 리모델링 후 청년부 출석률이 1.8배 증가했습니다.</div>
+          <div class="pf-foot"><span>서울 ㅇㅇ교회</span><span>청년부 라운지 · 120평</span></div>
+        </div>
+        <div class="pf-card pf-4" onclick="showPage('page-pf-detail')">
+          <div class="img-wrap"><div class="pf-img"><span class="pf-num">04</span></div></div>
+          <div class="meta"><span class="tag">OFFICE · 2024</span><span class="arrow">↗</span></div>
+          <h3>사역의 흐름을 담는<br>사무 공간</h3>
+          <div class="desc">담임 목사실, 부교역자실, 사역회의실, 상담실. 사역자 동선과 성도 응대 흐름을 분리 설계하여 작은 공간 안에서도 효율적인 사역이 가능하도록 했습니다.</div>
+          <div class="pf-foot"><span>부산 ㅇㅇ교회</span><span>사역자 사무실 · 95평</span></div>
+        </div>
+      </div>
+      <div class="pf-cta-row">
+        <a href="portfolio_list.html" class="pf-more nav-link">전체 포트폴리오 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEEP / WHY CONVILL -->
+  <section class="deep">
+    <div class="container">
+      <div class="deep-grid">
+        <div>
+          <div class="eyebrow-row deep-eyebrow">— WHY CONVILL</div>
+          <h2>설명이 어려운 일은,<br>보여드리는 게 빠릅니다.</h2>
+          <p>교회 리모델링은 성도들을 설득하는 일입니다. 인테리어 예산 승인이 얼마나 어려운 과정인지 잘 압니다. 컨빌은 장로님들과 성도님들이 한눈에 이해하고 감동할 수 있는 고퀄리티 시각 자료와 근거 있는 제안서를 통해 교회의 원활한 의사결정을 돕습니다.</p>
+        </div>
+        <div class="collage">
+          <div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div>
+        </div>
+      </div>
+      <div class="deep-features-row">
+        <div class="dfr-item reveal">
+          <div class="dfr-tag">01 · VISUALIZATION</div>
+          <h4>3D 렌더링 + 가상 투어</h4>
+          <p>완공 전에 사진처럼 미리 보여드려, 장로님과 성도님이 변화될 공간을 한 장면으로 이해하실 수 있습니다.</p>
+        </div>
+        <div class="dfr-item reveal">
+          <div class="dfr-tag">02 · COMPARISON</div>
+          <h4>Before &amp; After 비교 자료</h4>
+          <p>노후된 현재 공간과 새로 바뀔 공간을 나란히 보여드려, 리모델링의 필요성과 가치를 한눈에 전달합니다.</p>
+        </div>
+        <div class="dfr-item reveal">
+          <div class="dfr-tag">03 · DECISION</div>
+          <h4>당회 발표 PPT + 견적 비교표</h4>
+          <p>당회·제직회용 발표 자료와 항목별 견적 비교표까지 무상으로 준비해, 의사결정이 매끄럽게 진행되도록 돕습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section class="videos reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-row">— REAL VOICES</div>
+        <h2>350개의 공간 경험, 이제 교회에 쏟습니다.</h2>
+        <p>교회 목사님들이 직접 증명한 후기!</p>
+      </div>
+      <div class="v-grid">
+        <div class="v-card v1" onclick="showPage('page-sns-youtube')">
+          <div class="v-thumb">
+            <div class="play">▶</div>
+            <div class="label"><em>BEFORE / AFTER</em>목사님의<br>반전 인테리어 비법!</div>
+            <div class="duration">11:29</div>
+          </div>
+          <div class="v-tag">CHURCH RENEWAL</div>
+          <h3>교회도 이제 브랜딩이 필요합니다!</h3>
+          <p>예배의 본질을 바꾸는 디자인의 힘</p>
+        </div>
+        <div class="v-card v2" onclick="showPage('page-sns-youtube')">
+          <div class="v-thumb">
+            <div class="play">▶</div>
+            <div class="label"><em>5천만원 절약 대성공!</em>30년된 교회의<br>놀라운 변신</div>
+            <div class="duration">7:35</div>
+          </div>
+          <div class="v-tag">COMMUNITY SPACE</div>
+          <h3>서광주 교회 목사님이 직접 보여주신 사례</h3>
+          <p>정직한 견적과 합리적 시공으로 30년 노후 교회를 다시 살린 이야기</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PATHS / SERVICE -->
+  <section class="paths" id="paths">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-row">— THREE PATHS</div>
+        <h2>교회를 위한 세 가지 길</h2>
+        <p>예산과 상황에 맞춰, 우리 교회에 꼭 맞는 길을 제안드립니다.</p>
+      </div>
+      <div class="three-grid">
+        <article class="tp-card reveal">
+          <div class="tp-header">
+            <div class="tp-meta"><span class="tp-num">— 01 / 서비스</span><span class="tp-tag tag-amber">합리적 예산</span></div>
+            <h3 class="tp-title">반셀프 인테리어 패키지</h3>
+            <p class="tp-sub">설계는 전문가에게, 시공은 직접</p>
+          </div>
+          <div class="tp-body">
+            <p class="tp-desc">예산이 빠듯하지만, 전문가의 디자인과 정확한 도면은 꼭 필요한 교회를 위한 패키지입니다. 컨빌이 설계까지 책임지고, 시공은 교회에서 직접 진행합니다.</p>
+            <ul class="tp-list">
+              <li><span class="ck ck-amber">✓</span><span>3D 디자인 시각화 제공</span></li>
+              <li><span class="ck ck-amber">✓</span><span>도면 제공 (평면도 + 천장도)</span></li>
+              <li><span class="ck ck-amber">✓</span><span>마감재 리스트 제공</span></li>
+              <li><span class="ck ck-amber">✓</span><span>자재 발주처 가이드</span></li>
+              <li><span class="ck ck-amber">✓</span><span>시공 단계별 도면 해설</span></li>
+              <li class="note"><span class="ck">·</span><span>현장 출장비 별도 산정</span></li>
+            </ul>
+          </div>
+          <div class="tp-foot"><span class="tp-btn btn-amber nav-link" data-nav="page-main,cta">반셀프 패키지 신청하기 →</span></div>
+        </article>
+        <article class="tp-card featured reveal">
+          <span class="featured-badge">대표 서비스</span>
+          <div class="tp-header">
+            <div class="tp-meta"><span class="tp-num">— 02 / 서비스</span><span class="tp-tag tag-navy">디자인 + 시공</span></div>
+            <h3 class="tp-title">시공까지 한 번에</h3>
+            <p class="tp-sub">교회 인테리어 디자인 &amp; 시공</p>
+          </div>
+          <div class="tp-body">
+            <p class="tp-desc">예배당부터 교육관, 카페형 공간까지 — 컨셉 기획부터 3D 시각화, 시공, 사후 관리까지 컨빌이 한 번에 책임집니다.</p>
+            <ul class="tp-list">
+              <li><span class="ck ck-navy">✓</span><span>현장 진단 &amp; 컨셉 기획 (사역 방향 인터뷰 포함)</span></li>
+              <li><span class="ck ck-navy">✓</span><span>맞춤형 평면도 &amp; 3D 렌더링 시각화</span></li>
+              <li><span class="ck ck-navy">✓</span><span>당회 승인용 PPT 제안서 무상 제공</span></li>
+              <li><span class="ck ck-navy">✓</span><span>예배 일정을 고려한 공정 설계 &amp; 시공 관리</span></li>
+              <li><span class="ck ck-navy">✓</span><span>컨빌 직영팀 책임 시공</span></li>
+              <li><span class="ck ck-navy">✓</span><span>1년 무상 A/S + 6개월 시점 1회 무상 점검</span></li>
+              <li><span class="ck ck-navy">✓</span><span>하자이행보증증권 발급</span></li>
+              <li><span class="ck ck-navy">✓</span><span>자재별 보증서 통합 전달</span></li>
+            </ul>
+          </div>
+          <div class="tp-foot"><span class="tp-btn btn-navy nav-link" data-nav="page-main,cta">인테리어 상담 신청하기 →</span></div>
+        </article>
+        <article class="tp-card reveal">
+          <div class="tp-header">
+            <div class="tp-meta"><span class="tp-num">— 03 / 서비스</span><span class="tp-tag tag-teal">브랜드 정체성</span></div>
+            <h3 class="tp-title">교회 브랜딩 패키지</h3>
+            <p class="tp-sub">우리 교회만의 정체성과 공동체</p>
+          </div>
+          <div class="tp-body">
+            <p class="tp-desc">성도님들이 "우리 교회 사람"이라는 소속감을 느끼게 하는 일. 그것이 교회 브랜딩입니다. 우리 교회만의 로고와 디자인 언어로 결속감과 공동체 의식을 만들어 드립니다.</p>
+            <div class="tp-tier">
+              <div class="tp-tier-head"><div class="tp-tier-label">TYPE A · 단건 패키지</div><span class="tp-tier-meta">1회 결제</span></div>
+              <ul class="tp-tier-list">
+                <li>— 우리 교회 전용 로고 디자인 제작</li>
+                <li>— 주보 디자인 템플릿 1종 제작</li>
+                <li>— 현수막 디자인 1종 제작</li>
+              </ul>
+            </div>
+            <div class="tp-tier sub">
+              <div class="tp-tier-head"><div class="tp-tier-label">TYPE B · 정기 구독 시스템</div><span class="tp-tier-meta">월 단위</span></div>
+              <ul class="tp-tier-list">
+                <li>— 매달 교회 이벤트별 주보 디자인 제작</li>
+                <li>— 부활절·가정의달·성탄절 등 현수막 디자인</li>
+                <li>— 현수막 직접 출력 + 행사 1주일 전 배송</li>
+                <li>— 무상 수정 2회 포함 · 1년 단위 약정</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tp-foot"><span class="tp-btn btn-teal nav-link" data-nav="page-main,cta">브랜딩 상담 신청하기 →</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-row">— OUR PROCESS</div>
+        <h2>처음이시라도 괜찮습니다.<br>친절히 한 걸음씩 함께 걷겠습니다.</h2>
+        <p class="sub">5단계로 완성되는 우리 교회 — 시작부터 브랜드까지, 컨빌이 함께합니다.</p>
+      </div>
+      <div class="steps">
+        <article class="step reveal">
+          <div class="step-top"><div class="step-number">01</div></div>
+          <div class="step-divider"></div>
+          <h4>무료 상담</h4>
+          <p>전화 · 카톡 · 구글폼을 통해 우리 교회의 상황을 편하게 말씀해 주세요.</p>
+          <span class="step-meta">소요 5분</span>
+        </article>
+        <article class="step reveal">
+          <div class="step-top"><div class="step-number">02</div></div>
+          <div class="step-divider"></div>
+          <h4>현장 출장 <span class="sub-note">(필요시)</span></h4>
+          <p>대표가 직접 방문하여 실측 및 공간 · 동선 · 현장 상황을 파악하고 상담을 진행합니다.</p>
+          <span class="step-meta">대표 직접 방문</span>
+        </article>
+        <article class="step reveal">
+          <div class="step-top"><div class="step-number">03</div></div>
+          <div class="step-divider"></div>
+          <h4>컨셉 제안</h4>
+          <p>교회의 요청사항과 주어진 예산에 맞춰 역설계 방식으로 디자인 방향을 잡아드리고, 3D 시안 · 도면 · 마감재 리스트 · 견적서를 함께 제공드립니다.</p>
+          <span class="step-meta">예산 맞춤 역설계</span>
+        </article>
+        <article class="step reveal">
+          <div class="step-top"><div class="step-number">04</div></div>
+          <div class="step-divider"></div>
+          <h4>시공 진행</h4>
+          <p>약속한 일정대로, 약속한 품질로 진행합니다. 컨빌프로 어플리케이션을 통해 현장 진행 상황을 실시간으로 공유받으실 수 있습니다.</p>
+          <span class="step-meta">컨빌프로 앱 실시간 공유</span>
+        </article>
+        <article class="step reveal">
+          <div class="step-top"><div class="step-number">05</div></div>
+          <div class="step-divider"></div>
+          <h4>교회 브랜딩 관리</h4>
+          <p>부활절 · 성탄절 · 송구영신예배 · 추수감사 등 절기마다 어울리는 현수막을 디자인해 드리고, 우리 교회만의 로고 제작까지 — 교회의 브랜드를 함께 가꾸어 갑니다.</p>
+          <span class="step-meta">절기별 디자인 제공</span>
+        </article>
+      </div>
+      <div class="process-cta">
+        <p>여기까지 읽으셨다면, 이미 <em>첫 걸음</em>을 떼신 겁니다.</p>
+        <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-row">— FAQ</div>
+        <h2>궁금한 것들에 미리 답해드립니다</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>예산이 많지 않은 작은 교회도 가능한가요?</summary>
+          <p>가능합니다. 컨빌의 '디자인 + 반셀프 도면' 옵션은 바로 이런 교회를 위해 만든 서비스입니다. 도면과 자재 리스트를 드리면 성도님들의 봉사로 시공하실 수 있고, 컨빌이 원격으로 함께 점검합니다.</p>
+        </details>
+        <details>
+          <summary>부산 외 지역도 가능한가요?</summary>
+          <p>네, 가능합니다. 특히 광주·전남 지역은 별도 거점을 운영하고 있어 신속한 대응이 가능합니다. 그 외 지역도 사전 협의로 진행하고 있습니다.</p>
+        </details>
+        <details>
+          <summary>공사 중에도 주일 예배가 가능한가요?</summary>
+          <p>가능합니다. 컨빌은 예배 일정을 최우선으로 고려해 공정을 설계합니다. 부분 공사·야간 공사·임시 공간 운영 등 교회의 사역이 멈추지 않도록 함께 계획합니다.</p>
+        </details>
+        <details>
+          <summary>견적은 어떻게 산정되나요?</summary>
+          <p>현장 방문 후, 공간 면적·자재 등급·시공 범위에 따라 투명하게 산정해 드립니다. 숨겨진 비용 없이 항목별로 정리한 견적서를 제공합니다.</p>
+        </details>
+        <details>
+          <summary>당회 통과를 위한 발표 자료도 만들어 주시나요?</summary>
+          <p>네, 컨빌의 가장 큰 차별점 중 하나입니다. 디자인 시안과 함께 당회·제직회용 발표 PPT를 무상으로 제공해 드립니다.</p>
+        </details>
+        <details>
+          <summary>인테리어 외 브랜딩(로고·주보·현수막)만 의뢰할 수도 있나요?</summary>
+          <p>가능합니다. 컨빌의 '교회 브랜딩 패키지'는 인테리어와 별도로 운영됩니다. 한 번에 끝나는 단건 패키지와 매달 새로운 디자인을 받아보시는 정기 구독 시스템 중 선택하실 수 있습니다. 정기 구독은 현수막 출력과 배송까지 포함됩니다.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-left">
+          <div class="cta-eyebrow">— CONTACT</div>
+          <h2>우리 교회 공간,<br>어디서부터 시작해야 할지<br>모르시겠나요?</h2>
+          <p>10년의 현장 경험과 350개 이상의 사례로<br>첫 진단부터 함께 시작합니다.</p>
+          <div class="cta-quote">
+            "좋은 공간은 좋은 사역을 만듭니다."
+            <span>— 박진하 대표</span>
+          </div>
+        </div>
+        <div class="cta-right">
+          <div class="cta-r-label">— 상담 신청</div>
+          <h3 class="cta-r-title">5초면 충분합니다</h3>
+          <p class="cta-r-desc">간단한 교회 정보만 남겨주시면, 24시간 이내에 박진하 대표가 직접 연락드립니다. 부담 없이 시작해 보세요.</p>
+          <div class="cta-steps">
+            <div class="cta-step"><span class="cta-step-num">1</span><p class="cta-step-text"><strong>구글폼 작성</strong> <span>· 약 5초</span></p></div>
+            <div class="cta-step"><span class="cta-step-num">2</span><p class="cta-step-text"><strong>24시간 이내 전화드립니다</strong></p></div>
+          </div>
+          <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="cta-primary-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M10 12l2 2 4-4"/></svg>
+            5초 문의 바로가기
+          </a>
+          <div class="cta-divider"><span>또는 바로 연락</span></div>
+          <div class="cta-alts">
+            <a href="tel:01000000000" class="cta-alt-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              전화로 문의
+            </a>
+            <a href="https://pf.kakao.com/your-channel" target="_blank" rel="noopener" class="cta-alt-btn kakao">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-1.18 4.32c-.1.36.31.65.62.45l5.16-3.42c.24.02.48.05.74.05 5.52 0 10-3.48 10-7.8C22 6.48 17.52 3 12 3z"/></svg>
+              카카오톡 상담
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-main -->
+
+<!-- ============================================================
+  SHARED FOOTER
+  ============================================================ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">컨빌디자인 <small>Convill Church Studio</small></div>
+        <p>주식회사 컨빌 · 대표 박진하</p>
+        <p>부산광역시 / 서울특별시</p>
+        <p>사업자등록번호 000-00-00000</p>
+        <p>contact@convilldesign.com</p>
+      </div>
+      <div class="foot-col">
+        <h5>SERVICE</h5>
+        <ul>
+          <li><span data-nav="page-main,paths" class="nav-link">반셀프 인테리어 패키지</span></li>
+          <li><span data-nav="page-main,paths" class="nav-link">시공까지 한 번에</span></li>
+          <li><span data-nav="page-main,paths" class="nav-link">교회 브랜딩 패키지</span></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>STUDIO</h5>
+        <ul>
+          <li><span data-nav="page-main,about" class="nav-link">About</span></li>
+          <li><span data-nav="page-portfolio" class="nav-link">Portfolio</span></li>
+          <li><span data-nav="page-main,process" class="nav-link">Process</span></li>
+          <li><span data-nav="page-main,faq" class="nav-link">FAQ</span></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>SNS</h5>
+        <ul>
+          <li><span data-nav="page-sns-youtube" class="nav-link">YouTube</span></li>
+          <li><span data-nav="page-sns-magazine" class="nav-link">Magazine</span></li>
+          <li>KakaoTalk</li>
+          <li>Instagram</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Convill Design. All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>
