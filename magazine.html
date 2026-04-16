@@ -29,23 +29,27 @@
       <li><a href="youtube.html" class="nav-link nav-active">SNS</a></li>
       <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
     </ul>
-    <span data-nav="page-main,cta" class="cta nav-link">무료 상담 신청</span>
-    <button class="nav-mobile-toggle" onclick="openMobileMenu()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <div class="nav-actions">
+      <a href="https://zrr.kr/BEsbko" target="_blank" class="cta nav-link">무료 상담 신청</a>
+      <button class="nav-mobile-toggle" onclick="openMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="closeMobileMenu()">✕</button>
-  <a href="index.html#about" class="nav-link" onclick="closeMobileMenu()">소개</a>
-  <a href="portfolio_list.html" class="nav-link" onclick="closeMobileMenu()">포트폴리오</a>
-  <a href="index.html#paths" class="nav-link" onclick="closeMobileMenu()">서비스</a>
-  <a href="index.html#process" class="nav-link" onclick="closeMobileMenu()">프로세스</a>
-  <a href="youtube.html" class="nav-link" onclick="closeMobileMenu()">SNS</a>
-  <a href="index.html#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
-  <a href="index.html#cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;display:inline-block;">무료 상담 신청</a>
+  <span data-nav="page-main,about" class="nav-link" onclick="closeMobileMenu()">소개</span>
+  <a href="portfolio_list.html" class="nav-link">포트폴리오</a>
+  <!-- <span data-nav="page-main,portfolio" class="nav-link" onclick="closeMobileMenu()">포트폴리오</span> -->
+  <span data-nav="page-main,paths" class="nav-link" onclick="closeMobileMenu()">서비스</span>
+  <span data-nav="page-main,process" class="nav-link" onclick="closeMobileMenu()">프로세스</span>
+  <a href="youtube.html" class="nav-link">SNS</a>
+  <!-- <span data-nav="page-sns-youtube" class="nav-link" onclick="closeMobileMenu()">SNS</span> -->
+  <span data-nav="page-main,faq" class="nav-link" onclick="closeMobileMenu()">FAQ</span>
+  <span data-nav="page-main,cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;">무료 상담 신청</span>
 </div>
 
 <!-- ============================================================
@@ -129,7 +133,7 @@
       <span class="eye">— LET'S WORK TOGETHER</span>
       <h2>우리 교회도, 새로워질 수 있습니다.</h2>
       <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br>혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
-      <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span>
+      <a href="https://zrr.kr/BEsbko" target="_blank" class="nav-link">무료 상담 신청하기 →</a>
     </div>
   </section>
 
@@ -168,10 +172,11 @@
       <div class="foot-col">
         <h5>SNS</h5>
         <ul>
-          <li><span data-nav="page-sns-youtube" class="nav-link">YouTube</span></li>
-          <li><span data-nav="page-sns-magazine" class="nav-link">Magazine</span></li>
-          <li>KakaoTalk</li>
-          <li>Instagram</li>
+          <li><a href="https://convil.net" target="_blank" class="nav-link">컨빌디자인 홈페이지</a></li>
+          <li><a href="https://blog.naver.com/convil_interior" target="_blank" class="nav-link">블로그</a></li>
+          <li><a href="https://www.youtube.com/@convil.interior" target="_blank" class="nav-link">유튜브</a></li>
+          <li><a href="https://pf.kakao.com/_PYdxin" target="_blank" class="nav-link">카카오톡 채널</a></li>
+          <li><a href="https://www.instagram.com/convil.design/" target="_blank" class="nav-link">인스타그램</a></li>
         </ul>
       </div>
     </div>

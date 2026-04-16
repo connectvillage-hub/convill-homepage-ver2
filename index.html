@@ -29,10 +29,12 @@
       <li><a href="youtube.html" class="nav-link">SNS</a></li>
       <li><span data-nav="page-main,faq" class="nav-link">FAQ</span></li>
     </ul>
-    <span data-nav="page-main,cta" class="cta nav-link">무료 상담 신청</span>
-    <button class="nav-mobile-toggle" onclick="openMobileMenu()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <div class="nav-actions">
+      <span data-nav="page-main,cta" class="cta nav-link">무료 상담 신청</span>
+      <button class="nav-mobile-toggle" onclick="openMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -40,10 +42,12 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="closeMobileMenu()">✕</button>
   <span data-nav="page-main,about" class="nav-link" onclick="closeMobileMenu()">소개</span>
-  <span data-nav="page-main,portfolio" class="nav-link" onclick="closeMobileMenu()">포트폴리오</span>
+  <a href="portfolio_list.html" class="nav-link">포트폴리오</a>
+  <!-- <span data-nav="page-main,portfolio" class="nav-link" onclick="closeMobileMenu()">포트폴리오</span> -->
   <span data-nav="page-main,paths" class="nav-link" onclick="closeMobileMenu()">서비스</span>
   <span data-nav="page-main,process" class="nav-link" onclick="closeMobileMenu()">프로세스</span>
-  <span data-nav="page-sns-youtube" class="nav-link" onclick="closeMobileMenu()">SNS</span>
+  <a href="youtube.html" class="nav-link">SNS</a>
+  <!-- <span data-nav="page-sns-youtube" class="nav-link" onclick="closeMobileMenu()">SNS</span> -->
   <span data-nav="page-main,faq" class="nav-link" onclick="closeMobileMenu()">FAQ</span>
   <span data-nav="page-main,cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;">무료 상담 신청</span>
 </div>
@@ -61,8 +65,10 @@
       <h1>성도가 머물고 싶은 공간,<br>청년이 찾아오는 교회</h1>
       <p class="lead">10년간 350개 공간을 디자인한 컨빌이,<br>이제 교회만을 위한 인테리어를 시작합니다.</p>
       <div class="hero-ctas">
-        <span class="btn btn-gold nav-link" data-nav="page-main,cta">무료 상담 신청 →</span>
-        <span class="btn btn-outline nav-link" data-nav="page-portfolio">포트폴리오 보기</span>
+        <a href="https://zrr.kr/BEsbko" target="_blank"class="btn btn-gold nav-link">무료 상담 신청 →</a>
+        <!-- <span class="btn btn-gold nav-link" data-nav="page-main,cta">무료 상담 신청 →</span> -->
+        <a href="portfolio_list.html" class="btn btn-outline nav-link">포트폴리오 보기</a>
+        <!-- <span class="btn btn-outline nav-link" data-nav="page-portfolio">포트폴리오 보기</span> -->
       </div>
     </div>
   </section>
@@ -81,11 +87,12 @@
       <div class="about-text">
         <div class="eyebrow-row">— OUR STORY</div>
         <h2>인테리어 회사가 아니라,<br>교회를 섬기는 한 사람으로<br>시작했습니다.</h2>
-        <p>10년 넘게 상업 공간을 디자인하면서 350개가 넘는 현장을 다녔습니다. 그러던 어느 날, 한 교회 리모델링 의뢰를 받았습니다.</p>
-        <p>한 푼 두 푼 모아온 헌금으로 마련된 공사 예산. 평생을 교회와 함께 걸어오신 나이 드신 성도님들께 앞으론 더 좋은 공간을 내어드리고 싶다는 목사님의 마음, 새롭게 찾아오시는 새가족들께는 공간을 통해 더 큰 은혜와 따뜻함이 전해지길 바라는 마음.</p>
+        <p>10년 넘게 상업 공간을 디자인하면서 350개가 넘는 현장을 다녔습니다.<br>그러던 어느 날, 한 교회 리모델링 의뢰를 받았습니다.</p>
+        <p>소중한 마음들을 모은 헌금으로 마련된 공사 예산.</p>
+        <p>평생을 교회와 함께 걸어오신 나이 드신 성도님들께 앞으론 더 좋은 공간을 내어드리고 싶다는 목사님의 마음, 새롭게 찾아오시는 새가족들께는 공간을 통해 더 큰 은혜와 따뜻함이 전해지길 바라는 마음.</p>
         <p>그 마음들이 저를 움직였습니다.<br>그날 결심했습니다.</p>
         <p class="highlight-line">교회 공간만큼은, 사명으로 짓겠다고.</p>
-        <p>정직한 견적으로 시작합니다. 예배당에 들어선 성도님이 "아, 좋다"라고 한마디 하실 때까지 끝까지 마무리하겠습니다.</p>
+        <p>정직한 견적으로 시작합니다.<br> 예배당에 들어선 성도님이 "아, 좋다"라고 한마디 하실 때까지 끝까지 마무리하겠습니다.</p>
       </div>
     </div>
   </section>
@@ -111,7 +118,7 @@
         <div class="ico">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
         </div>
-        <h3>350개 이상의 현장이<br>만든 확신</h3>
+        <h3>350개 이상의<br>현장이 만든 확신</h3>
         <p>10년 동안 350개 이상의 교회·상업 공간을 책임져 왔습니다. 신축부터 오래된 예배당의 리모델링까지, 경험이 만든 안정감을 드립니다.</p>
       </div>
     </div>
@@ -128,31 +135,31 @@
       <div class="pf-grid">
         <div class="pf-card pf-1" onclick="showPage('page-pf-detail')">
           <div class="img-wrap"><div class="pf-img"><span class="pf-num">01</span></div></div>
-          <div class="meta"><span class="tag">WORSHIP HALL · 2024</span><span class="arrow">↗</span></div>
-          <h3>빛이 머무는 본당,<br>새로운 예배의 시작</h3>
-          <div class="desc">30년 된 본당을 자연광 중심으로 재구성한 프로젝트. 1,200석 규모의 모든 자리에서 동일한 예배 경험을 누릴 수 있도록 했습니다.</div>
-          <div class="pf-foot"><span>부산 ㅇㅇ교회</span><span>본당 리모델링 · 380평</span></div>
+          <div class="meta"><span class="tag">2024</span><span class="arrow">↗</span></div>
+          <h3>은혜의 물결이 흐르는 본당,<br>친화적인 교회의 시작</h3>
+          <div class="desc">오래된 분위기의 예배당을 모던하고 따뜻한 공간으로 재구성한 프로젝트</div>
+          <div class="pf-foot"><span>광주월성교회</span><span>약 50평 중 예배당 공간 포함</span></div>
         </div>
         <div class="pf-card pf-2" onclick="showPage('page-pf-detail')">
           <div class="img-wrap"><div class="pf-img"><span class="pf-num">02</span></div></div>
-          <div class="meta"><span class="tag">CHAPEL · 2024</span><span class="arrow">↗</span></div>
-          <h3>작은 채플,<br>깊은 묵상의 공간</h3>
-          <div class="desc">평일 새벽기도와 소그룹 모임을 위한 채플 신축. 한정된 예산으로도 깊이 있는 예배 공간을 완성했습니다.</div>
-          <div class="pf-foot"><span>광주 ㅇㅇ교회</span><span>채플 신축 · 80평</span></div>
+          <div class="meta"><span class="tag">2024</span><span class="arrow">↗</span></div>
+          <h3>50년의 시간을 품은 교회,<br>다음 세대를 위한 새 공간의 시작</h3>
+          <div class="desc">50년 역사를 지닌 교회의 1·2층을 다시 구성한 리모델링 프로젝트</div>
+          <div class="pf-foot"><span>서광주교회</span><span>1·2층 리모델링</span></div>
         </div>
         <div class="pf-card pf-3" onclick="showPage('page-pf-detail')">
           <div class="img-wrap"><div class="pf-img"><span class="pf-num">03</span></div></div>
-          <div class="meta"><span class="tag">YOUTH LOUNGE · 2023</span><span class="arrow">↗</span></div>
-          <h3>청년이 머물고,<br>다시 찾아오는 라운지</h3>
-          <div class="desc">청년부 전용 카페·라운지·미디어룸을 한 공간에 통합. 리모델링 후 청년부 출석률이 1.8배 증가했습니다.</div>
-          <div class="pf-foot"><span>서울 ㅇㅇ교회</span><span>청년부 라운지 · 120평</span></div>
+          <div class="meta"><span class="tag">2024</span><span class="arrow">↗</span></div>
+          <h3>어두운 지하 예배당,<br>밝고 따뜻한 예배의 변화</h3>
+          <div class="desc">빛이 부족하고 다소 답답했던 지하 예배당을, 밝고 따뜻한 분위기의 예배 공간으로 다시 설계한 프로젝트</div>
+          <div class="pf-foot"><span>광주 벧엘교회</span><span>지하 예배당 리모델링</span></div>
         </div>
         <div class="pf-card pf-4" onclick="showPage('page-pf-detail')">
           <div class="img-wrap"><div class="pf-img"><span class="pf-num">04</span></div></div>
-          <div class="meta"><span class="tag">OFFICE · 2024</span><span class="arrow">↗</span></div>
-          <h3>사역의 흐름을 담는<br>사무 공간</h3>
-          <div class="desc">담임 목사실, 부교역자실, 사역회의실, 상담실. 사역자 동선과 성도 응대 흐름을 분리 설계하여 작은 공간 안에서도 효율적인 사역이 가능하도록 했습니다.</div>
-          <div class="pf-foot"><span>부산 ㅇㅇ교회</span><span>사역자 사무실 · 95평</span></div>
+          <div class="meta"><span class="tag">2024</span><span class="arrow">↗</span></div>
+          <h3>청년이 머물고,<br>다시 찾아오는 교회</h3>
+          <div class="desc">오랜 시간 사용된 교회 공간을, 젊은 세대가 머물 수 있는 열린 1층과 예배에 온전히 집중할 수 있는 2층으로 다시 구성한 프로젝트</div>
+          <div class="pf-foot"><span>부산 제8영도교회</span><span>예배당/로비/스터디카페 리모델링</span></div>
         </div>
       </div>
       <div class="pf-cta-row">
@@ -203,21 +210,19 @@
         <p>교회 목사님들이 직접 증명한 후기!</p>
       </div>
       <div class="v-grid">
-        <div class="v-card v1" onclick="showPage('page-sns-youtube')">
-          <div class="v-thumb">
-            <div class="play">▶</div>
-            <div class="label"><em>BEFORE / AFTER</em>목사님의<br>반전 인테리어 비법!</div>
-            <div class="duration">11:29</div>
+        <div class="v-card v1" onclick="window.open('https://youtu.be/9ITB-_l8ZuQ?si=N4D46X4idC1fSgVi', '_blank')">
+          <div class="v-thumb">            
+            <!-- <div class="label"><em>BEFORE / AFTER</em>목사님의<br>반전 인테리어 비법!</div>
+            <div class="duration">11:29</div> -->
           </div>
           <div class="v-tag">CHURCH RENEWAL</div>
           <h3>교회도 이제 브랜딩이 필요합니다!</h3>
           <p>예배의 본질을 바꾸는 디자인의 힘</p>
         </div>
-        <div class="v-card v2" onclick="showPage('page-sns-youtube')">
-          <div class="v-thumb">
-            <div class="play">▶</div>
-            <div class="label"><em>5천만원 절약 대성공!</em>30년된 교회의<br>놀라운 변신</div>
-            <div class="duration">7:35</div>
+        <div class="v-card v2" onclick="window.open('https://youtu.be/_kJKeTYkMPg?si=3NzcVoiNqxbWQqpO', '_blank')">
+          <div class="v-thumb">            
+            <!-- <div class="label"><em>5천만원 절약 대성공!</em>30년된 교회의<br>놀라운 변신</div>
+            <div class="duration">7:35</div> -->
           </div>
           <div class="v-tag">COMMUNITY SPACE</div>
           <h3>서광주 교회 목사님이 직접 보여주신 사례</h3>
@@ -253,7 +258,10 @@
               <li class="note"><span class="ck">·</span><span>현장 출장비 별도 산정</span></li>
             </ul>
           </div>
-          <div class="tp-foot"><span class="tp-btn btn-amber nav-link" data-nav="page-main,cta">반셀프 패키지 신청하기 →</span></div>
+          <div class="tp-foot">
+            <a href="https://zrr.kr/BEsbko" target="_blank" class="tp-btn btn-amber nav-link">반셀프 패키지 신청하기 →</a>
+            <!-- <span class="tp-btn btn-amber nav-link" data-nav="page-main,cta">반셀프 패키지 신청하기 →</span> -->
+          </div>
         </article>
         <article class="tp-card featured reveal">
           <span class="featured-badge">대표 서비스</span>
@@ -271,11 +279,13 @@
               <li><span class="ck ck-navy">✓</span><span>예배 일정을 고려한 공정 설계 &amp; 시공 관리</span></li>
               <li><span class="ck ck-navy">✓</span><span>컨빌 직영팀 책임 시공</span></li>
               <li><span class="ck ck-navy">✓</span><span>1년 무상 A/S + 6개월 시점 1회 무상 점검</span></li>
-              <li><span class="ck ck-navy">✓</span><span>하자이행보증증권 발급</span></li>
               <li><span class="ck ck-navy">✓</span><span>자재별 보증서 통합 전달</span></li>
             </ul>
           </div>
-          <div class="tp-foot"><span class="tp-btn btn-navy nav-link" data-nav="page-main,cta">인테리어 상담 신청하기 →</span></div>
+          <div class="tp-foot">
+            <a href="https://zrr.kr/BEsbko" target="_blank" class="tp-btn btn-navy nav-link">인테리어 상담 신청하기 →</a>
+            <!-- <span class="tp-btn btn-navy nav-link" data-nav="page-main,cta">인테리어 상담 신청하기 →</span> -->
+          </div>
         </article>
         <article class="tp-card reveal">
           <div class="tp-header">
@@ -284,26 +294,32 @@
             <p class="tp-sub">우리 교회만의 정체성과 공동체</p>
           </div>
           <div class="tp-body">
-            <p class="tp-desc">성도님들이 "우리 교회 사람"이라는 소속감을 느끼게 하는 일. 그것이 교회 브랜딩입니다. 우리 교회만의 로고와 디자인 언어로 결속감과 공동체 의식을 만들어 드립니다.</p>
+            <p class="tp-desc">교회 브랜딩은 단순히 로고 하나를 만드는 일이 아닙니다. 우리 교회만의 상징과 디자인 기준을 세우고, 성도님들이 자연스럽게 “우리 교회다운 분위기”를 느끼도록 만드는 일입니다.</p>
             <div class="tp-tier">
               <div class="tp-tier-head"><div class="tp-tier-label">TYPE A · 단건 패키지</div><span class="tp-tier-meta">1회 결제</span></div>
               <ul class="tp-tier-list">
                 <li>— 우리 교회 전용 로고 디자인 제작</li>
+                <li>— 브랜드 가이드북 제작</li>
                 <li>— 주보 디자인 템플릿 1종 제작</li>
                 <li>— 현수막 디자인 1종 제작</li>
               </ul>
             </div>
             <div class="tp-tier sub">
-              <div class="tp-tier-head"><div class="tp-tier-label">TYPE B · 정기 구독 시스템</div><span class="tp-tier-meta">월 단위</span></div>
+              <div class="tp-tier-head"><div class="tp-tier-label">TYPE B · 정기 구독 시스템</div><span class="tp-tier-meta">년 단위</span></div>
               <ul class="tp-tier-list">
-                <li>— 매달 교회 이벤트별 주보 디자인 제작</li>
-                <li>— 부활절·가정의달·성탄절 등 현수막 디자인</li>
-                <li>— 현수막 직접 출력 + 행사 1주일 전 배송</li>
-                <li>— 무상 수정 2회 포함 · 1년 단위 약정</li>
+                <li>— 우리 교회 전용 로고 디자인 제작</li>
+                <li>— 로고 의미 및 활용 방향이 담긴 브랜드 가이드 제공</li>
+                <li>— 절기별 현수막 디자인 운영</li>
+                <li>— 주보 디자인 템플릿 운영</li>
+                <li>— 교회 로고를 활용한 응용 디자인 및 굿즈 주문 제작</li>
+                <li>— 무상 수정 2회 포함</li>
               </ul>
             </div>
           </div>
-          <div class="tp-foot"><span class="tp-btn btn-teal nav-link" data-nav="page-main,cta">브랜딩 상담 신청하기 →</span></div>
+          <div class="tp-foot">
+            <a href="https://zrr.kr/BEsbko" target="_blank" class="tp-btn btn-teal nav-link">브랜딩 상담 신청하기 →</a>
+            <!-- <span class="tp-btn btn-teal nav-link" data-nav="page-main,cta">브랜딩 상담 신청하기 →</span> -->
+          </div>
         </article>
       </div>
     </div>
@@ -356,7 +372,8 @@
       </div>
       <div class="process-cta">
         <p>여기까지 읽으셨다면, 이미 <em>첫 걸음</em>을 떼신 겁니다.</p>
-        <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span>
+        <a href="https://zrr.kr/BEsbko" target="_blank" class="nav-link">무료 상담 신청하기 →</a>
+        <!-- <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span> -->
       </div>
     </div>
   </section>
@@ -418,17 +435,17 @@
             <div class="cta-step"><span class="cta-step-num">1</span><p class="cta-step-text"><strong>구글폼 작성</strong> <span>· 약 5초</span></p></div>
             <div class="cta-step"><span class="cta-step-num">2</span><p class="cta-step-text"><strong>24시간 이내 전화드립니다</strong></p></div>
           </div>
-          <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="cta-primary-btn">
+          <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="cta-primary-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M10 12l2 2 4-4"/></svg>
             5초 문의 바로가기
           </a>
           <div class="cta-divider"><span>또는 바로 연락</span></div>
           <div class="cta-alts">
-            <a href="tel:01000000000" class="cta-alt-btn">
+            <a href="tel:01072048009" class="cta-alt-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               전화로 문의
             </a>
-            <a href="https://pf.kakao.com/your-channel" target="_blank" rel="noopener" class="cta-alt-btn kakao">
+            <a href="https://pf.kakao.com/_PYdxin" target="_blank" rel="noopener" class="cta-alt-btn kakao">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-1.18 4.32c-.1.36.31.65.62.45l5.16-3.42c.24.02.48.05.74.05 5.52 0 10-3.48 10-7.8C22 6.48 17.52 3 12 3z"/></svg>
               카카오톡 상담
             </a>
@@ -473,10 +490,11 @@
       <div class="foot-col">
         <h5>SNS</h5>
         <ul>
-          <li><span data-nav="page-sns-youtube" class="nav-link">YouTube</span></li>
-          <li><span data-nav="page-sns-magazine" class="nav-link">Magazine</span></li>
-          <li>KakaoTalk</li>
-          <li>Instagram</li>
+          <li><a href="https://convil.net" target="_blank" class="nav-link">컨빌디자인 홈페이지</a></li>
+          <li><a href="https://blog.naver.com/convil_interior" target="_blank" class="nav-link">블로그</a></li>
+          <li><a href="https://www.youtube.com/@convil.interior" target="_blank" class="nav-link">유튜브</a></li>
+          <li><a href="https://pf.kakao.com/_PYdxin" target="_blank" class="nav-link">카카오톡 채널</a></li>
+          <li><a href="https://www.instagram.com/convil.design/" target="_blank" class="nav-link">인스타그램</a></li>
         </ul>
       </div>
     </div>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>컨빌디자인 — 성도가 머물고 싶은 공간, 청년이 찾아오는 교회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/common.css">
+<script src="js/portfolio.js" defer></script>
+</head>
+<body>
+
+<!-- ============================================================
+  SHARED HEADER
+  ============================================================ -->
+<header class="site">
+  <div class="container nav">
+    <div class="brand" onclick="location.href='index.html'">
+      컨빌디자인
+      <small>CHURCH INTERIOR STUDIO</small>
+    </div>
+    <ul>
+      <li><a href="index.html#about" class="nav-link">소개</a></li>
+      <li><a href="portfolio_list.html" class="nav-link nav-active">포트폴리오</a></li>
+      <li><a href="index.html#paths" class="nav-link">서비스</a></li>
+      <li><a href="index.html#process" class="nav-link">프로세스</a></li>
+      <li><a href="youtube.html" class="nav-link">SNS</a></li>
+      <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://zrr.kr/BEsbko" target="_blank" class="cta nav-link">무료 상담 신청</a>
+      <button class="nav-mobile-toggle" onclick="openMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="closeMobileMenu()">✕</button>
+  <span data-nav="page-main,about" class="nav-link" onclick="closeMobileMenu()">소개</span>
+  <a href="portfolio_list.html" class="nav-link">포트폴리오</a>
+  <!-- <span data-nav="page-main,portfolio" class="nav-link" onclick="closeMobileMenu()">포트폴리오</span> -->
+  <span data-nav="page-main,paths" class="nav-link" onclick="closeMobileMenu()">서비스</span>
+  <span data-nav="page-main,process" class="nav-link" onclick="closeMobileMenu()">프로세스</span>
+  <a href="youtube.html" class="nav-link">SNS</a>
+  <!-- <span data-nav="page-sns-youtube" class="nav-link" onclick="closeMobileMenu()">SNS</span> -->
+  <span data-nav="page-main,faq" class="nav-link" onclick="closeMobileMenu()">FAQ</span>
+  <span data-nav="page-main,cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;">무료 상담 신청</span>
+</div>
+
+
+<!-- ============================================================
+  PAGE 3: PORTFOLIO DETAIL
+  ============================================================ -->
+<div id="page-pf-detail" class="case01">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <div class="breadcrumb">
+        <span data-nav="page-main" class="nav-link">Home</span>
+        <span class="sep">/</span>
+        <span data-nav="page-portfolio" class="nav-link">Portfolio</span>
+        <span class="sep">/</span>
+        <span class="current" style="color:var(--ink)">친화적인 교회의 시작</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img">
+      <div class="hero-overlay">
+        <div class="hero-eyebrow">— Project N°01 / Worship Hall</div>
+        <h1>은혜의 물결이 흐르는 본당,<br>친화적인 교회의 시작</h1>
+        <div class="hero-meta">
+          <span>광주월성교회</span><span>· 약 50평 예배당 공간 포함</span><span>· 2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO BAR -->
+  <section class="info-bar">
+    <div class="container">
+      <dl class="info-grid">
+        <div class="info-cell"><dt>CHURCH</dt><dd>광주월성교회</dd></div>
+        <div class="info-cell"><dt>LOCATION</dt><dd>광주광역시</dd></div>
+        <div class="info-cell"><dt>TYPE</dt><dd>본당 리모델링</dd></div>
+        <div class="info-cell"><dt>SCALE</dt><dd>약 50평 예배당 공간 포함</dd></div>
+        <div class="info-cell"><dt>PERIOD</dt><dd>2024</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container-narrow">
+      <div class="intro-eye">— PROJECT NOTE</div>
+      <p>오래된 분위기의 예배당을 모던하고 따뜻한 공간으로 재구성한 프로젝트. 중앙 십자가를 강조한 강단, 물결 패턴 벽체, 자작나무 천장과 흡음 설계를 통해 예배의 집중도와 공간의 상징성을 함께 높였습니다.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <div class="container">
+      <figure class="g-item full reveal">
+        <div class="g-img before-img" style="background-image:url('../images/case01/before.jpg')">
+          <span class="before-label">BEFORE</span>
+        </div>
+        <figcaption>기존 예배당은 낡은 마감과 정돈되지 않은 조명, 통일감 없는 인테리어로 다소 어수선한 인상을 주고 있었습니다.</figcaption>
+      </figure>
+      <figure class="g-item full reveal">
+        <div class="g-img" style="background-image:url('../images/case01/1.jpg')">
+          <span class="before-label">3D디자인</span>
+        </div>
+        <figcaption>중앙 십자가를 강조한 강단, 물결 패턴 벽체, 자작나무 천장과 흡음 설계를 통해 예배의 집중도와 공간의 상징성을 함께 높였습니다.</figcaption>
+      </figure>
+      <figure class="g-item full reveal">
+        <div class="g-img" style="background-image:url('../images/case01/after.jpg')">
+          <span class="before-label">AFTER</span>
+        </div>
+        <figcaption>3D 디자인을 바탕으로 베이지와 크림, 우드 중심의 따뜻한 분위기로 정리하고, 처음 방문하는 사람도 편안함을 느낄 수 있도록 완성되었습니다.</figcaption>
+      </figure>
+      <div class="g-pair">
+        <figure class="g-item reveal">
+          <div class="g-img" style="background-image:url('../images/case01/2.jpg')"></div>
+          <figcaption>천장과 벽면에는 음향과 환기 계획을 함께 반영해 공기의 흐름과 소리 전달을 개선했고, 자작나무 마감재와 흡음제를 사용해 심미성과 기능을 동시에 확보했습니다.</figcaption>
+        </figure>
+        <figure class="g-item reveal">
+          <div class="g-img" style="background-image:url('../images/case01/5.jpg')"></div>
+          <figcaption>소회의실의 공간에는 따듯하고 부드러운 분위기를 연출할 수 있도록 천장에 조명을 매립하여 골고루 빛을 골고루 분산시켰습니다 ! </figcaption>
+        </figure>
+      </div>
+      <div class="g-pair">
+        <figure class="g-item reveal">
+          <div class="g-img" style="background-image:url('../images/case01/4.jpg')"></div>
+          <figcaption>벽을 따라 ㄱ자 형태의 긴 소파를 배치하여 많은 인원이 앉을 수 있도록 하였습니다! </figcaption>
+        </figure>
+        <figure class="g-item reveal">
+          <div class="g-img" style="background-image:url('../images/case01/6.jpg')"></div>
+          <figcaption>아 공간도 마찬가지로 중앙에 테이블과 의자를 배치하고, 벽면을 따라 벤치형 의자를 배치하여 효율적인 공간활용을 극대화 했습니다 </figcaption>
+        </figure>
+      </div>
+      <figure class="g-item reveal">
+        <div class="g-img" style="background-image:url('../images/case01/3.jpg')"></div>
+        <figcaption>벽면의 물결 패턴은 ‘은혜의 물결’을 시각적으로 표현한 이 공간의 시그니처 요소입니다.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimony">
+    <div class="testimony-inner">
+      <div class="test-eye">— PASTOR'S WORDS</div>
+      <blockquote>도면이 없었다면 불가능했을 것이라고 느낄 만큼, 이번 예배당 리모델링은 기준을 분명하게 세워준 작업이었습니다. 따뜻하고 정돈된 공간 안에서 성도들이 더 편안하게 예배에 집중할 수 있게 된 점이 무엇보다 감사했습니다.</blockquote>
+      <div class="test-author">
+        <div class="test-info">
+          <div class="test-role">광주월성교회</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED PROJECTS -->
+  <section class="related">
+    <div class="container">
+      <div class="related-head">
+        <span class="eye">— RELATED PROJECTS</span>
+        <h2>이 프로젝트와 함께 보면 좋은 작업들</h2>
+      </div>
+      <div class="rel-grid">
+        <span class="rel-card nav-link" onclick="location.href='portfolio_detail05.html'">
+          <div class="ph" style="background-image:url('images/case05/1.jpg')"></div>
+          <div class="rel-overlay"><h3>작은 채플, 깊은 묵상의 공간</h3><span>광주월성교회 부속 카페 · 80평</span></div>
+        </span>
+        <span class="rel-card nav-link" onclick="location.href='portfolio_detail02.html'">
+          <div class="ph" style="background-image:url('images/case02/6.jpg')"></div>
+          <div class="rel-overlay"><h3>30년 본당의 새로운 호흡</h3><span>서광주교회 · 250평</span></div>
+        </span>
+        <span class="rel-card nav-link" onclick="location.href='portfolio_detail03.html'">
+          <div class="ph" style="background-image:url('images/case03/6.jpg')"></div>
+          <div class="rel-overlay"><h3>세대를 잇는 다목적 예배홀</h3><span>광주 벧엘교회 · 190평</span></div>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="container">
+      <span class="eye">— LET'S WORK TOGETHER</span>
+      <h2>우리 교회도, 새로워질 수 있습니다.</h2>
+      <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br>혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+      <a href="https://zrr.kr/BEsbko" target="_blank" class="nav-link">무료 상담 신청하기 →</a>
+      <!-- <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span> -->
+    </div>
+  </section>
+
+</div><!-- /page-pf-detail -->
+
+<!-- ============================================================
+  SHARED FOOTER
+  ============================================================ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">컨빌디자인 <small>CONVIL Church Studio</small></div>
+        <p>주식회사 컨빌 · 대표 박진하</p>
+        <p>주소: 서울 강남구 압구정로 8길 루피움빌딩/부산 광역시 연제구 연제로 24, 203호</p>
+        <p>사업자등록번호: 736-05-02612</p>
+        <p>connectvillage@convil.net</p>
+      </div>
+      <div class="foot-col">
+        <h5>SERVICE</h5>
+        <ul>
+          <li><span data-nav="page-main,paths" class="nav-link">반셀프 인테리어 패키지</span></li>
+          <li><span data-nav="page-main,paths" class="nav-link">시공까지 한 번에</span></li>
+          <li><span data-nav="page-main,paths" class="nav-link">교회 브랜딩 패키지</span></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>STUDIO</h5>
+        <ul>
+          <li><span data-nav="page-main,about" class="nav-link">About</span></li>
+          <li><span data-nav="page-portfolio" class="nav-link">Portfolio</span></li>
+          <li><span data-nav="page-main,process" class="nav-link">Process</span></li>
+          <li><span data-nav="page-main,faq" class="nav-link">FAQ</span></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>SNS</h5>
+        <ul>
+          <li><a href="https://convil.net" target="_blank" class="nav-link">컨빌디자인 홈페이지</a></li>
+          <li><a href="https://blog.naver.com/convil_interior" target="_blank" class="nav-link">블로그</a></li>
+          <li><a href="https://www.youtube.com/@convil.interior" target="_blank" class="nav-link">유튜브</a></li>
+          <li><a href="https://pf.kakao.com/_PYdxin" target="_blank" class="nav-link">카카오톡 채널</a></li>
+          <li><a href="https://www.instagram.com/convil.design/" target="_blank" class="nav-link">인스타그램</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">Copyright © 2026 by Convil Inc. All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>

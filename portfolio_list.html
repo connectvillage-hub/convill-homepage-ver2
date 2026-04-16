@@ -23,29 +23,33 @@
     </div>
     <ul>
       <li><a href="index.html#about" class="nav-link">소개</a></li>
-      <li><a href="index.html#portfolio" class="nav-link nav-active">포트폴리오</a></li>
+      <li><a href="portfolio_list.html" class="nav-link nav-active">포트폴리오</a></li>
       <li><a href="index.html#paths" class="nav-link">서비스</a></li>
       <li><a href="index.html#process" class="nav-link">프로세스</a></li>
       <li><a href="youtube.html" class="nav-link">SNS</a></li>
       <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
     </ul>
-    <span data-nav="page-main,cta" class="cta nav-link">무료 상담 신청</span>
-    <button class="nav-mobile-toggle" onclick="openMobileMenu()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <div class="nav-actions">
+      <a href="https://zrr.kr/BEsbko" target="_blank" class="cta nav-link">무료 상담 신청</a>
+      <button class="nav-mobile-toggle" onclick="openMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="closeMobileMenu()">✕</button>
-  <a href="index.html#about" class="nav-link" onclick="closeMobileMenu()">소개</a>
-  <a href="portfolio_list.html" class="nav-link" onclick="closeMobileMenu()">포트폴리오</a>
-  <a href="index.html#paths" class="nav-link" onclick="closeMobileMenu()">서비스</a>
-  <a href="index.html#process" class="nav-link" onclick="closeMobileMenu()">프로세스</a>
-  <a href="youtube.html" class="nav-link" onclick="closeMobileMenu()">SNS</a>
-  <a href="index.html#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
-  <a href="index.html#cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;display:inline-block;">무료 상담 신청</a>
+  <span data-nav="page-main,about" class="nav-link" onclick="closeMobileMenu()">소개</span>
+  <a href="portfolio_list.html" class="nav-link">포트폴리오</a>
+  <!-- <span data-nav="page-main,portfolio" class="nav-link" onclick="closeMobileMenu()">포트폴리오</span> -->
+  <span data-nav="page-main,paths" class="nav-link" onclick="closeMobileMenu()">서비스</span>
+  <span data-nav="page-main,process" class="nav-link" onclick="closeMobileMenu()">프로세스</span>
+  <a href="youtube.html" class="nav-link">SNS</a>
+  <!-- <span data-nav="page-sns-youtube" class="nav-link" onclick="closeMobileMenu()">SNS</span> -->
+  <span data-nav="page-main,faq" class="nav-link" onclick="closeMobileMenu()">FAQ</span>
+  <span data-nav="page-main,cta" class="nav-link" onclick="closeMobileMenu()" style="background:var(--navy);color:#fff;padding:14px 28px;border-radius:4px;font-size:18px;">무료 상담 신청</span>
 </div>
 
 
@@ -75,15 +79,15 @@
         <div class="featured-img"></div>
         <div class="featured-info">
           <div class="pf-num-label">— Featured Project · 01</div>
-          <h2>빛이 머무는 본당,<br>새로운 예배의 시작</h2>
-          <p>30년 된 본당을 자연광 중심으로 재구성한 프로젝트. 강대상부터 성가대석, 영상부의 시야각까지 다시 설계하여, 1,200석 규모의 모든 자리에서 동일한 예배 경험을 누릴 수 있도록 했습니다.</p>
+          <h2>은혜의 물결이 흐르는 본당, 친화적인 교회의 시작</h2>
+          <p>오래된 분위기의 예배당을 모던하고 따뜻한 공간으로 재구성한 프로젝트. 중앙 십자가를 강조한 강단, 물결 패턴 벽체, 자작나무 천장과 흡음 설계를 통해 예배의 집중도와 공간의 상징성을 함께 높였습니다.</p>
           <dl class="featured-meta">
-            <div><dt>CHURCH</dt><dd>부산 ㅇㅇ교회</dd></div>
-            <div><dt>TYPE</dt><dd>본당 리모델링</dd></div>
-            <div><dt>SCALE</dt><dd>380평 · 1,200석</dd></div>
-            <div><dt>PERIOD</dt><dd>2024.03 — 06</dd></div>
+            <div><dt>CHURCH</dt><dd>광주월성교회</dd></div>
+            <div><dt>TYPE</dt><dd>예배당 리모델링</dd></div>
+            <div><dt>SCALE</dt><dd>약 50평 중 예배당 공간 포함</dd></div>
+            <div><dt>PERIOD</dt><dd>2024</dd></div>
           </dl>
-          <span class="featured-cta nav-link" data-nav="page-pf-detail">프로젝트 자세히 보기 →</span>
+          <a href="portfolio_detail01.html" class="featured-cta nav-link" data-nav="page-pf-detail">프로젝트 자세히 보기 →</a>
         </div>
       </div>
     </div>
@@ -106,53 +110,21 @@
   <section class="pf-section">
     <div class="container-wide">
       <div class="pf-grid" id="pfGrid">
-        <article class="pf-item reveal" onclick="location.href='portfolio_detail.html'">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1519302959554-a75be0afc82a?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>빛이 머무는 본당, 새로운 예배의 시작</h3><span class="pf-sub">부산 ㅇㅇ교회 · 380평</span></div>
+        <article class="pf-item reveal" onclick="location.href='portfolio_detail02.html'">
+          <div class="ph" style="background-image:url('images/case02/6.jpg')"></div>
+          <div class="pf-overlay"><h3>50년의 시간을 품은 교회,<br>다음 세대를 위한 새 공간의 시작</h3><span class="pf-sub">서광주교회 · 380평</span></div>
         </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1438032005730-c779502df39b?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>작은 채플, 깊은 묵상의 공간</h3><span class="pf-sub">광주 ㅇㅇ교회 · 80평</span></div>
+        <article class="pf-item reveal" onclick="location.href='portfolio_detail03.html'">
+          <div class="ph" style="background-image:url('images/case03/6.jpg')"></div>
+          <div class="pf-overlay"><h3>어두운 지하 예배당,<br>밝고 따뜻한 예배의 변화</h3><span class="pf-sub">광주 벧엘교회 · 62평</span></div>
         </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>청년이 머물고, 다시 찾아오는 라운지</h3><span class="pf-sub">서울 ㅇㅇ교회 · 120평</span></div>
+        <article class="pf-item reveal" onclick="location.href='portfolio_detail04.html'">
+          <div class="ph" style="background-image:url('images/case04/1.jpg')"></div>
+          <div class="pf-overlay"><h3>청년이 머물고, 다시 찾아오는 교회</h3><span class="pf-sub">부산 제8영도교회 · 120평</span></div>
         </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>사역의 흐름을 담는 사무 공간</h3><span class="pf-sub">부산 ㅇㅇ교회 · 95평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>마을과 함께 나누는 1층 카페</h3><span class="pf-sub">대구 ㅇㅇ교회 · 65평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>30년 본당의 새로운 호흡</h3><span class="pf-sub">인천 ㅇㅇ교회 · 250평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1568667256549-094345857637?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>자연광이 들어오는 교회 도서관</h3><span class="pf-sub">경기 ㅇㅇ교회 · 50평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1520637836862-4d197d17c50a?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>새가족을 위한 환영의 로비</h3><span class="pf-sub">서울 ㅇㅇ교회 · 70평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e85b56e16531?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>어린이 사역실, 함께 자라는 공간</h3><span class="pf-sub">부산 ㅇㅇ교회 · 110평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>노을빛이 닿는 작은 기도실</h3><span class="pf-sub">강원 ㅇㅇ교회 · 35평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>세대를 잇는 다목적 예배홀</h3><span class="pf-sub">울산 ㅇㅇ교회 · 190평</span></div>
-        </article>
-        <article class="pf-item reveal" onclick="showPage('page-pf-detail')">
-          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1507692812060-98338d07aca3?w=900&q=85')"></div>
-          <div class="pf-overlay"><h3>십자가가 있는 새로운 교회 외관</h3><span class="pf-sub">광주 ㅇㅇ교회 · —</span></div>
+        <article class="pf-item reveal" onclick="location.href='portfolio_detail05.html'">
+          <div class="ph" style="background-image:url('images/case05/1.jpg')"></div>
+          <div class="pf-overlay"><h3>친화적 교회,<br>함께 연결되는 커뮤니티 공간</h3><span class="pf-sub">광주월성교회 부속 카페 · 95평</span></div>
         </article>
         <div class="empty-state" id="emptyState" style="display:none;"><span class="em">No results</span>검색하신 키워드와 일치하는 프로젝트가 없습니다.</div>
       </div>
@@ -165,7 +137,8 @@
       <span class="eyebrow">— LET'S WORK TOGETHER</span>
       <h2>우리 교회도, 새로워질 수 있습니다.</h2>
       <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br>혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
-      <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span>
+      <a href="https://zrr.kr/BEsbko" target="_blank" class="nav-link">무료 상담 신청하기 →</a>
+      <!-- <span class="nav-link" data-nav="page-main,cta">무료 상담 신청하기 →</span> -->
     </div>
   </section>
 
@@ -204,10 +177,11 @@
       <div class="foot-col">
         <h5>SNS</h5>
         <ul>
-          <li><span data-nav="page-sns-youtube" class="nav-link">YouTube</span></li>
-          <li><span data-nav="page-sns-magazine" class="nav-link">Magazine</span></li>
-          <li>KakaoTalk</li>
-          <li>Instagram</li>
+          <li><a href="https://convil.net" target="_blank" class="nav-link">컨빌디자인 홈페이지</a></li>
+          <li><a href="https://blog.naver.com/convil_interior" target="_blank" class="nav-link">블로그</a></li>
+          <li><a href="https://www.youtube.com/@convil.interior" target="_blank" class="nav-link">유튜브</a></li>
+          <li><a href="https://pf.kakao.com/_PYdxin" target="_blank" class="nav-link">카카오톡 채널</a></li>
+          <li><a href="https://www.instagram.com/convil.design/" target="_blank" class="nav-link">인스타그램</a></li>
         </ul>
       </div>
     </div>

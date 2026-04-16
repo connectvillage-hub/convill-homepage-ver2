@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   
-  /* 1. 남은 data-nav 처리 (PC 무료상담 버튼용) */
+  /* 1. 남은 data-nav 처리 (PC 무료상담 버튼용)
   document.addEventListener('click', function(e) {
     const el = e.target.closest('[data-nav]');
     if (!el) return;
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const parts = val.split(',');
     // 클릭 시 본진(index.html)의 해당 구역(#)으로 바로 쏴줍니다!
     window.location.href = 'index.html#' + (parts[1] || '');
-  });
+  }); */
 
   /* 2. Mobile menu */
   window.openMobileMenu = function() { document.getElementById('mobileMenu').classList.add('open'); };
@@ -37,22 +37,33 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchWrap = document.querySelector('.search-wrap');
 
   function applySearch(q) {
-    const items = document.querySelectorAll('#pfGrid .pf-item');
-    const empty = document.getElementById('emptyState');
-    const query = q.trim().toLowerCase();
-    if (query.length < 2) {
-      items.forEach(item => item.classList.remove('hidden'));
-      if (empty) empty.style.display = 'none';
-      return;
-    }
-    let visibleCount = 0;
-    items.forEach(item => {
-      const title = item.querySelector('h3') ? item.querySelector('h3').textContent.toLowerCase() : '';
-      if (title.includes(query)) { item.classList.remove('hidden'); visibleCount++; }
-      else { item.classList.add('hidden'); }
-    });
-    if (empty) empty.style.display = visibleCount === 0 ? 'block' : 'none';
+  const items = document.querySelectorAll('#pfGrid .pf-item');
+  const empty = document.getElementById('emptyState');
+  const query = q.trim().toLowerCase();
+
+  if (query.length < 2) {
+    items.forEach(item => item.classList.remove('hidden'));
+    if (empty) empty.style.display = 'none';
+    return;
   }
+
+  let visibleCount = 0;
+  items.forEach(item => {
+    // 1. 선택자를 'h3'에서 '.pf-sub'로 변경합니다.
+    const subElement = item.querySelector('.pf-sub');
+    // 2. 요소가 존재할 경우 텍스트를 가져오고, 없으면 빈 문자열을 할당합니다.
+    const targetText = subElement ? subElement.textContent.toLowerCase() : '';
+
+    if (targetText.includes(query)) { 
+      item.classList.remove('hidden'); 
+      visibleCount++; 
+    } else { 
+      item.classList.add('hidden'); 
+    }
+  });
+
+  if (empty) empty.style.display = visibleCount === 0 ? 'block' : 'none';
+}
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
