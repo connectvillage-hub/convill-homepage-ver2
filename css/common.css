@@ -221,7 +221,7 @@ section{padding:110px 0}
 .collage{position:relative;height:380px;}
 .collage div{position:absolute;box-shadow:0 20px 40px -10px rgba(0,0,0,.5); background-repeat: no-repeat; background-size: cover; background-position: center;}
 .c1{top:0;left:0;width:55%;height:55%;background-image:url('../images/case01/1.jpg')}
-.c2{top:23px;right:0;width:50%;height:45%;background-image:url('../images/case01/before.jpg');transform:rotate(2deg)}
+.c2{top:23px;right:0;width:50%;height:45%;background-image:url('../images/case01/b_1.jpg');transform:rotate(2deg)}
 .c3{overflow: hidden;bottom:0;left:5%;width:55%;height:45%;background-image:url('../images/before.jpg');padding:14px;font-family:"Cormorant Garamond",serif;color:var(--ink);font-size:11px;line-height:1.5;transform:rotate(-3deg)}
 .c3:after{box-sizing: border-box;content: "Before&After 비교자료";font-size: 13px;position: absolute;bottom: 0;left:0;width: 100%;z-index: 1;color: #fff;background: #202020;text-align: center;padding: 5px;}
 .c4{overflow: hidden;bottom:0;right:0;width:50%;height:40%;background-image:url('../images/list.png');transform: rotate(3deg);}
