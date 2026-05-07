@@ -1,0 +1,13 @@
+{
+  "name": "convill-homepage-ver2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "컨빌디자인 - 교회 인테리어 전문 스튜디오",
+  "scripts": {
+    "build": "node scripts/generate-sitemap.js",
+    "sitemap": "node scripts/generate-sitemap.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
