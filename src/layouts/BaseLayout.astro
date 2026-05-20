@@ -1,0 +1,61 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonical: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  activeNav?: 'about' | 'portfolio' | 'paths' | 'process' | 'sns' | 'faq' | null;
+  /** common.js를 페이지에서 사용하지 않는 경우 false */
+  loadCommonJs?: boolean;
+  /** 페이지 고유 JS 파일 (예: 'portfolio.js'). 없으면 미로드. */
+  pageJs?: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  canonical,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  ogType,
+  activeNav,
+  loadCommonJs = true,
+  pageJs,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <SEOHead
+    title={title}
+    description={description}
+    keywords={keywords}
+    canonical={canonical}
+    ogTitle={ogTitle}
+    ogDescription={ogDescription}
+    ogImage={ogImage}
+    ogType={ogType}
+  />
+  {loadCommonJs && <script src="/js/common.js" is:inline defer></script>}
+  {pageJs && <script src={`/js/${pageJs}`} is:inline defer></script>}
+</head>
+<body>
+  <Header activeNav={activeNav} />
+  <MobileMenu />
+
+  <slot />
+
+  <Footer />
+</body>
+</html>
