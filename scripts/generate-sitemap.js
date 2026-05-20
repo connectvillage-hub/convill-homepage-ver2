@@ -10,6 +10,7 @@ const PRIORITY_RULES = [
   { match: f => f.startsWith('portfolio_detail'),  priority: '0.8', changefreq: 'monthly' },
   { match: f => f === 'youtube.html',              priority: '0.6', changefreq: 'weekly'  },
   { match: f => f === 'magazine.html',             priority: '0.6', changefreq: 'monthly' },
+  { match: f => f.startsWith('magazine_detail'),   priority: '0.7', changefreq: 'monthly' },
   { match: ()  => true,                            priority: '0.5', changefreq: 'monthly' },
 ];
 
