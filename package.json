@@ -9,13 +9,19 @@
     "start": "astro dev",
     "build": "astro build && node scripts/generate-sitemap.js",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dev:cms": "decap-server",
+    "dev:all": "concurrently --names \"astro,cms\" --prefix-colors \"cyan,magenta\" \"npm:dev\" \"npm:dev:cms\""
   },
   "dependencies": {
-    "astro": "^4.16.18",
-    "@astrojs/sitemap": "^3.2.1"
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.18"
   },
   "engines": {
     "node": ">=18.14.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "decap-server": "^3.7.0"
   }
 }

@@ -1,3 +1,7 @@
+# 로컬 전용 모드 — 푸시 없이 내 PC에서만 CMS UI 동작 확인용
+# 라이브 배포 시 이 줄 제거하면 됨
+local_backend: true
+
 backend:
   name: github
   repo: connectvillage-hub/convill-homepage-ver2
