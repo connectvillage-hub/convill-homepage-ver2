@@ -5,7 +5,7 @@ import MagazineDetailLayout from '../layouts/MagazineDetailLayout.astro';
 export async function getStaticPaths() {
   const entries = await getCollection('magazine');
   return entries.map(entry => ({
-    params: { id: entry.data.id },
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }

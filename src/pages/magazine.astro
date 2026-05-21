@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// id 내림차순 정렬 (최신 글이 먼저)
+// 발행일 내림차순 정렬 (최신 글이 먼저)
 const entries = (await getCollection('magazine')).sort(
-  (a, b) => Number(b.data.id) - Number(a.data.id)
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 ---
 <BaseLayout
@@ -49,12 +49,12 @@ const entries = (await getCollection('magazine')).sort(
         <div class="mag-grid" id="magGrid">
           {entries.map(entry => (
             <a
-              href={`/magazine_detail${entry.data.id}.html`}
+              href={`/${entry.slug}.html`}
               class="mag-card"
               data-mag-item
               aria-label={entry.data.title}
             >
-              <div class="mag-thumb" style={`background-image:url('${entry.data.heroImage}')`}></div>
+              <div class="mag-thumb" style={`background-image:url('${entry.data.coverImage ?? entry.data.heroImage}')`}></div>
             </a>
           ))}
         </div>

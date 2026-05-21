@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 const magazine = defineCollection({
   type: 'content',
   schema: z.object({
-    id: z.string().regex(/^\d{2}$/), // "01", "02", ... — URL의 magazine_detail{id}.html 패턴
+    id: z.string().regex(/^\d{2}$/), // "01", "02", ... — 내부 정렬용 (URL은 파일명이 slug로 자동 사용됨)
     title: z.string(),
     description: z.string(),
     keywords: z.string().optional(),
@@ -12,8 +12,9 @@ const magazine = defineCollection({
     category: z.string(), // 예: "CHURCH SPACE"
     publishDate: z.date(),
     readingTime: z.string(), // 예: "6분 읽기"
-    heroImage: z.string(), // 메인 이미지 URL (외부 URL 또는 /images/...)
+    heroImage: z.string(), // 글 상세 페이지 상단 메인 이미지
     heroImageAlt: z.string(),
+    coverImage: z.string().optional(), // 매거진 리스트 카드용 썸네일 (미지정 시 heroImage 사용)
     ogImage: z.string().optional(), // SNS 공유용 이미지 — 미지정 시 heroImage 사용
     tags: z.array(z.string()),
   }),
