@@ -1,0 +1,180 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'magazine'>;
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+
+const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
+const canonicalPath = `/magazine_detail${data.id}.html`;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+const ogImage = data.ogImage ?? data.heroImage;
+
+const formattedDate = data.publishDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+}).replace(/\.\s*$/, '').replace(/\.\s*/g, '.');
+
+const isoPublishDate = data.publishDate.toISOString().split('T')[0];
+
+// Article Schema (JSON-LD) — for Google + AI
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  image: data.heroImage,
+  datePublished: isoPublishDate,
+  dateModified: isoPublishDate,
+  author: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    url: SITE_URL + '/',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/main.png`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Magazine', item: `${SITE_URL}/magazine.html` },
+    { '@type': 'ListItem', position: 3, name: data.title, item: canonicalUrl },
+  ],
+};
+---
+<BaseLayout
+  title={`${data.title} — 컨빌디자인 매거진`}
+  description={data.description}
+  keywords={data.keywords}
+  canonical={canonicalPath}
+  ogTitle={data.title}
+  ogDescription={data.description}
+  ogImage={ogImage}
+  ogType="article"
+  activeNav="sns"
+>
+  <!-- Article Schema (body 안에 둬도 Google이 인식함) -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/index.html" class="nav-link">Home</a>
+        <span class="sep">/</span>
+        <a href="/magazine.html" class="nav-link">Magazine</a>
+        <span class="sep">/</span>
+        <span class="current" style="color:var(--ink)">{data.title}</span>
+      </div>
+    </div>
+  </div>
+
+  <article>
+    <header class="mag-article-head">
+      <div class="mag-eyebrow">
+        {data.category} <span>·</span> {formattedDate} <span>·</span> {data.readingTime}
+      </div>
+      <h1>{data.title}</h1>
+      <p class="mag-dek">{data.dek}</p>
+    </header>
+
+    <div class="mag-hero-image">
+      <img src={data.heroImage} alt={data.heroImageAlt} />
+    </div>
+
+    <div class="mag-body">
+      <p class="lead">{data.lead}</p>
+
+      <slot />
+    </div>
+
+    <div class="mag-tags">
+      <div class="mag-tags-row">
+        {data.tags.map(tag => <span class="mag-tag">{tag}</span>)}
+      </div>
+    </div>
+
+    <div class="mag-back">
+      <a href="/magazine.html">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        매거진 전체 보기
+      </a>
+    </div>
+  </article>
+
+  <section class="cta-strip">
+    <div class="container">
+      <span class="eye">— LET'S WORK TOGETHER</span>
+      <h2>우리 교회도, <span class="ws">새로워질 수</span> 있습니다.</h2>
+      <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br />혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+      <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* Magazine Article — clean editorial layout */
+  .mag-article-head { max-width: 760px; margin: 0 auto; padding: 80px 24px 50px; text-align: center; }
+  .mag-eyebrow { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 24px; }
+  .mag-eyebrow span { margin: 0 8px; color: #ccc; }
+  .mag-article-head h1 { font-family: 'Noto Serif KR', serif; font-size: 40px; font-weight: 700; letter-spacing: -.025em; line-height: 1.3; color: #1a1a1a; margin: 0 0 22px; }
+  .mag-dek { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; line-height: 1.7; color: #666; margin: 0 auto; max-width: 620px; }
+  .mag-hero-image { max-width: 1100px; margin: 0 auto 70px; padding: 0 24px; }
+  .mag-hero-image img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .mag-body { max-width: 720px; margin: 0 auto; padding: 0 24px 60px; font-family: 'Noto Serif KR', serif; font-size: 18px; line-height: 1.95; color: #2a2a2a; }
+  .mag-body .lead { font-size: 21px; line-height: 1.7; color: #1a1a1a; font-weight: 500; margin: 0 0 50px; padding-bottom: 30px; border-bottom: 1px solid #e5e5e5; }
+  .mag-body p { margin: 0 0 28px; }
+  .mag-body h2 { font-family: 'Noto Serif KR', serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 64px 0 24px; color: #1a1a1a; line-height: 1.4; }
+  .mag-body h3 { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 600; margin: 40px 0 14px; color: #1a1a1a; line-height: 1.4; }
+  .mag-body figure { margin: 50px -40px; }
+  .mag-body figure img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .mag-body figcaption { font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 14px; font-style: italic; }
+  .mag-body blockquote { margin: 50px 0; padding: 34px 20px; border-top: 2px solid #1a1a1a; border-bottom: 2px solid #1a1a1a; font-family: 'Noto Serif KR', serif; font-size: 24px; line-height: 1.5; font-weight: 500; font-style: italic; text-align: center; color: #1a1a1a; }
+  .mag-body ol, .mag-body ul { padding-left: 24px; margin: 0 0 28px; }
+  .mag-body ol li, .mag-body ul li { margin-bottom: 16px; }
+  .mag-body a { color: #1a3a5f; text-decoration: underline; text-underline-offset: 3px; }
+  .mag-body strong { font-weight: 600; color: #1a1a1a; }
+
+  .mag-tags { max-width: 720px; margin: 0 auto; padding: 30px 24px 0; border-top: 1px solid #e5e5e5; }
+  .mag-tags-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .mag-tag { font-family: 'Noto Sans KR', sans-serif; font-size: 13px; padding: 7px 14px; background: #f5f5f5; border-radius: 20px; color: #555; }
+
+  .mag-back { max-width: 720px; margin: 0 auto 80px; padding: 30px 24px 0; }
+  .mag-back a { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 500; color: #1a1a1a; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .mag-back a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .mag-article-head { padding: 60px 20px 40px; }
+    .mag-article-head h1 { font-size: 28px; }
+    .mag-dek { font-size: 16px; }
+    .mag-hero-image { padding: 0; margin-bottom: 50px; }
+    .mag-hero-image img { border-radius: 0; }
+    .mag-body { font-size: 17px; padding: 0 20px 50px; }
+    .mag-body .lead { font-size: 19px; }
+    .mag-body h2 { font-size: 24px; margin: 48px 0 18px; }
+    .mag-body h3 { font-size: 19px; }
+    .mag-body figure { margin: 36px -20px; }
+    .mag-body figure img { border-radius: 0; }
+    .mag-body blockquote { font-size: 20px; padding: 28px 16px; }
+  }
+</style>
