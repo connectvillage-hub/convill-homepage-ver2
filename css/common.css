@@ -600,11 +600,11 @@ details p{color:var(--muted);font-size:13px;line-height:1.8;margin:14px 0 0;padd
   .mag-body a{color:#1a3a5f;text-decoration:underline;text-underline-offset:3px;}
   .mag-body strong{font-weight:600;color:#1a1a1a;}
 
-  .mag-tags{max-width:720px;margin:0 auto;padding:30px 24px 0;border-top:1px solid #e5e5e5;}
+  .mag-tags{max-width:1000px;margin:0 auto;padding:30px 24px 0;border-top:1px solid #e5e5e5;}
   .mag-tags-row{display:flex;flex-wrap:wrap;gap:10px;}
   .mag-tag{font-family:'Noto Sans KR',sans-serif;font-size:13px;padding:7px 14px;background:#f5f5f5;border-radius:20px;color:#555;}
 
-  .mag-back{max-width:720px;margin:0 auto 80px;padding:30px 24px 0;}
+  .mag-back{max-width:1000px;margin:0 auto 80px;padding:30px 24px 0;}
   .mag-back a{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
   .mag-back a:hover{text-decoration:underline;}
 
