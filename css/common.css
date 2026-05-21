@@ -482,7 +482,7 @@ details p{color:var(--muted);font-size:13px;line-height:1.8;margin:14px 0 0;padd
 .cat-tabs a,.cat-tabs span[data-nav]{color:var(--muted);padding:8px 22px;transition:color .2s ease;font-weight:400;cursor:pointer;}
 .cat-tabs a:hover,.cat-tabs span[data-nav]:hover{color:var(--ink)}
 .cat-tabs a.active,.cat-tabs span[data-nav].active,.cat-tabs .sns-active{color:var(--ink);font-weight:700}
-.cat-tabs .sep{width:1px;height:14px;background:var(--line);display:inline-block;}
+.cat-tabs .sep{margin: 0 10px 0 -10px;width:1px;height:14px;background:var(--line);display:inline-block;}
 
 .yt-section{padding:0 0 110px}
 .yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
@@ -578,6 +578,36 @@ details p{color:var(--muted);font-size:13px;line-height:1.8;margin:14px 0 0;padd
 .mobile-menu a:hover,.mobile-menu span[data-nav]:hover{color:var(--orange)}
 .mobile-menu .close-btn{position:absolute;top:28px;right:28px;background:none;border:none;cursor:pointer;font-size:28px;color:var(--ink);}
 
+ /* Magazine Article — clean editorial layout */
+  .mag-article-head{max-width:760px;margin:0 auto;padding:80px 24px 50px;text-align:center;}
+  .mag-eyebrow{font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#999;margin-bottom:24px;}
+  .mag-eyebrow span{margin:0 8px;color:#ccc;}
+  .mag-article-head h1{font-family:'Noto Serif KR',serif;font-size:40px;font-weight:700;letter-spacing:-.025em;line-height:1.3;color:#1a1a1a;margin:0 0 22px;}
+  .mag-dek{font-family:'Noto Sans KR',sans-serif;font-size:18px;line-height:1.7;color:#666;margin:0 auto;max-width:620px;}
+  .mag-hero-image{max-width:1100px;margin:0 auto 70px;padding:0 24px;}
+  .mag-hero-image img{width:100%;height:auto;max-width: 1000px; margin: 0 auto;display:block;border-radius:4px;}
+  .mag-body{max-width:1000px;margin:0 auto;padding:0 24px 60px;font-family:'Noto Serif KR',serif;font-size:18px;line-height:1.95;color:#2a2a2a;}
+  .mag-body .lead{font-size:21px;line-height:1.7;color:#1a1a1a;font-weight:500;margin:0 0 50px;padding-bottom:30px;border-bottom:1px solid #e5e5e5;}
+  .mag-body p{margin:0 0 28px;}
+  .mag-body h2{font-family:'Noto Serif KR',serif;font-size:30px;font-weight:700;letter-spacing:-.02em;margin:64px 0 24px;color:#1a1a1a;line-height:1.4;}
+  .mag-body h3{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:600;margin:40px 0 14px;color:#1a1a1a;line-height:1.4;}
+  .mag-body figure{margin:50px -40px;}
+  .mag-body figure img{width:100%;height:auto;display:block;border-radius:4px;}
+  .mag-body figcaption{font-family:'Noto Sans KR',sans-serif;font-size:13px;color:#999;text-align:center;margin-top:14px;font-style:italic;}
+  .mag-body blockquote{margin:50px 0;padding:34px 20px;border-top:2px solid #1a1a1a;border-bottom:2px solid #1a1a1a;font-family:'Noto Serif KR',serif;font-size:24px;line-height:1.5;font-weight:500;font-style:italic;text-align:center;color:#1a1a1a;}
+  .mag-body ol,.mag-body ul{padding-left:24px;margin:0 0 28px;}
+  .mag-body ol li,.mag-body ul li{margin-bottom:16px;}
+  .mag-body a{color:#1a3a5f;text-decoration:underline;text-underline-offset:3px;}
+  .mag-body strong{font-weight:600;color:#1a1a1a;}
+
+  .mag-tags{max-width:720px;margin:0 auto;padding:30px 24px 0;border-top:1px solid #e5e5e5;}
+  .mag-tags-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .mag-tag{font-family:'Noto Sans KR',sans-serif;font-size:13px;padding:7px 14px;background:#f5f5f5;border-radius:20px;color:#555;}
+
+  .mag-back{max-width:720px;margin:0 auto 80px;padding:30px 24px 0;}
+  .mag-back a{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+  .mag-back a:hover{text-decoration:underline;}
+
 
 /* ============================================================
    RESPONSIVE STYLES (모두 이곳으로 집결하였사옵니다!)
@@ -639,6 +669,21 @@ details p{color:var(--muted);font-size:13px;line-height:1.8;margin:14px 0 0;padd
   .intro p{font-size:16px}
   .g-pair{grid-template-columns:1fr;gap:0;margin-bottom: 0;}
   .g-pair .g-item{margin-bottom:60px}
+}
+
+@media (max-width:768px){
+  .mag-article-head{padding:60px 20px 40px;}
+  .mag-article-head h1{font-size:28px;}
+  .mag-dek{font-size:16px;}
+  .mag-hero-image{padding:0;margin-bottom:50px;}
+  .mag-hero-image img{border-radius:0;}
+  .mag-body{font-size:17px;padding:0 20px 50px;}
+  .mag-body .lead{font-size:19px;}
+  .mag-body h2{font-size:24px;margin:48px 0 18px;}
+  .mag-body h3{font-size:19px;}
+  .mag-body figure{margin:36px -20px;}
+  .mag-body figure img{border-radius:0;}
+  .mag-body blockquote{font-size:20px;padding:28px 16px;}
 }
 
 /* 640px 이하 */
