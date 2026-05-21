@@ -91,4 +91,16 @@ const portfolio = defineCollection({
   }),
 });
 
-export const collections = { magazine, portfolio };
+const youtube = defineCollection({
+  type: 'data',
+  schema: z.object({
+    id: z.string().regex(/^\d{2}$/),       // "01"~"NN"
+    displayOrder: z.number(),               // 노출 순서 (작을수록 위)
+    url: z.string().url(),                  // YouTube URL
+    title: z.string(),                      // 영상 제목
+    thumbnail: z.string(),                  // 썸네일 이미지 (예: /images/youtube01.jpg)
+    duration: z.string(),                   // 재생 시간 (예: "2:08")
+  }),
+});
+
+export const collections = { magazine, portfolio, youtube };

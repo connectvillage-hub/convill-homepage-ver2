@@ -1,5 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// displayOrder 오름차순 정렬
+const videos = (await getCollection('youtube')).sort(
+  (a, b) => a.data.displayOrder - b.data.displayOrder
+);
 ---
 <BaseLayout
   title="교회 인테리어 영상 SNS — 서울·부산·광주 컨빌디자인"
@@ -31,7 +37,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </a>
         </div>
         <nav class="cat-tabs">
-          <!-- <a href="magazine.html" class="nav-link">MAGAZINE</a> -->
+          <!-- <a href="/magazine.html" class="nav-link">MAGAZINE</a> -->
           <span class="sep"></span>
           <span class="sns-active">YOUTUBE</span>
         </nav>
@@ -41,61 +47,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="yt-section">
       <div class="container">
         <div class="yt-grid" id="ytGrid">
-          <!-- 총 12개 영상, JS로 6개씩 페이지 처리 -->
-          <article class="yt-card" data-yt-item onclick="window.open('https://youtu.be/KhRgZ3OvVzc?si=L4quLAYWE86ajk3Y', '_blank')">
-            <div class="yt-thumb">
-              <div class="ph" style="background-image:url('/images/youtube06.jpg')"></div>
-              <span class="yt-duration">2:08</span>
-            </div>
-            <div class="yt-info">
-              <h3>단순 시공 아닌 '설계 + 브랜딩'까지 인테리어 잘하는 곳</h3>
-            </div>
-          </article>
-          <article class="yt-card" data-yt-item onclick="window.open('https://youtu.be/9ITB-_l8ZuQ?si=N4D46X4idC1fSgVi', '_blank')">
-            <div class="yt-thumb">
-              <div class="ph" style="background-image:url('/images/youtube05.jpg')"></div>
-              <span class="yt-duration">7:37</span>
-            </div>
-            <div class="yt-info">
-              <h3>목사님이 직접 공사하셨다고요? 반셀프인테리어로 5천만원 절약한 교회 리모델링의 비밀</h3>
-            </div>
-          </article>
-          <article class="yt-card" data-yt-item onclick="window.open('https://youtu.be/A8-autHvFlc?si=r5VR-xxqUWnbBqDS', '_blank')">
-            <div class="yt-thumb">
-              <div class="ph" style="background-image:url('/images/youtube04.jpg')"></div>
-              <span class="yt-duration">9:01</span>
-            </div>
-            <div class="yt-info">
-              <h3>17년 목사님의 결단! 교회도 이제 브랜딩이 필요합니다. (충격적인 비포&에프터 변화)</h3>
-            </div>
-          </article>
-          <article class="yt-card" data-yt-item onclick="window.open('https://youtu.be/_kJKeTYkMPg?si=j9wzIxwA-pyIVoNP', '_blank')">
-            <div class="yt-thumb">
-              <div class="ph" style="background-image:url('/images/youtube03.jpg')"></div>
-              <span class="yt-duration">18:06</span>
-            </div>
-            <div class="yt-info">
-              <h3>새해 맞이 교회리모델링을 3000만원이나 절약한 광주월성교회의 비법 대공개🔥</h3>
-            </div>
-          </article>
-          <article class="yt-card" data-yt-item onclick="window.open('https://youtu.be/Sifv-tmaFMg?si=oRdTktGRX7oHAk08', '_blank')">
-            <div class="yt-thumb">
-              <div class="ph" style="background-image:url('/images/youtube02.jpg')"></div>
-              <span class="yt-duration">8:32</span>
-            </div>
-            <div class="yt-info">
-              <h3>인테리어비용 30% 폭풍 절감!! 교회 리모델링 '도면' 대공개💒 ⚠️이 방법 모르면 손해입니다⚠️</h3>
-            </div>
-          </article>
-          <article class="yt-card" data-yt-item onclick="window.open('https://youtu.be/4kjG6AF3EBQ?si=Zm87qj0A5Axu8qh3', '_blank')">
-            <div class="yt-thumb">
-              <div class="ph" style="background-image:url('/images/youtube01.jpg')"></div>
-              <span class="yt-duration">11:29</span>
-            </div>
-            <div class="yt-info">
-              <h3>이런 교회 봤어? 💒✨ 성도들이 찾아오고 싶게 만든 목사님의 반셀프인테리어 도전기 (인테리어전문가와 싸게하는법) 😎</h3>
-            </div>
-          </article>
+          {videos.map(video => (
+            <article class="yt-card" data-yt-item onclick={`window.open('${video.data.url}', '_blank')`}>
+              <div class="yt-thumb">
+                <div class="ph" style={`background-image:url('${video.data.thumbnail}')`}></div>
+                <span class="yt-duration">{video.data.duration}</span>
+              </div>
+              <div class="yt-info">
+                <h3>{video.data.title}</h3>
+              </div>
+            </article>
+          ))}
         </div>
         <!-- YouTube 페이지네이션 -->
         <div class="pagination" id="ytPagination"></div>
@@ -107,7 +69,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="eye">— LET'S WORK TOGETHER</span>
         <h2>우리 교회도, <span class="ws">새로워질 수</span> 있습니다.</h2>
         <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br />혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
-        <a href="https://zrr.kr/BEsbko" target="_blank" class="nav-link">무료 상담 신청하기 →</a>
+        <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
       </div>
     </section>
 
