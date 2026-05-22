@@ -12,13 +12,78 @@ const data = entry.data;
 
 const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
 const canonicalPath = `/portfolio_detail${data.id}.html`;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 const ogImage = data.ogImage ?? `${SITE_URL}${data.listImage}`;
+
+// <br> 제거 평문 (Schema/메타용)
+const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+const plainTitle = stripBr(data.title);
+const plainListTitle = stripBr(data.listTitle);
+
+// period (예: "2024", "2026") → ISO date (1월 1일로 단순화)
+const periodYear = data.period.match(/\d{4}/)?.[0] ?? new Date().getFullYear().toString();
+const isoDate = `${periodYear}-01-01`;
 
 // Related projects — relatedIds로 다른 entries 조회
 const allEntries = await getCollection('portfolio');
 const relatedEntries = data.relatedIds
   .map(id => allEntries.find(e => e.data.id === id))
   .filter((e): e is CollectionEntry<'portfolio'> => Boolean(e));
+
+// Article Schema (JSON-LD) — Google + AI 인용성 강화
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: plainTitle,
+  description: data.description,
+  image: [
+    `${SITE_URL}${data.listImage}`,
+    ...data.beforeAfters.flatMap(ba => [
+      ba.after.startsWith('http') ? ba.after : `${SITE_URL}${ba.after}`,
+    ]),
+  ].slice(0, 5),
+  datePublished: isoDate,
+  dateModified: isoDate,
+  author: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    url: `${SITE_URL}/`,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/main.png`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  about: {
+    '@type': 'Place',
+    name: data.church,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: data.location,
+      addressCountry: 'KR',
+    },
+  },
+  keywords: data.keywords,
+  articleSection: data.projectType,
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/portfolio_list.html` },
+    { '@type': 'ListItem', position: 3, name: data.breadcrumb, item: canonicalUrl },
+  ],
+};
 ---
 <BaseLayout
   title={data.ogTitle ?? `${data.church} ${data.projectType} — 컨빌디자인 포트폴리오`}
@@ -33,6 +98,10 @@ const relatedEntries = data.relatedIds
   pageJs="portfolio.js"
 >
   <div id="page-pf-detail" class={`case${data.id}`}>
+
+    <!-- Structured Data (Article + BreadcrumbList) — SEO + AI 인용성 -->
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb-bar">

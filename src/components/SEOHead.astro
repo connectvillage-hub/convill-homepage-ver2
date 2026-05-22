@@ -25,6 +25,55 @@ const {
 
 const siteUrl = 'https://convill-homepage-ver2.vercel.app';
 const canonicalUrl = canonical.startsWith('http') ? canonical : `${siteUrl}${canonical}`;
+
+// LocalBusiness Schema — 모든 페이지에 전역 (지역 SEO 강화)
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${siteUrl}/#organization`,
+  name: '컨빌디자인',
+  alternateName: 'CONVIL Church Studio',
+  url: siteUrl,
+  logo: `${siteUrl}/images/main.png`,
+  image: `${siteUrl}/images/main.png`,
+  description: '서울·부산·광주 교회 인테리어 전문 스튜디오. 예배당, 로비, 청년부 카페, 목양실 등 교회 공간 디자인 및 시공.',
+  email: 'connectvillage@convil.net',
+  telephone: '+82-10-7204-8009',
+  priceRange: '문의',
+  founder: {
+    '@type': 'Person',
+    name: '박진하',
+    jobTitle: '대표',
+  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '강남구 압구정로 8길 루피움빌딩',
+      addressLocality: '서울',
+      addressCountry: 'KR',
+    },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '연제구 연제로 24, 203호',
+      addressLocality: '부산',
+      addressCountry: 'KR',
+    },
+  ],
+  areaServed: [
+    { '@type': 'Country', name: '대한민국' },
+    { '@type': 'City', name: '서울' },
+    { '@type': 'City', name: '부산' },
+    { '@type': 'City', name: '광주' },
+  ],
+  sameAs: [
+    'https://convil.net',
+    'https://blog.naver.com/convil_interior',
+    'https://www.youtube.com/@convil.interior',
+    'https://www.instagram.com/convil.design/',
+    'https://pf.kakao.com/_PYdxin',
+  ],
+  taxID: '736-05-02612',
+};
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,3 +112,6 @@ const canonicalUrl = canonical.startsWith('http') ? canonical : `${siteUrl}${can
 
 <!-- Shared CSS -->
 <link rel="stylesheet" href="/css/common.css" />
+
+<!-- LocalBusiness Schema (전역, 지역 SEO + Google 비즈니스 프로필 연동) -->
+<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
