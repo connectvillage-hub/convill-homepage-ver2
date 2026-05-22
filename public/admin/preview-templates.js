@@ -199,14 +199,16 @@ function imgBox(src, label, color) {
 }
 
 /* ============================================================
-   Magazine Preview (간단 버전)
+   Magazine Preview (본문 마크다운 포함)
    ============================================================ */
-const MagazinePreview = ({ entry }) => {
+const MagazinePreview = ({ entry, widgetFor }) => {
   const dataJS = entry.getIn(['data']).toJS();
   const data = dataJS || {};
   return h('article', { style: { fontFamily: 'Pretendard, sans-serif', maxWidth: '760px', margin: '0 auto', padding: '40px 24px', background: '#fff' } },
     h('div', { style: { background: '#FFF7E6', padding: '10px', fontSize: '12px', color: '#8B6800', borderRadius: '6px', marginBottom: '24px' } },
-      '👀 매거진 글 미리보기'),
+      '👀 매거진 글 미리보기 (실시간 반영)'),
+
+    // Header
     h('header', { style: { textAlign: 'center', marginBottom: '32px' } },
       h('div', { style: { fontSize: '12px', color: '#999', letterSpacing: '0.18em', marginBottom: '16px' } },
         (data.category || 'CATEGORY') + ' · ' + (data.readingTime || '— 분 읽기')),
@@ -219,20 +221,33 @@ const MagazinePreview = ({ entry }) => {
         dangerouslySetInnerHTML: { __html: data.dek || '— 부제 —' },
       }),
     ),
+
+    // Hero image
     data.heroImage
-      ? h('img', { src: data.heroImage, alt: data.heroImageAlt || '', style: { width: '100%', borderRadius: '4px', marginBottom: '32px' } })
+      ? h('img', { src: data.heroImage, alt: data.heroImageAlt || '', style: { width: '100%', borderRadius: '4px', marginBottom: '32px', display: 'block' } })
       : null,
-    h('div', { style: { fontFamily: 'Noto Serif KR, serif', fontSize: '17px', lineHeight: 1.9, color: '#333' } },
+
+    // Body: lead + 마크다운 본문 (widgetFor로 렌더링)
+    h('div', {
+      className: 'mag-body',
+      style: { fontFamily: 'Noto Serif KR, serif', fontSize: '17px', lineHeight: 1.9, color: '#333' },
+    },
+      // Lead 단락 (강조 표시)
       h('p', {
-        style: { fontSize: '20px', borderBottom: '1px solid #ddd', paddingBottom: '24px', marginBottom: '32px' },
+        className: 'lead',
+        style: { fontSize: '20px', borderBottom: '1px solid #ddd', paddingBottom: '24px', marginBottom: '32px', fontWeight: 500 },
         dangerouslySetInnerHTML: { __html: data.lead || '— 첫 단락 —' },
       }),
-      h('p', { style: { color: '#999', fontStyle: 'italic' } }, '— 본문은 admin에서 작성한 마크다운으로 렌더링됨 (이 미리보기에는 표시 안 됨) —'),
+
+      // 마크다운 본문 (자동 렌더링, editor component 포함)
+      widgetFor('body'),
     ),
+
+    // Tags
     (data.tags && data.tags.length > 0)
-      ? h('div', { style: { marginTop: '32px', display: 'flex', flexWrap: 'wrap', gap: '8px' } },
+      ? h('div', { style: { marginTop: '40px', paddingTop: '24px', borderTop: '1px solid #e5e5e5', display: 'flex', flexWrap: 'wrap', gap: '10px' } },
           data.tags.map((tag, i) =>
-            h('span', { key: i, style: { background: '#f5f5f5', padding: '6px 12px', borderRadius: '999px', fontSize: '12px' } }, tag)
+            h('span', { key: i, style: { background: '#f5f5f5', padding: '7px 14px', borderRadius: '999px', fontSize: '13px', color: '#555' } }, tag)
           ),
         )
       : null,
