@@ -2,11 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+
 const all = await getCollection('portfolio');
 const featured = all.find(e => e.data.isFeatured);
 const rest = all
   .filter(e => !e.data.isFeatured)
   .sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+
+const listTitleOf = (e: typeof all[number]) => e.data.listCard.title ?? stripBr(e.data.heading.title);
 ---
 <BaseLayout
   title="교회 인테리어 시공 사례 — 서울·부산·광주 컨빌디자인 포트폴리오"
@@ -39,16 +43,16 @@ const rest = all
       <section class="featured-pf">
         <div class="container-wide">
           <div class="featured-grid">
-            <div class="featured-img" style={`background-image:url('${featured.data.listImage}')`}></div>
+            <div class="featured-img" style={`background-image:url('${featured.data.listCard.image}')`}></div>
             <div class="featured-info">
               <div class="pf-num-label">— Featured Project · {featured.data.id}</div>
-              <h2 set:html={featured.data.listTitle} />
-              <p>{featured.data.intro}</p>
+              <h2 set:html={listTitleOf(featured)} />
+              <p>{featured.data.content.intro}</p>
               <dl class="featured-meta">
-                <div><dt>CHURCH</dt><dd>{featured.data.church}</dd></div>
-                <div><dt>TYPE</dt><dd>{featured.data.projectType}</dd></div>
-                <div><dt>SCALE</dt><dd set:html={featured.data.scale} /></div>
-                <div><dt>PERIOD</dt><dd>{featured.data.period}</dd></div>
+                <div><dt>CHURCH</dt><dd>{featured.data.church.name}</dd></div>
+                <div><dt>TYPE</dt><dd>{featured.data.church.projectType}</dd></div>
+                <div><dt>SCALE</dt><dd set:html={featured.data.church.scale} /></div>
+                <div><dt>PERIOD</dt><dd>{featured.data.church.period}</dd></div>
               </dl>
               <a href={`/portfolio_detail${featured.data.id}.html`} class="featured-cta nav-link">프로젝트 자세히 보기 →</a>
             </div>
@@ -76,10 +80,10 @@ const rest = all
         <div class="pf-grid" id="pfGrid">
           {rest.map(entry => (
             <a href={`/portfolio_detail${entry.data.id}.html`} class="pf-item reveal">
-              <div class="ph" style={`background-image:url('${entry.data.listImage}')`}></div>
+              <div class="ph" style={`background-image:url('${entry.data.listCard.image}')`}></div>
               <div class="pf-overlay">
-                <h3 set:html={entry.data.listTitle} />
-                <span class="pf-sub">{entry.data.listSubtitle}</span>
+                <h3 set:html={listTitleOf(entry)} />
+                <span class="pf-sub">{entry.data.listCard.subtitle}</span>
               </div>
             </a>
           ))}

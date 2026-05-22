@@ -69,62 +69,75 @@ collections:
     extension: md
     format: yaml-frontmatter
     slug: "{{fields.id}}"
-    identifier_field: church
-    summary: "[{{id}}] {{church}}"
-    sortable_fields: [displayOrder, id, period]
+    identifier_field: id
+    summary: "[{{id}}] {{church.name}}"
+    sortable_fields: [displayOrder, id]
     fields:
-      - { name: id, label: '사례 번호 (01, 02 ...)', widget: string, hint: 'URL은 portfolio_detail{번호}.html', pattern: ['^\d{2}$', '두 자리 숫자만'] }
-      - { name: displayOrder, label: 표시 순서, widget: number, default: 99, value_type: int, hint: '작은 숫자가 리스트 페이지 위쪽에 표시됨' }
-      - { name: isFeatured, label: 대표 사례로 표시?, widget: boolean, default: false, hint: '포트폴리오 리스트 페이지 상단의 Featured 섹션에 표시' }
+      # ─── 1) 기본 정보 ───
+      - { name: id, label: '① 사례 번호 (01, 02 ...)', widget: string, hint: 'URL: portfolio_detail{번호}.html', pattern: ['^\d{2}$', '두 자리 숫자만'] }
+      - { name: displayOrder, label: '① 표시 순서', widget: number, default: 99, value_type: int, hint: '작은 숫자가 리스트 페이지 위쪽에 표시됨' }
+      - { name: isFeatured, label: '① 대표 사례로 표시?', widget: boolean, default: false, hint: '포트폴리오 리스트 상단 Featured 섹션에 표시' }
 
-      # 히어로
-      - { name: title, label: 제목 (h1), widget: text, hint: '줄바꿈은 <br> 사용. 예: "친화적인 교회의 시작,<br>은혜의 물결이 흐르는 본당"' }
-      - { name: breadcrumb, label: 경로 표시 (breadcrumb), widget: string, hint: '페이지 상단 경로의 마지막 텍스트' }
-      - { name: church, label: 교회명, widget: string }
-      - { name: scaleInfo, label: 규모 정보 (히어로), widget: string, hint: '예: "약 50평 예배당 공간 포함"' }
-      - { name: period, label: 시공 연도, widget: string, hint: '예: "2024"' }
-
-      # Info Bar
-      - { name: location, label: 위치, widget: string, hint: '예: "광주광역시"' }
-      - { name: projectType, label: 프로젝트 종류, widget: string, hint: '예: "본당 리모델링"' }
-      - { name: scale, label: 규모 (info bar), widget: text, hint: '여러 줄 가능, <br>로 줄바꿈' }
-
-      # 소개
-      - { name: intro, label: 프로젝트 소개, widget: text }
-
-      # Before/After
-      - name: beforeAfters
-        label: Before / After 슬라이더
-        widget: list
-        required: false
-        summary: '{{fields.afterAlt}}'
+      # ─── 2) 교회 정보 ───
+      - name: church
+        label: '② 교회 정보'
+        widget: object
+        collapsed: false
         fields:
-          - { name: before, label: '시공 전 이미지', widget: image }
-          - { name: after, label: '시공 후 이미지', widget: image }
-          - { name: beforeAlt, label: '시공 전 이미지 설명 (alt)', widget: string }
-          - { name: afterAlt, label: '시공 후 이미지 설명 (alt)', widget: string }
+          - { name: name, label: 교회명, widget: string, hint: '예: "광주월성교회"' }
+          - { name: location, label: 위치, widget: string, hint: '예: "광주광역시"' }
+          - { name: projectType, label: 프로젝트 종류, widget: string, hint: '예: "본당 리모델링"' }
+          - { name: scale, label: 규모, widget: text, hint: '예: "약 50평 예배당 공간 포함" (여러 줄 가능, <br>로 줄바꿈)' }
+          - { name: period, label: 시공 연도, widget: string, hint: '예: "2024"' }
 
-      # Gallery
-      - name: gallery
-        label: 갤러리 (사진 묶음)
-        widget: list
-        required: false
-        summary: '{{fields.images[0].src}}'
-        label_singular: 사진 묶음 (1~2장)
+      # ─── 3) 헤더 (페이지 상단) ───
+      - name: heading
+        label: '③ 헤더 (페이지 상단)'
+        widget: object
+        collapsed: false
         fields:
-          - name: images
-            label: 이미지 (한 줄에 1~2장)
+          - { name: title, label: 제목 (h1), widget: text, hint: '줄바꿈은 <br>로. 예: "은혜의 물결이 흐르는 본당,<br>친화적인 교회의 시작"' }
+          - { name: breadcrumb, label: 경로 마지막 텍스트, widget: string, hint: '예: "친화적인 교회의 시작"' }
+
+      # ─── 4) 본문 콘텐츠 ───
+      - name: content
+        label: '④ 본문 콘텐츠'
+        widget: object
+        collapsed: false
+        fields:
+          - { name: intro, label: 프로젝트 소개, widget: text }
+
+          - name: beforeAfters
+            label: Before / After 슬라이더
             widget: list
-            summary: '{{fields.src}}'
+            required: false
+            summary: '{{fields.afterAlt}}'
             fields:
-              - { name: src, label: 이미지, widget: image }
-              - { name: caption, label: 캡션 (설명), widget: text, required: false }
-              - { name: isFull, label: 전체 폭 표시 (한 줄 단독), widget: boolean, default: false }
-              - { name: alt, label: 이미지 설명 (alt), widget: string, required: false }
+              - { name: before, label: '시공 전 이미지', widget: image }
+              - { name: after, label: '시공 후 이미지', widget: image }
+              - { name: beforeAlt, label: '시공 전 이미지 설명 (alt)', widget: string }
+              - { name: afterAlt, label: '시공 후 이미지 설명 (alt)', widget: string }
 
-      # 목회자 후기
+          - name: gallery
+            label: 갤러리 (사진 묶음)
+            widget: list
+            required: false
+            summary: '{{fields.images[0].src}}'
+            label_singular: 사진 묶음 (1~2장)
+            fields:
+              - name: images
+                label: 이미지 (한 줄에 1~2장)
+                widget: list
+                summary: '{{fields.src}}'
+                fields:
+                  - { name: src, label: 이미지, widget: image }
+                  - { name: caption, label: 캡션 (설명), widget: text, required: false }
+                  - { name: isFull, label: 전체 폭 표시 (한 줄 단독), widget: boolean, default: false }
+                  - { name: alt, label: 이미지 설명 (alt), widget: string, required: false }
+
+      # ─── 5) 목회자 후기 (선택) ───
       - name: testimony
-        label: 목회자 후기
+        label: '⑤ 목회자 후기 (선택)'
         widget: object
         required: false
         collapsed: true
@@ -142,20 +155,30 @@ collections:
               - { name: thumbnail, label: 썸네일 이미지, widget: image }
               - { name: duration, label: 재생 시간, widget: string, hint: '예: "18:06"' }
 
-      # 관련 프로젝트
-      - { name: relatedIds, label: 관련 프로젝트 (번호 3개 추천), widget: list, required: false, hint: '예: ["02", "05", "06"]', default: [] }
+      # ─── 6) 관련 프로젝트 ───
+      - { name: relatedIds, label: '⑥ 관련 프로젝트 (번호 3개 추천)', widget: list, required: false, hint: '예: ["02", "05", "06"]', default: [] }
 
-      # SEO
-      - { name: description, label: 메타 설명 (SEO), widget: text }
-      - { name: keywords, label: 키워드 (SEO), widget: string, required: false }
-      - { name: ogTitle, label: SNS 공유 제목, widget: string, required: false }
-      - { name: ogDescription, label: SNS 공유 설명, widget: text, required: false }
-      - { name: ogImage, label: SNS 공유 이미지, widget: image, required: false, choose_url: true }
+      # ─── 7) SEO (자동 처리, 필요시만 수정) ───
+      - name: seo
+        label: '⑦ SEO (선택 — 안 적으면 자동)'
+        widget: object
+        collapsed: true
+        fields:
+          - { name: description, label: 메타 설명 (필수), widget: text, hint: '검색 결과에 표시. 1~2문장' }
+          - { name: keywords, label: 키워드, widget: string, required: false }
+          - { name: ogTitle, label: 'SNS 공유 제목', widget: string, required: false, hint: '비우면 헤더 제목 자동 사용' }
+          - { name: ogDescription, label: 'SNS 공유 설명', widget: text, required: false, hint: '비우면 메타 설명 자동 사용' }
+          - { name: ogImage, label: 'SNS 공유 이미지', widget: image, required: false, choose_url: true, hint: '비우면 리스트 카드 이미지 자동 사용' }
 
-      # 리스트 페이지 표시용
-      - { name: listImage, label: 리스트 페이지 썸네일, widget: image, hint: '포트폴리오 리스트에 표시될 작은 이미지' }
-      - { name: listTitle, label: 리스트 페이지 제목, widget: text, hint: '줄바꿈은 <br>로' }
-      - { name: listSubtitle, label: 리스트 페이지 부제, widget: string, hint: '예: "광주월성교회 · 50평"' }
+      # ─── 8) 리스트 카드 (포트폴리오 목록 페이지에 표시) ───
+      - name: listCard
+        label: '⑧ 리스트 카드'
+        widget: object
+        collapsed: false
+        fields:
+          - { name: image, label: 썸네일 이미지, widget: image, hint: '포트폴리오 목록에 표시될 작은 이미지' }
+          - { name: subtitle, label: 카드 부제, widget: string, hint: '예: "광주월성교회 · 50평"' }
+          - { name: title, label: 카드 제목 (선택), widget: text, required: false, hint: '비우면 헤더 제목 자동 사용 (br 제거)' }
 
   # =================== 유튜브 영상 ===================
   - name: youtube

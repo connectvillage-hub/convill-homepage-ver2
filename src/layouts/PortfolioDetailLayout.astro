@@ -13,15 +13,18 @@ const data = entry.data;
 const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
 const canonicalPath = `/portfolio_detail${data.id}.html`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
-const ogImage = data.ogImage ?? `${SITE_URL}${data.listImage}`;
 
-// <br> 제거 평문 (Schema/메타용)
+// === 자동 추출 헬퍼 ===
 const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
-const plainTitle = stripBr(data.title);
-const plainListTitle = stripBr(data.listTitle);
+const plainTitle = stripBr(data.heading.title);
 
-// period (예: "2024", "2026") → ISO date (1월 1일로 단순화)
-const periodYear = data.period.match(/\d{4}/)?.[0] ?? new Date().getFullYear().toString();
+// SEO 자동 fallback
+const seoOgTitle = data.seo.ogTitle ?? plainTitle;
+const seoOgDescription = data.seo.ogDescription ?? data.seo.description;
+const seoOgImage = data.seo.ogImage ?? `${SITE_URL}${data.listCard.image}`;
+
+// period (예: "2024") → ISO date
+const periodYear = data.church.period.match(/\d{4}/)?.[0] ?? new Date().getFullYear().toString();
 const isoDate = `${periodYear}-01-01`;
 
 // Related projects — relatedIds로 다른 entries 조회
@@ -30,15 +33,15 @@ const relatedEntries = data.relatedIds
   .map(id => allEntries.find(e => e.data.id === id))
   .filter((e): e is CollectionEntry<'portfolio'> => Boolean(e));
 
-// Article Schema (JSON-LD) — Google + AI 인용성 강화
+// === Schema.org JSON-LD ===
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: plainTitle,
-  description: data.description,
+  description: data.seo.description,
   image: [
-    `${SITE_URL}${data.listImage}`,
-    ...data.beforeAfters.flatMap(ba => [
+    `${SITE_URL}${data.listCard.image}`,
+    ...data.content.beforeAfters.flatMap(ba => [
       ba.after.startsWith('http') ? ba.after : `${SITE_URL}${ba.after}`,
     ]),
   ].slice(0, 5),
@@ -63,43 +66,45 @@ const articleSchema = {
   },
   about: {
     '@type': 'Place',
-    name: data.church,
+    name: data.church.name,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: data.location,
+      addressLocality: data.church.location,
       addressCountry: 'KR',
     },
   },
-  keywords: data.keywords,
-  articleSection: data.projectType,
+  keywords: data.seo.keywords,
+  articleSection: data.church.projectType,
 };
 
-// BreadcrumbList Schema
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
     { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/portfolio_list.html` },
-    { '@type': 'ListItem', position: 3, name: data.breadcrumb, item: canonicalUrl },
+    { '@type': 'ListItem', position: 3, name: data.heading.breadcrumb, item: canonicalUrl },
   ],
 };
+
+// 리스트 카드용 (related projects 카드 표시)
+const listTitleOf = (e: CollectionEntry<'portfolio'>) => e.data.listCard.title ?? stripBr(e.data.heading.title);
 ---
 <BaseLayout
-  title={data.ogTitle ?? `${data.church} ${data.projectType} — 컨빌디자인 포트폴리오`}
-  description={data.description}
-  keywords={data.keywords}
+  title={seoOgTitle}
+  description={data.seo.description}
+  keywords={data.seo.keywords}
   canonical={canonicalPath}
-  ogTitle={data.ogTitle}
-  ogDescription={data.ogDescription}
-  ogImage={ogImage}
+  ogTitle={seoOgTitle}
+  ogDescription={seoOgDescription}
+  ogImage={seoOgImage}
   ogType="article"
   activeNav="portfolio"
   pageJs="portfolio.js"
 >
   <div id="page-pf-detail" class={`case${data.id}`}>
 
-    <!-- Structured Data (Article + BreadcrumbList) — SEO + AI 인용성 -->
+    <!-- Structured Data (Article + BreadcrumbList) -->
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
@@ -111,7 +116,7 @@ const breadcrumbSchema = {
           <span class="sep">/</span>
           <a href="/portfolio_list.html" class="nav-link">Portfolio</a>
           <span class="sep">/</span>
-          <span class="current" style="color:var(--ink)">{data.breadcrumb}</span>
+          <span class="current" style="color:var(--ink)">{data.heading.breadcrumb}</span>
         </div>
       </div>
     </div>
@@ -120,9 +125,9 @@ const breadcrumbSchema = {
     <section class="hero">
       <div class="hero-img">
         <div class="hero-overlay">
-          <h1 set:html={data.title} />
+          <h1 set:html={data.heading.title} />
           <div class="hero-meta">
-            <span>{data.church}</span><span>· {data.scaleInfo}</span><span>· {data.period}</span>
+            <span>{data.church.name}</span><span>· {data.church.scale}</span><span>· {data.church.period}</span>
           </div>
         </div>
       </div>
@@ -132,11 +137,11 @@ const breadcrumbSchema = {
     <section class="info-bar">
       <div class="container">
         <dl class="info-grid">
-          <div class="info-cell"><dt>CHURCH</dt><dd>{data.church}</dd></div>
-          <div class="info-cell"><dt>LOCATION</dt><dd>{data.location}</dd></div>
-          <div class="info-cell"><dt>TYPE</dt><dd>{data.projectType}</dd></div>
-          <div class="info-cell"><dt>SCALE</dt><dd set:html={data.scale} /></div>
-          <div class="info-cell"><dt>PERIOD</dt><dd>{data.period}</dd></div>
+          <div class="info-cell"><dt>CHURCH</dt><dd>{data.church.name}</dd></div>
+          <div class="info-cell"><dt>LOCATION</dt><dd>{data.church.location}</dd></div>
+          <div class="info-cell"><dt>TYPE</dt><dd>{data.church.projectType}</dd></div>
+          <div class="info-cell"><dt>SCALE</dt><dd set:html={data.church.scale} /></div>
+          <div class="info-cell"><dt>PERIOD</dt><dd>{data.church.period}</dd></div>
         </dl>
       </div>
     </section>
@@ -145,17 +150,17 @@ const breadcrumbSchema = {
     <section class="intro">
       <div class="container-narrow">
         <div class="intro-eye">— PROJECT NOTE</div>
-        <p>{data.intro}</p>
+        <p>{data.content.intro}</p>
       </div>
     </section>
 
-    {data.beforeAfters.length > 0 && (
+    {data.content.beforeAfters.length > 0 && (
       <section class="ba-section">
         <div class="container-narrow">
           <div class="intro-eye">— BEFORE &amp; AFTER</div>
           <h2 class="ba-title">시공 전후 비교</h2>
           <p class="ba-desc">슬라이더를 좌우로 드래그하여 공사 전과 후를 비교해보세요.</p>
-          {data.beforeAfters.map(pair => (
+          {data.content.beforeAfters.map(pair => (
             <div class="ba-slider">
               <img class="ba-after" src={pair.after} alt={pair.afterAlt} />
               <img class="ba-before" src={pair.before} alt={pair.beforeAlt} />
@@ -173,10 +178,10 @@ const breadcrumbSchema = {
       </section>
     )}
 
-    {data.gallery.length > 0 && (
+    {data.content.gallery.length > 0 && (
       <section class="gallery">
         <div class="container">
-          {data.gallery.map(pair => (
+          {data.content.gallery.map(pair => (
             <div class="g-pair">
               {pair.images.map(img => (
                 <figure class={`g-item ${img.isFull ? 'full ' : ''}reveal`}>
@@ -227,10 +232,10 @@ const breadcrumbSchema = {
           <div class="rel-grid">
             {relatedEntries.map(rel => (
               <a href={`/portfolio_detail${rel.data.id}.html`} class="rel-card nav-link">
-                <div class="ph" style={`background-image:url('${rel.data.listImage}')`}></div>
+                <div class="ph" style={`background-image:url('${rel.data.listCard.image}')`}></div>
                 <div class="rel-overlay">
-                  <h3>{rel.data.listTitle}</h3>
-                  <span>{rel.data.listSubtitle}</span>
+                  <h3>{listTitleOf(rel)}</h3>
+                  <span>{rel.data.listCard.subtitle}</span>
                 </div>
               </a>
             ))}

@@ -23,47 +23,46 @@ const magazine = defineCollection({
 const portfolio = defineCollection({
   type: 'content',
   schema: z.object({
-    // Identification
-    id: z.string().regex(/^\d{2}$/), // "01"~"08" — URL: portfolio_detail{id}.html
-    displayOrder: z.number(), // 리스트 정렬 순서 (작을수록 위)
-    isFeatured: z.boolean().default(false), // 리스트 페이지 상단 featured 섹션 표시 여부
+    // 1) 기본 정보
+    id: z.string().regex(/^\d{2}$/),
+    displayOrder: z.number(),
+    isFeatured: z.boolean().default(false),
 
-    // Hero & Title
-    title: z.string(), // h1 헤드라인 (HTML <br> 포함 가능)
-    breadcrumb: z.string(), // breadcrumb 마지막 텍스트
+    // 2) 교회 정보 (한 곳에서 입력, 여러 곳에 자동 표시)
+    church: z.object({
+      name: z.string(),
+      location: z.string(),
+      projectType: z.string(),
+      scale: z.string(),
+      period: z.string(),
+    }),
 
-    // Hero meta line (church · scaleInfo · period)
-    church: z.string(),
-    scaleInfo: z.string(), // 예: "약 50평 예배당 공간 포함"
-    period: z.string(),    // 예: "2024"
+    // 3) 헤더 (페이지 상단)
+    heading: z.object({
+      title: z.string(),       // h1 (HTML <br> 포함 가능)
+      breadcrumb: z.string(),  // breadcrumb 마지막 텍스트
+    }),
 
-    // Info bar (5 cells)
-    location: z.string(),
-    projectType: z.string(),
-    scale: z.string(),
+    // 4) 본문 콘텐츠
+    content: z.object({
+      intro: z.string(),
+      beforeAfters: z.array(z.object({
+        before: z.string(),
+        after: z.string(),
+        beforeAlt: z.string(),
+        afterAlt: z.string(),
+      })).default([]),
+      gallery: z.array(z.object({
+        images: z.array(z.object({
+          src: z.string(),
+          alt: z.string().optional(),
+          caption: z.string().optional(),
+          isFull: z.boolean().default(false),
+        })),
+      })).default([]),
+    }),
 
-    // Intro paragraph
-    intro: z.string(),
-
-    // Before & After sliders (1~N pairs)
-    beforeAfters: z.array(z.object({
-      before: z.string(),
-      after: z.string(),
-      beforeAlt: z.string(),
-      afterAlt: z.string(),
-    })).default([]),
-
-    // Gallery — g-pair 단위, 각 pair는 1~2개 figure
-    gallery: z.array(z.object({
-      images: z.array(z.object({
-        src: z.string(),
-        alt: z.string().optional(),
-        caption: z.string().optional(),
-        isFull: z.boolean().default(false),
-      })),
-    })).default([]),
-
-    // Pastor's testimonial (선택)
+    // 5) 목회자 후기 (선택)
     testimony: z.object({
       quote: z.string(),
       author: z.string(),
@@ -75,20 +74,24 @@ const portfolio = defineCollection({
       }).optional(),
     }).optional(),
 
-    // Related projects — 다른 case의 id 배열 (텍스트/이미지는 해당 case의 list* 데이터에서 가져옴)
+    // 6) 관련 프로젝트 (다른 case id 배열)
     relatedIds: z.array(z.string()).default([]),
 
-    // SEO
-    description: z.string(),
-    keywords: z.string().optional(),
-    ogTitle: z.string().optional(),
-    ogDescription: z.string().optional(),
-    ogImage: z.string().optional(),
+    // 7) SEO (description 필수, 나머지는 자동/선택)
+    seo: z.object({
+      description: z.string(),
+      keywords: z.string().optional(),
+      ogTitle: z.string().optional(),        // 미지정 시 heading.title에서 br 제거 자동
+      ogDescription: z.string().optional(),  // 미지정 시 description 자동
+      ogImage: z.string().optional(),        // 미지정 시 listCard.image 자동
+    }),
 
-    // List page data (portfolio_list 페이지에서 카드 표시용)
-    listImage: z.string(),       // 카드 썸네일 URL
-    listTitle: z.string(),       // 카드 제목 (\n으로 줄바꿈)
-    listSubtitle: z.string(),    // 카드 sub (church · scale 등)
+    // 8) 리스트 카드 (포트폴리오 목록 페이지에 표시)
+    listCard: z.object({
+      image: z.string(),       // 썸네일 URL
+      subtitle: z.string(),    // "광주월성교회 · 50평" 등
+      title: z.string().optional(),  // 미지정 시 heading.title에서 br 제거 자동
+    }),
   }),
 });
 
