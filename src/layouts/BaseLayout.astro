@@ -18,6 +18,8 @@ interface Props {
   loadCommonJs?: boolean;
   /** 페이지 고유 JS 파일 (예: 'portfolio.js'). 없으면 미로드. */
   pageJs?: string;
+  /** 홈페이지(루트 /)에서만 true. Google site name 추출용 WebSite 스키마를 출력. */
+  isHomepage?: boolean;
 }
 
 const {
@@ -32,7 +34,23 @@ const {
   activeNav,
   loadCommonJs = true,
   pageJs,
+  isHomepage = false,
 } = Astro.props;
+
+const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
+
+// Google 검색 결과에 "Vercel" 대신 사이트 이름을 띄우려면 홈페이지에 WebSite 스키마가 필요.
+// publisher를 LocalBusiness(#organization)와 @id로 묶어 동일 주체로 인식되게 함.
+const websiteSchema = isHomepage ? {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  name: '컨빌디자인',
+  alternateName: 'CONVIL Church Studio',
+  url: `${SITE_URL}/`,
+  inLanguage: 'ko',
+  publisher: { '@id': `${SITE_URL}/#organization` },
+} : null;
 ---
 <!DOCTYPE html>
 <html lang="ko">
@@ -47,6 +65,11 @@ const {
     ogImage={ogImage}
     ogType={ogType}
   />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  {websiteSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  )}
   {loadCommonJs && <script src="/js/common.js" is:inline defer></script>}
   {pageJs && <script src={`/js/${pageJs}`} is:inline defer></script>}
 </head>
