@@ -27,11 +27,25 @@ const seoOgImage = data.seo.ogImage ?? `${SITE_URL}${data.listCard.image}`;
 const periodYear = data.church.period.match(/\d{4}/)?.[0] ?? new Date().getFullYear().toString();
 const isoDate = `${periodYear}-01-01`;
 
-// Related projects — relatedIds로 다른 entries 조회
+// Related projects — relatedIds 기반 + 자동 보정
+// 편집자 선택 우선, 중복/자기참조 제거, 부족하면 displayOrder 순으로 자동 채움
 const allEntries = await getCollection('portfolio');
-const relatedEntries = data.relatedIds
+const RELATED_TARGET_COUNT = 3;
+
+const curated = [...new Set(data.relatedIds ?? [])]
+  .filter(id => id !== data.id)
   .map(id => allEntries.find(e => e.data.id === id))
   .filter((e): e is CollectionEntry<'portfolio'> => Boolean(e));
+
+let relatedEntries: CollectionEntry<'portfolio'>[] = curated;
+if (relatedEntries.length < RELATED_TARGET_COUNT) {
+  const used = new Set([data.id, ...relatedEntries.map(e => e.data.id)]);
+  const fillers = allEntries
+    .filter(e => !used.has(e.data.id))
+    .sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+    .slice(0, RELATED_TARGET_COUNT - relatedEntries.length);
+  relatedEntries = [...relatedEntries, ...fillers];
+}
 
 // === Schema.org JSON-LD ===
 const articleSchema = {
