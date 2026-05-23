@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+
+const all = await getCollection('portfolio');
+const featured = all.find(e => e.data.isFeatured);
+const rest = all
+  .filter(e => !e.data.isFeatured)
+  .sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+
+const listTitleOf = (e: typeof all[number]) => e.data.listCard.title ?? stripBr(e.data.heading.title);
+---
+<BaseLayout
+  title="교회 인테리어 시공 사례 — 서울·부산·광주 컨빌디자인 포트폴리오"
+  description="서울·부산·광주를 비롯한 전국 교회 인테리어 시공 사례. 예배당, 로비, 목양실, 청년부 카페 등 컨빌디자인이 진행한 교회 리모델링 포트폴리오를 만나보세요."
+  keywords="교회 인테리어 사례, 서울 교회 인테리어, 부산 교회 인테리어, 광주 교회 인테리어, 교회 리모델링 포트폴리오, 컨빌디자인 시공사례, 예배당 리노베이션, 교회 로비 리모델링"
+  canonical="/portfolio_list.html"
+  ogTitle="교회 인테리어 시공 사례 — 서울·부산·광주 컨빌디자인 포트폴리오"
+  ogDescription="서울·부산·광주를 비롯한 전국 교회 인테리어 시공 사례. 예배당, 로비, 목양실, 청년부 카페 리모델링 포트폴리오."
+  ogImage="https://convill-homepage-ver2.vercel.app/images/main.png"
+  activeNav="portfolio"
+  pageJs="portfolio.js"
+>
+  <div>
+
+    <!-- PAGE HEADER -->
+    <section class="page-head">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/index.html" class="nav-link">Home</a>
+          <span class="sep">/</span>
+          Portfolio
+        </div>
+        <div class="page-eyebrow">— PORTFOLIO ARCHIVE</div>
+        <h1>컨빌이 함께한 교회 공간들</h1>
+        <p class="lead">한 교회, 한 교회의 이야기를 담았습니다.</p>
+      </div>
+    </section>
+
+    {featured && (
+      <section class="featured-pf">
+        <div class="container-wide">
+          <div class="featured-grid">
+            <div class="featured-img" style={`background-image:url('${featured.data.listCard.image}')`}></div>
+            <div class="featured-info">
+              <div class="pf-num-label">— Featured Project · {featured.data.id}</div>
+              <h2 set:html={listTitleOf(featured)} />
+              <p>{featured.data.content.intro}</p>
+              <dl class="featured-meta">
+                <div><dt>CHURCH</dt><dd>{featured.data.church.name}</dd></div>
+                <div><dt>TYPE</dt><dd>{featured.data.church.projectType}</dd></div>
+                <div><dt>SCALE</dt><dd set:html={featured.data.church.scale} /></div>
+                <div><dt>PERIOD</dt><dd>{featured.data.church.period}</dd></div>
+              </dl>
+              <a href={`/portfolio_detail${featured.data.id}.html`} class="featured-cta nav-link">프로젝트 자세히 보기 →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- SEARCH BAR -->
+    <div class="filter-bar">
+      <div class="container">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="pfSearch" class="search-input" placeholder="프로젝트 제목으로 검색해 보세요 (2글자 이상)" autocomplete="off" />
+          <button type="button" id="pfSearchClear" class="search-clear" aria-label="검색어 지우기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO GRID -->
+    <section class="pf-section">
+      <div class="container-wide">
+        <div class="pf-grid" id="pfGrid">
+          {rest.map(entry => (
+            <a href={`/portfolio_detail${entry.data.id}.html`} class="pf-item reveal">
+              <div class="ph" style={`background-image:url('${entry.data.listCard.image}')`}></div>
+              <div class="pf-overlay">
+                <h3 set:html={listTitleOf(entry)} />
+                <span class="pf-sub">{entry.data.listCard.subtitle}</span>
+              </div>
+            </a>
+          ))}
+          <div class="empty-state" id="emptyState" style="display:none;"><span class="em">No results</span>검색하신 키워드와 일치하는 프로젝트가 없습니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-strip">
+      <div class="container">
+        <span class="eyebrow">— LET'S WORK TOGETHER</span>
+        <h2>우리 교회도, <span class="ws">새로워질 수</span> 있습니다.</h2>
+        <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br />혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+        <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
+      </div>
+    </section>
+
+  </div><!-- /page-portfolio -->
+</BaseLayout>

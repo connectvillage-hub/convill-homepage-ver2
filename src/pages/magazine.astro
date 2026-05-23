@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 발행일 내림차순 정렬 (최신 글이 먼저)
+const entries = (await getCollection('magazine')).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+---
+<BaseLayout
+  title="교회 인테리어 매거진 — 서울·부산·광주 컨빌디자인"
+  description="교회 인테리어 비용, 예배당 디자인 트렌드, 시공 노하우 등 교회 공간에 대한 인사이트를 전합니다. 서울·부산·광주 교회 인테리어 전문 컨빌디자인 매거진."
+  keywords="교회 인테리어 매거진, 교회 인테리어 비용, 예배당 디자인 트렌드, 교회 리모델링 가이드, 서울 부산 광주 교회 인테리어, 컨빌디자인 매거진"
+  canonical="/magazine.html"
+  ogTitle="교회 인테리어 매거진 — 서울·부산·광주 컨빌디자인"
+  ogDescription="교회 인테리어 비용, 예배당 디자인 트렌드, 시공 노하우 — 교회 공간 인사이트"
+  ogImage="https://convill-homepage-ver2.vercel.app/images/main.png"
+  activeNav="sns"
+  pageJs="portfolio.js"
+>
+  <div>
+
+    <section class="sns-title">
+      <div class="container">
+        <h1>SNS</h1>
+        <hr class="sns-divider" />
+      </div>
+    </section>
+
+    <section class="cat-head">
+      <div class="container cat-row">
+        <div class="cat-left">
+          <h2 class="cat-name">Magazine</h2>
+          <span class="cat-pill">
+            매거진 전체
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+        <nav class="cat-tabs">
+          <span class="sns-active">MAGAZINE</span>
+          <span class="sep"></span>
+          <a href="/youtube.html" class="nav-link">YOUTUBE</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="mag-section">
+      <div class="container">
+        <div class="mag-grid" id="magGrid">
+          {entries.map(entry => (
+            <a
+              href={`/${entry.slug}.html`}
+              class="mag-card"
+              data-mag-item
+              aria-label={entry.data.title}
+            >
+              <div class="mag-thumb" style={`background-image:url('${entry.data.coverImage ?? entry.data.heroImage}')`}></div>
+            </a>
+          ))}
+        </div>
+        <!-- Magazine 페이지네이션 -->
+        <div class="pagination" id="magPagination"></div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <span class="eye">— LET'S WORK TOGETHER</span>
+        <h2>우리 교회도, <span class="ws">새로워질 수</span> 있습니다.</h2>
+        <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br />혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+        <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
+      </div>
+    </section>
+
+  </div><!-- /page-sns-magazine -->
+</BaseLayout>

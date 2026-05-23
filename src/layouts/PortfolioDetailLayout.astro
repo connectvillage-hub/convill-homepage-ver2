@@ -1,0 +1,272 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'portfolio'>;
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+
+const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
+const canonicalPath = `/portfolio_detail${data.id}.html`;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+
+// === 자동 추출 헬퍼 ===
+const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+const plainTitle = stripBr(data.heading.title);
+
+// SEO 자동 fallback
+const seoOgTitle = data.seo.ogTitle ?? plainTitle;
+const seoOgDescription = data.seo.ogDescription ?? data.seo.description;
+const seoOgImage = data.seo.ogImage ?? `${SITE_URL}${data.listCard.image}`;
+
+// period (예: "2024") → ISO date
+const periodYear = data.church.period.match(/\d{4}/)?.[0] ?? new Date().getFullYear().toString();
+const isoDate = `${periodYear}-01-01`;
+
+// Related projects — relatedIds 기반 + 자동 보정
+// 편집자 선택 우선, 중복/자기참조 제거, 부족하면 displayOrder 순으로 자동 채움
+const allEntries = await getCollection('portfolio');
+const RELATED_TARGET_COUNT = 3;
+
+const curated = [...new Set(data.relatedIds ?? [])]
+  .filter(id => id !== data.id)
+  .map(id => allEntries.find(e => e.data.id === id))
+  .filter((e): e is CollectionEntry<'portfolio'> => Boolean(e));
+
+let relatedEntries: CollectionEntry<'portfolio'>[] = curated;
+if (relatedEntries.length < RELATED_TARGET_COUNT) {
+  const used = new Set([data.id, ...relatedEntries.map(e => e.data.id)]);
+  const fillers = allEntries
+    .filter(e => !used.has(e.data.id))
+    .sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+    .slice(0, RELATED_TARGET_COUNT - relatedEntries.length);
+  relatedEntries = [...relatedEntries, ...fillers];
+}
+
+// === Schema.org JSON-LD ===
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: plainTitle,
+  description: data.seo.description,
+  image: [
+    `${SITE_URL}${data.listCard.image}`,
+    ...data.content.beforeAfters.flatMap(ba => [
+      ba.after.startsWith('http') ? ba.after : `${SITE_URL}${ba.after}`,
+    ]),
+  ].slice(0, 5),
+  datePublished: isoDate,
+  dateModified: isoDate,
+  author: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    url: `${SITE_URL}/`,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/main.png`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  about: {
+    '@type': 'Place',
+    name: data.church.name,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: data.church.location,
+      addressCountry: 'KR',
+    },
+  },
+  keywords: data.seo.keywords,
+  articleSection: data.church.projectType,
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/portfolio_list.html` },
+    { '@type': 'ListItem', position: 3, name: data.heading.breadcrumb, item: canonicalUrl },
+  ],
+};
+
+// 리스트 카드용 (related projects 카드 표시)
+const listTitleOf = (e: CollectionEntry<'portfolio'>) => e.data.listCard.title ?? stripBr(e.data.heading.title);
+---
+<BaseLayout
+  title={seoOgTitle}
+  description={data.seo.description}
+  keywords={data.seo.keywords}
+  canonical={canonicalPath}
+  ogTitle={seoOgTitle}
+  ogDescription={seoOgDescription}
+  ogImage={seoOgImage}
+  ogType="article"
+  activeNav="portfolio"
+  pageJs="portfolio.js"
+>
+  <div id="page-pf-detail" class={`case${data.id}`}>
+
+    <!-- Structured Data (Article + BreadcrumbList) -->
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-bar">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/index.html" class="nav-link">Home</a>
+          <span class="sep">/</span>
+          <a href="/portfolio_list.html" class="nav-link">Portfolio</a>
+          <span class="sep">/</span>
+          <span class="current" style="color:var(--ink)">{data.heading.breadcrumb}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-img">
+        <div class="hero-overlay">
+          <h1 set:html={data.heading.title} />
+          <div class="hero-meta">
+            <span>{data.church.name}</span><span>· {stripBr(data.church.scale)}</span><span>· {data.church.period}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO BAR -->
+    <section class="info-bar">
+      <div class="container">
+        <dl class="info-grid">
+          <div class="info-cell"><dt>CHURCH</dt><dd>{data.church.name}</dd></div>
+          <div class="info-cell"><dt>LOCATION</dt><dd>{data.church.location}</dd></div>
+          <div class="info-cell"><dt>TYPE</dt><dd>{data.church.projectType}</dd></div>
+          <div class="info-cell"><dt>SCALE</dt><dd set:html={data.church.scale} /></div>
+          <div class="info-cell"><dt>PERIOD</dt><dd>{data.church.period}</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <div class="container-narrow">
+        <div class="intro-eye">— PROJECT NOTE</div>
+        <p>{data.content.intro}</p>
+      </div>
+    </section>
+
+    {data.content.beforeAfters.length > 0 && (
+      <section class="ba-section">
+        <div class="container-narrow">
+          <div class="intro-eye">— BEFORE &amp; AFTER</div>
+          <h2 class="ba-title">시공 전후 비교</h2>
+          <p class="ba-desc">슬라이더를 좌우로 드래그하여 공사 전과 후를 비교해보세요.</p>
+          {data.content.beforeAfters.map(pair => (
+            <div class="ba-slider">
+              <img class="ba-after" src={pair.after} alt={pair.afterAlt} />
+              <img class="ba-before" src={pair.before} alt={pair.beforeAlt} />
+              <div class="ba-divider">
+                <div class="ba-handle">
+                  <svg viewBox="0 0 10 16"><polygon points="10,0 0,8 10,16"/></svg>
+                  <svg viewBox="0 0 10 16"><polygon points="0,0 10,8 0,16"/></svg>
+                </div>
+              </div>
+              <span class="ba-tag ba-tag-before">BEFORE</span>
+              <span class="ba-tag ba-tag-after">AFTER</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {data.content.gallery.length > 0 && (
+      <section class="gallery">
+        <div class="container">
+          {data.content.gallery.map(pair => (
+            <div class="g-pair">
+              {pair.images.map(img => (
+                <figure class={`g-item ${img.isFull ? 'full ' : ''}reveal`}>
+                  <div class="g-img" style={`background-image:url('${img.src}')`}></div>
+                  {img.caption && <figcaption set:html={img.caption} />}
+                </figure>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {data.testimony && (
+      <section class="testimony">
+        <div class="testimony-inner">
+          <div class="test-eye">— PASTOR'S WORDS</div>
+          <blockquote>{data.testimony.quote}</blockquote>
+          <div class="test-author">
+            <div class="test-info">
+              <div class="test-role">{data.testimony.author}</div>
+            </div>
+          </div>
+          {data.testimony.youtube && (
+            <div style="margin-top: 50px;">
+              <article class="yt-card" data-yt-item onclick={`window.open('${data.testimony.youtube.url}', '_blank')`}>
+                <div class="yt-info">
+                  <h3 style="color: #fff;">{data.testimony.youtube.title}</h3>
+                </div>
+                <div class="yt-thumb">
+                  <div class="ph" style={`background-image:url('${data.testimony.youtube.thumbnail}')`}></div>
+                  <span class="yt-duration">{data.testimony.youtube.duration}</span>
+                </div>
+              </article>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {relatedEntries.length > 0 && (
+      <section class="related">
+        <div class="container">
+          <div class="related-head">
+            <span class="eye">— RELATED PROJECTS</span>
+            <h2>이 프로젝트와 함께 보면 좋은 작업들</h2>
+          </div>
+          <div class="rel-grid">
+            {relatedEntries.map(rel => (
+              <a href={`/portfolio_detail${rel.data.id}.html`} class="rel-card nav-link">
+                <div class="ph" style={`background-image:url('${rel.data.listCard.image}')`}></div>
+                <div class="rel-overlay">
+                  <h3 set:html={listTitleOf(rel)} />
+                  <span>{rel.data.listCard.subtitle}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <section class="cta-strip">
+      <div class="container">
+        <span class="eye">— LET'S WORK TOGETHER</span>
+        <h2>우리 교회도, <span class="ws">새로워질 수</span> 있습니다.</h2>
+        <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br />혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+        <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
+      </div>
+    </section>
+
+  </div><!-- /page-pf-detail -->
+</BaseLayout>

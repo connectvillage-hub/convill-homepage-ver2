@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/magazine_detail01.html",
+      "destination": "/church-interior-design.html",
+      "permanent": true
+    }
+  ]
+}

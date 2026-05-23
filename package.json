@@ -1,0 +1,28 @@
+{
+  "name": "convill-homepage-ver2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "컨빌디자인 - 교회 인테리어 전문 스튜디오 (Astro)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && node scripts/generate-sitemap.js",
+    "preview": "astro preview",
+    "astro": "astro",
+    "dev:cms": "decap-server",
+    "dev:all": "concurrently --names \"astro,cms\" --prefix-colors \"cyan,magenta\" \"npm:dev\" \"npm:dev:cms\""
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.18"
+  },
+  "engines": {
+    "node": ">=18.14.1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^5.8.4",
+    "concurrently": "^9.2.1",
+    "decap-server": "^3.7.0"
+  }
+}

@@ -1,8 +1,12 @@
-const { readdirSync, writeFileSync } = require('node:fs');
-const { join } = require('node:path');
+import { readdirSync, writeFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
-const ROOT = join(__dirname, '..');
+const DIST = join(__dirname, '..', 'dist');
 
 const PRIORITY_RULES = [
   { match: f => f === 'index.html',                priority: '1.0', changefreq: 'weekly'  },
@@ -10,13 +14,18 @@ const PRIORITY_RULES = [
   { match: f => f.startsWith('portfolio_detail'),  priority: '0.8', changefreq: 'monthly' },
   { match: f => f === 'youtube.html',              priority: '0.6', changefreq: 'weekly'  },
   { match: f => f === 'magazine.html',             priority: '0.6', changefreq: 'monthly' },
+  { match: f => f.startsWith('magazine_detail'),   priority: '0.7', changefreq: 'monthly' },
   { match: ()  => true,                            priority: '0.5', changefreq: 'monthly' },
 ];
 
+// sitemap.xml 자체와 에러 페이지는 sitemap에 포함하지 않음
+const EXCLUDE = new Set(['404.html', 'sitemap.xml']);
+
 const today = new Date().toISOString().split('T')[0];
 
-const htmlFiles = readdirSync(ROOT)
+const htmlFiles = readdirSync(DIST)
   .filter(f => f.endsWith('.html'))
+  .filter(f => !EXCLUDE.has(f))
   .sort();
 
 const urls = htmlFiles.map(file => {
@@ -38,5 +47,5 @@ ${urls}
 </urlset>
 `;
 
-writeFileSync(join(ROOT, 'sitemap.xml'), sitemap, 'utf8');
-console.log(`sitemap.xml generated with ${htmlFiles.length} URLs`);
+writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf8');
+console.log(`sitemap.xml generated in dist/ with ${htmlFiles.length} URLs`);

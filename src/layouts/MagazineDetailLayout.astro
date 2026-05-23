@@ -1,0 +1,141 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'magazine'>;
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+
+const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
+const canonicalPath = `/${entry.slug}`;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+const ogImage = data.ogImage ?? data.heroImage;
+
+// <br>은 화면에서 줄바꿈, 텍스트 메타에는 공백으로 치환
+const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+const plainTitle = stripBr(data.title);
+const plainDek = stripBr(data.dek);
+
+const formattedDate = data.publishDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+}).replace(/\.\s*$/, '').replace(/\.\s*/g, '.');
+
+const isoPublishDate = data.publishDate.toISOString().split('T')[0];
+
+// Article Schema (JSON-LD) — for Google + AI
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: plainTitle,
+  description: data.description,
+  image: data.heroImage,
+  datePublished: isoPublishDate,
+  dateModified: isoPublishDate,
+  author: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    url: SITE_URL + '/',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '컨빌디자인',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/main.png`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Magazine', item: `${SITE_URL}/magazine.html` },
+    { '@type': 'ListItem', position: 3, name: plainTitle, item: canonicalUrl },
+  ],
+};
+---
+<BaseLayout
+  title={`${plainTitle} — 컨빌디자인 매거진`}
+  description={data.description}
+  keywords={data.keywords}
+  canonical={canonicalPath}
+  ogTitle={plainTitle}
+  ogDescription={data.description}
+  ogImage={ogImage}
+  ogType="article"
+  activeNav="sns"
+>
+  <!-- Article Schema (body 안에 둬도 Google이 인식함) -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/index.html" class="nav-link">Home</a>
+        <span class="sep">/</span>
+        <a href="/magazine.html" class="nav-link">Magazine</a>
+        <span class="sep">/</span>
+        <span class="current" style="color:var(--ink)">{plainTitle}</span>
+      </div>
+    </div>
+  </div>
+
+  <article>
+    <header class="mag-article-head">
+      <div class="mag-eyebrow">
+        {data.category} <span>·</span> {formattedDate} <span>·</span> {data.readingTime}
+      </div>
+      <h1 set:html={data.title} />
+      <p class="mag-dek" set:html={data.dek} />
+    </header>
+
+    <div class="mag-hero-image">
+      <img src={data.heroImage} alt={data.heroImageAlt} />
+    </div>
+
+    <div class="mag-body">
+      <p class="lead" set:html={data.lead} />
+
+      <slot />
+    </div>
+
+    <div class="mag-tags">
+      <div class="mag-tags-row">
+        {data.tags.map(tag => <span class="mag-tag">{tag}</span>)}
+      </div>
+    </div>
+
+    <div class="mag-back">
+      <a href="/magazine.html">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        매거진 전체 보기
+      </a>
+    </div>
+  </article>
+
+  <section class="cta-strip">
+    <div class="container">
+      <span class="eye">— LET'S WORK TOGETHER</span>
+      <h2>우리 교회도, <span class="ws">새로워질 수</span> 있습니다.</h2>
+      <p>우리 교회에 가장 잘 어울리는 공간은 어떻게 시작해야 할까요?<br />혼자 고민하지 마세요. 저희가 도와드리겠습니다.</p>
+      <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<!-- 매거진 스타일은 public/css/common.css 에 통합됨 -->
+
