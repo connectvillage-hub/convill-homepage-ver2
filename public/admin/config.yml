@@ -61,9 +61,10 @@ collections:
       - { name: category, label: 카테고리, widget: string, hint: '예: CHURCH SPACE, CHURCH INTERIOR 등' }
       - { name: publishDate, label: 발행일, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, picker_utc: false }
       - { name: readingTime, label: 읽는 시간, widget: string, hint: '예: "6분 읽기"' }
-      - { name: heroImage, label: 대표 이미지, widget: image, choose_url: true, hint: '업로드 또는 외부 URL' }
+      - { name: heroImage, label: 대표 이미지 (글 본문 상단), widget: image, choose_url: true, hint: '글 상세 페이지 상단에 큰 이미지로 표시. 업로드 또는 외부 URL' }
       - { name: heroImageAlt, label: 대표 이미지 설명 (alt), widget: string }
-      - { name: ogImage, label: SNS 공유용 이미지, widget: image, required: false, choose_url: true, hint: '미지정 시 대표 이미지 사용' }
+      - { name: coverImage, label: 카드 표지 이미지 (목록 페이지, 4:3 권장), widget: image, required: false, choose_url: true, hint: '🖼️ 매거진 목록 페이지의 카드 썸네일. 미지정 시 대표 이미지 자동 사용' }
+      - { name: ogImage, label: SNS 공유용 이미지, widget: image, required: false, choose_url: true, hint: '미지정 시 대표 이미지 자동 사용. 1200x630 권장' }
       - { name: tags, label: 태그, widget: list, default: [], hint: '예: 청년 사역, 교회 공간 등' }
       - { name: body, label: 본문, widget: markdown }
 
