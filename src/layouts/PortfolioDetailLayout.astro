@@ -141,7 +141,7 @@ const listTitleOf = (e: CollectionEntry<'portfolio'>) => e.data.listCard.title ?
         <div class="hero-overlay">
           <h1 set:html={data.heading.title} />
           <div class="hero-meta">
-            <span>{data.church.name}</span><span>· {data.church.scale}</span><span>· {data.church.period}</span>
+            <span>{data.church.name}</span><span>· {stripBr(data.church.scale)}</span><span>· {data.church.period}</span>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@ const listTitleOf = (e: CollectionEntry<'portfolio'>) => e.data.listCard.title ?
               {pair.images.map(img => (
                 <figure class={`g-item ${img.isFull ? 'full ' : ''}reveal`}>
                   <div class="g-img" style={`background-image:url('${img.src}')`}></div>
-                  {img.caption && <figcaption>{img.caption}</figcaption>}
+                  {img.caption && <figcaption set:html={img.caption} />}
                 </figure>
               ))}
             </div>
@@ -248,7 +248,7 @@ const listTitleOf = (e: CollectionEntry<'portfolio'>) => e.data.listCard.title ?
               <a href={`/portfolio_detail${rel.data.id}.html`} class="rel-card nav-link">
                 <div class="ph" style={`background-image:url('${rel.data.listCard.image}')`}></div>
                 <div class="rel-overlay">
-                  <h3>{listTitleOf(rel)}</h3>
+                  <h3 set:html={listTitleOf(rel)} />
                   <span>{rel.data.listCard.subtitle}</span>
                 </div>
               </a>
