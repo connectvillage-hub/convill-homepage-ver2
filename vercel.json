@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/magazine_detail01.html",
+      "destination": "/church-interior-design.html",
+      "permanent": true
+    }
+  ]
+}
