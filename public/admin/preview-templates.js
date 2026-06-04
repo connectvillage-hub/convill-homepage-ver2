@@ -266,6 +266,25 @@ const renderMagazineSection = (section, i) => {
     const borderStyle = section.style === 'dashed' ? 'dashed' : (section.style === 'dotted' ? 'dotted' : 'solid');
     return h('hr', { key: i, style: { border: 'none', borderTop: '1px ' + borderStyle + ' #ddd', margin: '24px 0' } });
   }
+  if (t === 'gallery') {
+    const cols = section.cols || 2;
+    const images = section.images || [];
+    return h('div', {
+      key: i,
+      style: { display: 'grid', gridTemplateColumns: 'repeat(' + cols + ', 1fr)', gap: '8px', margin: '24px 0' },
+    },
+      images.map((img, j) =>
+        h('figure', { key: j, style: { margin: 0 } },
+          img.src
+            ? h('img', { src: img.src, alt: img.alt || '', style: { width: '100%', display: 'block' } })
+            : h('div', { style: { padding: '40px', background: '#f5f5f5', color: '#999', textAlign: 'center', fontSize: '12px' } }, '미선택'),
+          img.caption
+            ? h('figcaption', { style: { fontSize: '12px', color: '#888', textAlign: 'center', marginTop: '4px' }, dangerouslySetInnerHTML: { __html: nl2br(img.caption) } })
+            : null
+        )
+      )
+    );
+  }
   if (t === 'link') {
     return h('p', { key: i, style: { margin: '0 0 16px' } },
       h('a', { href: section.href || '#', title: section.title || '', style: { color: '#1814F3' } }, section.text || '— 링크 —')

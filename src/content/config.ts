@@ -43,6 +43,15 @@ const magazineSection = z.discriminatedUnion('type', [
     type: z.literal('divider'),
     style: z.enum(['line', 'dashed', 'dotted', 'space']).default('line'),
   }),
+  z.object({
+    type: z.literal('gallery'),
+    cols: z.union([z.literal(2), z.literal(3), z.literal(4)]).default(2),
+    images: z.array(z.object({
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+    })).default([]),
+  }),
   // 템플릿 2 전용: 설명+이미지 한 묶음
   z.object({
     type: z.literal('text-image'),
