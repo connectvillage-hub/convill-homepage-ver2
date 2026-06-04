@@ -99,14 +99,21 @@ collections:
               - { name: level, label: 단계, widget: select, options: [h2, h3], default: h2, hint: 'h2=큰 제목 / h3=작은 제목' }
               - { name: text, label: 제목 내용, widget: text, hint: '엔터로 줄바꿈 가능' }
 
-          # ── 단락 ──
+          # ── 단락 (마크다운 에디터 — 인라인 굵게/기울임/링크 GUI 가능) ──
           - name: paragraph
             label: '✏️ 단락 (텍스트)'
             widget: object
             collapsed: false
             summary: '단락: {{fields.text}}'
             fields:
-              - { name: text, label: 본문 텍스트, widget: text, hint: '줄바꿈은 <br>로. 단락 안 줄바꿈은 <br><br>로 두 번' }
+              - name: text
+                label: 본문 텍스트
+                widget: markdown
+                minimal: true
+                buttons: [bold, italic, link, quote, bulleted-list, numbered-list]
+                editor_components: []
+                modes: [rich_text, raw]
+                hint: '도구바로 굵게/기울임/링크 적용. 폰트 크기/색상은 raw 모드에서 <span style="font-size:24px; color:red">텍스트</span> 같이 입력'
 
           # ── 리스트 ──
           - name: list
@@ -160,6 +167,15 @@ collections:
               - { name: text, label: 링크 표시 텍스트, widget: string, hint: '예: "컨빌 교회 인테리어 설계 사례 보기"' }
               - { name: href, label: 링크 URL, widget: string, hint: '내부 링크는 /portfolio_detail01.html 형식, 외부는 https://...' }
               - { name: title, label: 'title 속성 (선택)', widget: string, required: false }
+
+          # ── 구분선 ──
+          - name: divider
+            label: '➖ 구분선 (가로줄/빈공간)'
+            widget: object
+            collapsed: false
+            summary: '구분선: {{fields.style}}'
+            fields:
+              - { name: style, label: 종류, widget: select, options: [line, dashed, dotted, space], default: line, hint: 'line=얇은 가로줄 / dashed=점선 / dotted=점들 / space=그냥 빈 공간 (선 X)' }
 
           # ── 설명+이미지 한 묶음 ──
           - name: text-image

@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
-    "astro": "^4.16.18"
+    "astro": "^4.16.18",
+    "marked": "^18.0.4"
   },
   "engines": {
     "node": ">=18.14.1"

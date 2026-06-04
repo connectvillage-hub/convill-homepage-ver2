@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
+import { marked } from 'marked';
 
 interface Props {
   entry: CollectionEntry<'magazine'>;
@@ -8,6 +9,13 @@ interface Props {
 
 const { entry } = Astro.props;
 const data = entry.data;
+
+// 인라인 마크다운 → HTML (굵게/기울임/링크/<span> 등 허용, <p>는 안 감쌈)
+const renderInline = (s: string | undefined | null) => {
+  if (!s) return '';
+  const withBr = String(s).replace(/\r\n|\r|\n/g, '<br>');
+  return marked.parseInline(withBr, { breaks: false }) as string;
+};
 
 const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
 const canonicalPath = `/${entry.slug}`;
@@ -130,12 +138,12 @@ const breadcrumbSchema = {
             : <h2 set:html={nl2br(section.text)} />;
         }
         if (section.type === 'paragraph') {
-          return <p set:html={nl2br(section.text)} />;
+          return <p set:html={renderInline(section.text)} />;
         }
         if (section.type === 'list') {
           return section.style === 'ol'
-            ? <ol>{section.items.map(item => <li set:html={nl2br(item)} />)}</ol>
-            : <ul>{section.items.map(item => <li set:html={nl2br(item)} />)}</ul>;
+            ? <ol>{section.items.map(item => <li set:html={renderInline(item)} />)}</ol>
+            : <ul>{section.items.map(item => <li set:html={renderInline(item)} />)}</ul>;
         }
         if (section.type === 'figure') {
           return (
@@ -162,7 +170,7 @@ const breadcrumbSchema = {
           );
         }
         if (section.type === 'quote') {
-          return <blockquote set:html={nl2br(section.text)} />;
+          return <blockquote set:html={renderInline(section.text)} />;
         }
         if (section.type === 'link') {
           return (
@@ -174,13 +182,20 @@ const breadcrumbSchema = {
         if (section.type === 'text-image') {
           return (
             <Fragment>
-              <p set:html={nl2br(section.text)} />
+              <p set:html={renderInline(section.text)} />
               <figure>
                 <img src={section.src} alt={section.alt} loading="lazy" />
                 {section.caption && <figcaption set:html={nl2br(section.caption)} />}
               </figure>
             </Fragment>
           );
+        }
+        if (section.type === 'divider') {
+          if (section.style === 'space') {
+            return <div style="height: 32px" />;
+          }
+          const borderStyle = section.style === 'dashed' ? 'dashed' : (section.style === 'dotted' ? 'dotted' : 'solid');
+          return <hr style={`border: none; border-top: 1px ${borderStyle} #ddd; margin: 32px 0;`} />;
         }
         return null;
       }) : <slot />}

@@ -39,6 +39,10 @@ const magazineSection = z.discriminatedUnion('type', [
     href: z.string(),
     title: z.string().optional(),
   }),
+  z.object({
+    type: z.literal('divider'),
+    style: z.enum(['line', 'dashed', 'dotted', 'space']).default('line'),
+  }),
   // 템플릿 2 전용: 설명+이미지 한 묶음
   z.object({
     type: z.literal('text-image'),

@@ -204,6 +204,15 @@ function imgBox(src, label, color) {
 // 엔터(\n)를 <br>로 변환 — admin에서 엔터만 쳐도 줄바꿈되게
 const nl2br = (s) => String(s || '').replace(/\r\n|\r|\n/g, '<br>');
 
+// 인라인 마크다운 → HTML (굵게/기울임/링크 + <span> 인라인 HTML 허용)
+const renderInline = (s) => {
+  const withBr = nl2br(s);
+  if (typeof window !== 'undefined' && window.marked && window.marked.parseInline) {
+    return window.marked.parseInline(withBr, { breaks: false });
+  }
+  return withBr;
+};
+
 const renderMagazineSection = (section, i) => {
   const t = section.type;
   if (t === 'heading') {
@@ -215,13 +224,13 @@ const renderMagazineSection = (section, i) => {
     });
   }
   if (t === 'paragraph') {
-    return h('p', { key: i, style: { margin: '0 0 16px' }, dangerouslySetInnerHTML: { __html: nl2br(section.text) } });
+    return h('p', { key: i, style: { margin: '0 0 16px' }, dangerouslySetInnerHTML: { __html: renderInline(section.text) } });
   }
   if (t === 'list') {
     const Tag = section.style === 'ol' ? 'ol' : 'ul';
     return h(Tag, { key: i, style: { margin: '0 0 16px', paddingLeft: '24px' } },
       (section.items || []).map((item, j) =>
-        h('li', { key: j, style: { marginBottom: '6px' }, dangerouslySetInnerHTML: { __html: nl2br(item) } })
+        h('li', { key: j, style: { marginBottom: '6px' }, dangerouslySetInnerHTML: { __html: renderInline(item) } })
       )
     );
   }
@@ -247,8 +256,15 @@ const renderMagazineSection = (section, i) => {
     return h('blockquote', {
       key: i,
       style: { borderLeft: '4px solid #ddd', paddingLeft: '16px', margin: '24px 0', color: '#555', fontStyle: 'italic' },
-      dangerouslySetInnerHTML: { __html: nl2br(section.text) },
+      dangerouslySetInnerHTML: { __html: renderInline(section.text) },
     });
+  }
+  if (t === 'divider') {
+    if (section.style === 'space') {
+      return h('div', { key: i, style: { height: '32px' } });
+    }
+    const borderStyle = section.style === 'dashed' ? 'dashed' : (section.style === 'dotted' ? 'dotted' : 'solid');
+    return h('hr', { key: i, style: { border: 'none', borderTop: '1px ' + borderStyle + ' #ddd', margin: '24px 0' } });
   }
   if (t === 'link') {
     return h('p', { key: i, style: { margin: '0 0 16px' } },
@@ -257,7 +273,7 @@ const renderMagazineSection = (section, i) => {
   }
   if (t === 'text-image') {
     return h('div', { key: i, style: { margin: '24px 0' } },
-      h('p', { style: { margin: '0 0 12px' }, dangerouslySetInnerHTML: { __html: nl2br(section.text) } }),
+      h('p', { style: { margin: '0 0 12px' }, dangerouslySetInnerHTML: { __html: renderInline(section.text) } }),
       h('figure', { style: { margin: 0, textAlign: 'center' } },
         section.src ? h('img', { src: section.src, alt: section.alt || '', style: { width: '100%', display: 'block' } }) : h('div', { style: { padding: '40px', background: '#f5f5f5', color: '#999' } }, '🖼️ 이미지 미선택'),
         section.caption ? h('figcaption', { style: { fontSize: '13px', color: '#888', marginTop: '8px' }, dangerouslySetInnerHTML: { __html: nl2br(section.caption) } }) : null,
