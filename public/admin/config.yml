@@ -93,7 +93,7 @@ collections:
           - name: heading
             label: '🔖 제목 (h2/h3)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '제목: {{fields.text}}'
             fields:
               - { name: level, label: 단계, widget: select, options: [h2, h3], default: h2, hint: 'h2=큰 제목 / h3=작은 제목' }
@@ -103,7 +103,7 @@ collections:
           - name: paragraph
             label: '✏️ 단락 (텍스트)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '단락: {{fields.text}}'
             fields:
               - name: text
@@ -119,7 +119,7 @@ collections:
           - name: list
             label: '📋 리스트 (불릿/번호)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '리스트 {{fields.items.length}}개'
             fields:
               - { name: style, label: 종류, widget: select, options: [ul, ol], default: ul, hint: 'ul=점 / ol=숫자' }
@@ -129,7 +129,7 @@ collections:
           - name: figure
             label: '🖼️ 사진 + 캡션 (단일 이미지)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '사진: {{fields.alt}}'
             fields:
               - { name: src, label: 이미지 파일, widget: image }
@@ -140,7 +140,7 @@ collections:
           - name: ba
             label: '🔄 Before/After 슬라이더'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: 'BA: {{fields.afterAlt}}'
             fields:
               - { name: beforeSrc, label: '시공 전 이미지', widget: image }
@@ -152,7 +152,7 @@ collections:
           - name: quote
             label: '💬 인용 (blockquote)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '인용: {{fields.text}}'
             fields:
               - { name: text, label: 인용 문구, widget: text }
@@ -161,7 +161,7 @@ collections:
           - name: link
             label: '🔗 링크 (텍스트 + URL)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '링크: {{fields.text}} → {{fields.href}}'
             fields:
               - { name: text, label: 링크 표시 텍스트, widget: string, hint: '예: "컨빌 교회 인테리어 설계 사례 보기"' }
@@ -172,7 +172,7 @@ collections:
           - name: divider
             label: '➖ 구분선 (가로줄/빈공간)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '구분선: {{fields.style}}'
             fields:
               - { name: style, label: 종류, widget: select, options: [line, dashed, dotted, space], default: line, hint: 'line=얇은 가로줄 / dashed=점선 / dotted=점들 / space=그냥 빈 공간 (선 X)' }
@@ -181,7 +181,7 @@ collections:
           - name: gallery
             label: '🖼️🖼️ 갤러리 (이미지 여러 개 그리드)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '갤러리 {{fields.images.length}}장 ({{fields.cols}}열)'
             fields:
               - { name: cols, label: 한 줄당 이미지 수, widget: select, options: [2, 3, 4], default: 2, value_type: int, hint: '2=반/반 (2열), 3=3열, 4=4열. 이미지를 4장 넣고 2열로 하면 자동으로 2x2 그리드가 됨' }
@@ -198,7 +198,7 @@ collections:
           - name: text-image
             label: '📰 설명 + 이미지 (한 묶음)'
             widget: object
-            collapsed: false
+            collapsed: true
             summary: '페어: {{fields.alt}}'
             fields:
               - { name: text, label: 설명 텍스트, widget: text, hint: '이미지 위쪽에 표시될 단락. 엔터로 줄바꿈 가능' }
