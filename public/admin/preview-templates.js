@@ -199,9 +199,78 @@ function imgBox(src, label, color) {
 }
 
 /* ============================================================
-   Magazine Preview (본문 마크다운 포함)
+   Magazine Section Renderer (sections 배열의 한 블록 → React)
    ============================================================ */
-const MagazinePreview = ({ entry, widgetFor }) => {
+// 엔터(\n)를 <br>로 변환 — admin에서 엔터만 쳐도 줄바꿈되게
+const nl2br = (s) => String(s || '').replace(/\r\n|\r|\n/g, '<br>');
+
+const renderMagazineSection = (section, i) => {
+  const t = section.type;
+  if (t === 'heading') {
+    const Tag = section.level === 'h3' ? 'h3' : 'h2';
+    return h(Tag, {
+      key: i,
+      style: { fontFamily: 'Noto Serif KR, serif', marginTop: '32px', marginBottom: '12px' },
+      dangerouslySetInnerHTML: { __html: nl2br(section.text) },
+    });
+  }
+  if (t === 'paragraph') {
+    return h('p', { key: i, style: { margin: '0 0 16px' }, dangerouslySetInnerHTML: { __html: nl2br(section.text) } });
+  }
+  if (t === 'list') {
+    const Tag = section.style === 'ol' ? 'ol' : 'ul';
+    return h(Tag, { key: i, style: { margin: '0 0 16px', paddingLeft: '24px' } },
+      (section.items || []).map((item, j) =>
+        h('li', { key: j, style: { marginBottom: '6px' }, dangerouslySetInnerHTML: { __html: nl2br(item) } })
+      )
+    );
+  }
+  if (t === 'figure') {
+    return h('figure', { key: i, style: { margin: '24px 0', textAlign: 'center' } },
+      section.src ? h('img', { src: section.src, alt: section.alt || '', style: { width: '100%', display: 'block' } }) : h('div', { style: { padding: '40px', background: '#f5f5f5', color: '#999' } }, '🖼️ 이미지 미선택'),
+      section.caption ? h('figcaption', { style: { fontSize: '13px', color: '#888', marginTop: '8px' }, dangerouslySetInnerHTML: { __html: nl2br(section.caption) } }) : null,
+    );
+  }
+  if (t === 'ba') {
+    return h('div', { key: i, style: { margin: '24px 0', display: 'flex', gap: '8px' } },
+      h('div', { style: { flex: 1 } },
+        h('div', { style: { fontSize: '11px', color: '#999', marginBottom: '4px', letterSpacing: '0.1em' } }, 'BEFORE'),
+        section.beforeSrc ? h('img', { src: section.beforeSrc, alt: section.beforeAlt || '', style: { width: '100%', display: 'block' } }) : h('div', { style: { padding: '40px', background: '#f5f5f5', color: '#999', textAlign: 'center' } }, '미선택'),
+      ),
+      h('div', { style: { flex: 1 } },
+        h('div', { style: { fontSize: '11px', color: '#999', marginBottom: '4px', letterSpacing: '0.1em' } }, 'AFTER'),
+        section.afterSrc ? h('img', { src: section.afterSrc, alt: section.afterAlt || '', style: { width: '100%', display: 'block' } }) : h('div', { style: { padding: '40px', background: '#f5f5f5', color: '#999', textAlign: 'center' } }, '미선택'),
+      ),
+    );
+  }
+  if (t === 'quote') {
+    return h('blockquote', {
+      key: i,
+      style: { borderLeft: '4px solid #ddd', paddingLeft: '16px', margin: '24px 0', color: '#555', fontStyle: 'italic' },
+      dangerouslySetInnerHTML: { __html: nl2br(section.text) },
+    });
+  }
+  if (t === 'link') {
+    return h('p', { key: i, style: { margin: '0 0 16px' } },
+      h('a', { href: section.href || '#', title: section.title || '', style: { color: '#1814F3' } }, section.text || '— 링크 —')
+    );
+  }
+  if (t === 'text-image') {
+    return h('div', { key: i, style: { margin: '24px 0' } },
+      h('p', { style: { margin: '0 0 12px' }, dangerouslySetInnerHTML: { __html: nl2br(section.text) } }),
+      h('figure', { style: { margin: 0, textAlign: 'center' } },
+        section.src ? h('img', { src: section.src, alt: section.alt || '', style: { width: '100%', display: 'block' } }) : h('div', { style: { padding: '40px', background: '#f5f5f5', color: '#999' } }, '🖼️ 이미지 미선택'),
+        section.caption ? h('figcaption', { style: { fontSize: '13px', color: '#888', marginTop: '8px' }, dangerouslySetInnerHTML: { __html: nl2br(section.caption) } }) : null,
+      ),
+    );
+  }
+  return null;
+};
+
+/* ============================================================
+   Magazine Preview (sections 블록 배열 렌더링)
+   ============================================================ */
+const MagazinePreview = ({ entry }) => {
   const dataJS = entry.getIn(['data']).toJS();
   const data = dataJS || {};
   return h('article', { style: { fontFamily: 'Pretendard, sans-serif', maxWidth: '760px', margin: '0 auto', padding: '40px 24px', background: '#fff' } },
@@ -214,11 +283,11 @@ const MagazinePreview = ({ entry, widgetFor }) => {
         (data.category || 'CATEGORY') + ' · ' + (data.readingTime || '— 분 읽기')),
       h('h1', {
         style: { fontFamily: 'Noto Serif KR, serif', fontSize: '32px', lineHeight: 1.3, margin: '0 0 16px' },
-        dangerouslySetInnerHTML: { __html: data.title || '— 제목 —' },
+        dangerouslySetInnerHTML: { __html: data.title ? nl2br(data.title) : '— 제목 —' },
       }),
       h('p', {
         style: { fontFamily: 'Noto Sans KR, sans-serif', fontSize: '16px', color: '#666', lineHeight: 1.7 },
-        dangerouslySetInnerHTML: { __html: data.dek || '— 부제 —' },
+        dangerouslySetInnerHTML: { __html: data.dek ? nl2br(data.dek) : '— 부제 —' },
       }),
     ),
 
@@ -236,11 +305,14 @@ const MagazinePreview = ({ entry, widgetFor }) => {
       h('p', {
         className: 'lead',
         style: { fontSize: '20px', borderBottom: '1px solid #ddd', paddingBottom: '24px', marginBottom: '32px', fontWeight: 500 },
-        dangerouslySetInnerHTML: { __html: data.lead || '— 첫 단락 —' },
+        dangerouslySetInnerHTML: { __html: data.lead ? nl2br(data.lead) : '— 첫 단락 —' },
       }),
 
-      // 마크다운 본문 (자동 렌더링, editor component 포함)
-      widgetFor('body'),
+      // sections 블록 배열 렌더링 (template은 스타일 분기용으로만 표시)
+      (data.sections && data.sections.length > 0)
+        ? data.sections.map(renderMagazineSection)
+        : h('div', { style: { padding: '40px', textAlign: 'center', color: '#999', background: '#fafafa', borderRadius: '6px' } },
+            '"+ ADD" 버튼으로 본문 블록을 추가하세요 (제목 / 단락 / 사진 / BA슬라이더 / 인용 등)'),
     ),
 
     // Tags

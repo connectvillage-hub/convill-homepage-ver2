@@ -52,21 +52,141 @@ collections:
     editor:
       preview: true
     fields:
+      # ━━━━━━━━━━ 시스템 ━━━━━━━━━━
       - { name: id, label: '글 번호 (좌측 목록의 마지막 [번호] +1)', widget: string, hint: '⚠️ 새로 만들 때: 왼쪽 매거진 목록에서 마지막 항목의 [번호]를 확인 → +1 입력. 예: 마지막이 [09]면 "10" 입력. 두 자리 숫자 필수', pattern: ['^\d{2}$', '두 자리 숫자만 (예: 02, 10, 99)'] }
-      - { name: title, label: 제목, widget: string }
-      - { name: description, label: 메타 설명 (SEO), widget: text, hint: '검색 결과에 표시될 설명' }
-      - { name: keywords, label: 키워드 (SEO), widget: string, required: false }
-      - { name: dek, label: 부제목 (제목 아래 큰 글씨), widget: text }
-      - { name: lead, label: 첫 단락 (강조 표시), widget: text }
-      - { name: category, label: 카테고리, widget: string, hint: '예: CHURCH SPACE, CHURCH INTERIOR 등' }
-      - { name: publishDate, label: 발행일, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, picker_utc: false }
-      - { name: readingTime, label: 읽는 시간, widget: string, hint: '예: "6분 읽기"' }
-      - { name: heroImage, label: 대표 이미지 (글 본문 상단), widget: image, choose_url: true, hint: '글 상세 페이지 상단에 큰 이미지로 표시. 업로드 또는 외부 URL' }
-      - { name: heroImageAlt, label: 대표 이미지 설명 (alt), widget: string }
-      - { name: coverImage, label: 카드 표지 이미지 (목록 페이지, 4:3 권장), widget: image, required: false, choose_url: true, hint: '🖼️ 매거진 목록 페이지의 카드 썸네일. 미지정 시 대표 이미지 자동 사용' }
-      - { name: ogImage, label: SNS 공유용 이미지, widget: image, required: false, choose_url: true, hint: '미지정 시 대표 이미지 자동 사용. 1200x630 권장' }
-      - { name: tags, label: 태그, widget: list, default: [], hint: '예: 청년 사역, 교회 공간 등' }
-      - { name: body, label: 본문, widget: markdown }
+
+      # ━━━━━━━━━━ ① 페이지 상단 작은 글씨 (eyebrow) ━━━━━━━━━━
+      - { name: category, label: '① 카테고리', widget: string, hint: '🔝 페이지 최상단 작은 글씨 좌측. 예: "CHURCH SPACE", "CHURCH INTERIOR"' }
+      - { name: publishDate, label: '① 발행일', widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, picker_utc: false, hint: '🔝 페이지 최상단 작은 글씨 중간' }
+      - { name: readingTime, label: '① 읽는 시간', widget: string, hint: '🔝 페이지 최상단 작은 글씨 우측. 예: "6분 읽기"' }
+
+      # ━━━━━━━━━━ ② 헤더 (제목 영역) ━━━━━━━━━━
+      - { name: title, label: '② 제목 (h1)', widget: text, hint: '📰 페이지 헤더의 큰 글씨. 엔터로 줄바꿈 가능' }
+      - { name: dek, label: '② 부제 (제목 아래 회색 글씨)', widget: text, hint: '📰 제목 바로 아래. 엔터로 줄바꿈 가능' }
+
+      # ━━━━━━━━━━ ③ 대표 이미지 (헤더 아래) ━━━━━━━━━━
+      - { name: heroImage, label: '③ 대표 이미지', widget: image, choose_url: true, hint: '🖼️ 헤더 바로 아래 큰 가로 이미지. 업로드 또는 외부 URL' }
+      - { name: heroImageAlt, label: '③ 대표 이미지 설명 (alt — 검색 노출)', widget: string, hint: '🔍 Google 이미지 검색 노출용. 화면엔 안 보이지만 검색 SEO에 중요' }
+
+      # ━━━━━━━━━━ ④ 본문 첫 단락 (lead) ━━━━━━━━━━
+      - { name: lead, label: '④ 첫 단락 (강조 표시 단락)', widget: text, hint: '📝 본문의 첫 번째 강조 단락. 본문 블록보다 위에 큰 글씨로 표시. 엔터로 줄바꿈 가능' }
+
+      # ━━━━━━━━━━ ⑤ 본문 ━━━━━━━━━━
+      - name: sections
+        label: '⑤ 본문 블록'
+        widget: list
+        collapsed: false
+        hint: '📝 새 글에는 기본 구조 9개 블록이 미리 채워져 있습니다. 필요 없는 블록은 우측 X로 삭제, 위/아래 화살표로 순서 조정, "+ ADD"로 추가'
+        summary: '{{fields.type}} — {{fields.text}}{{fields.alt}}{{fields.afterAlt}}'
+        default:
+          - { type: heading, level: h2, text: '' }
+          - { type: paragraph, text: '' }
+          - { type: ba, beforeSrc: '', beforeAlt: '', afterSrc: '', afterAlt: '' }
+          - { type: heading, level: h2, text: '' }
+          - { type: paragraph, text: '' }
+          - { type: figure, src: '', alt: '' }
+          - { type: heading, level: h2, text: '' }
+          - { type: paragraph, text: '' }
+          - { type: quote, text: '' }
+        types:
+          # ── 제목 ──
+          - name: heading
+            label: '🔖 제목 (h2/h3)'
+            widget: object
+            collapsed: false
+            summary: '제목: {{fields.text}}'
+            fields:
+              - { name: level, label: 단계, widget: select, options: [h2, h3], default: h2, hint: 'h2=큰 제목 / h3=작은 제목' }
+              - { name: text, label: 제목 내용, widget: text, hint: '엔터로 줄바꿈 가능' }
+
+          # ── 단락 ──
+          - name: paragraph
+            label: '✏️ 단락 (텍스트)'
+            widget: object
+            collapsed: false
+            summary: '단락: {{fields.text}}'
+            fields:
+              - { name: text, label: 본문 텍스트, widget: text, hint: '줄바꿈은 <br>로. 단락 안 줄바꿈은 <br><br>로 두 번' }
+
+          # ── 리스트 ──
+          - name: list
+            label: '📋 리스트 (불릿/번호)'
+            widget: object
+            collapsed: false
+            summary: '리스트 {{fields.items.length}}개'
+            fields:
+              - { name: style, label: 종류, widget: select, options: [ul, ol], default: ul, hint: 'ul=점 / ol=숫자' }
+              - { name: items, label: 항목들, widget: list, field: { name: item, label: 항목, widget: text, hint: '엔터로 줄바꿈 가능' } }
+
+          # ── 단일 이미지 ──
+          - name: figure
+            label: '🖼️ 사진 + 캡션 (단일 이미지)'
+            widget: object
+            collapsed: false
+            summary: '사진: {{fields.alt}}'
+            fields:
+              - { name: src, label: 이미지 파일, widget: image }
+              - { name: alt, label: '🔍 이미지 설명 (SEO 필수)', widget: string, hint: 'Google 이미지 검색 노출용. 사진 내용을 한 문장으로. 예: "교회 천장 간접조명 인테리어 설계 — 컨빌디자인"' }
+              - { name: caption, label: 캡션 (사진 아래 글, 선택), widget: text, required: false }
+
+          # ── Before/After ──
+          - name: ba
+            label: '🔄 Before/After 슬라이더'
+            widget: object
+            collapsed: false
+            summary: 'BA: {{fields.afterAlt}}'
+            fields:
+              - { name: beforeSrc, label: '시공 전 이미지', widget: image }
+              - { name: beforeAlt, label: '🔍 시공 전 alt (SEO 필수)', widget: string, hint: '예: "광주월성교회 본당 시공 전 사진"' }
+              - { name: afterSrc, label: '시공 후 이미지', widget: image }
+              - { name: afterAlt, label: '🔍 시공 후 alt (SEO 필수)', widget: string, hint: '예: "광주월성교회 본당 시공 후 사진 — 컨빌디자인"' }
+
+          # ── 인용 ──
+          - name: quote
+            label: '💬 인용 (blockquote)'
+            widget: object
+            collapsed: false
+            summary: '인용: {{fields.text}}'
+            fields:
+              - { name: text, label: 인용 문구, widget: text }
+
+          # ── 링크 카드/줄 ──
+          - name: link
+            label: '🔗 링크 (텍스트 + URL)'
+            widget: object
+            collapsed: false
+            summary: '링크: {{fields.text}} → {{fields.href}}'
+            fields:
+              - { name: text, label: 링크 표시 텍스트, widget: string, hint: '예: "컨빌 교회 인테리어 설계 사례 보기"' }
+              - { name: href, label: 링크 URL, widget: string, hint: '내부 링크는 /portfolio_detail01.html 형식, 외부는 https://...' }
+              - { name: title, label: 'title 속성 (선택)', widget: string, required: false }
+
+          # ── 설명+이미지 한 묶음 ──
+          - name: text-image
+            label: '📰 설명 + 이미지 (한 묶음)'
+            widget: object
+            collapsed: false
+            summary: '페어: {{fields.alt}}'
+            fields:
+              - { name: text, label: 설명 텍스트, widget: text, hint: '이미지 위쪽에 표시될 단락. 엔터로 줄바꿈 가능' }
+              - { name: src, label: 이미지 파일, widget: image }
+              - { name: alt, label: '🔍 이미지 설명 (SEO 필수)', widget: string }
+              - { name: caption, label: 캡션 (사진 아래 글, 선택), widget: text, required: false }
+
+      # ━━━━━━━━━━ ⑥ 페이지 하단 태그 ━━━━━━━━━━
+      - { name: tags, label: '⑥ 태그 (페이지 하단)', widget: list, default: [], hint: '🏷️ 본문 끝 회색 알약 버튼들. 예: 청년 사역, 교회 공간 등' }
+
+      # ━━━━━━━━━━ ⑦ SEO (화면에 안 보이는 메타) ━━━━━━━━━━
+      - name: seo
+        label: '⑦ SEO (화면에 안 보임 — 검색·공유용)'
+        widget: object
+        collapsed: true
+        hint: '🔍 Google·네이버 검색 결과와 카카오톡·페이스북 공유 시 보이는 정보. 화면에는 표시되지 않습니다'
+        fields:
+          - { name: description, label: '메타 설명 (Google 검색 회색 글씨)', widget: text, hint: '🔍 검색 결과에 표시될 1~2문장 설명. 100~150자 권장' }
+          - { name: keywords, label: '키워드 (쉼표로 구분, 선택)', widget: string, required: false, hint: '🔍 예: "교회 인테리어, 예배당 디자인"' }
+          - { name: coverImage, label: '매거진 목록 페이지 카드 썸네일 (4:3 권장)', widget: image, required: false, choose_url: true, hint: '🖼️ /magazine.html 목록의 그리드 카드 이미지. 미지정 시 대표 이미지 자동 사용' }
+          - { name: ogImage, label: 'SNS 공유 미리보기 이미지 (카톡·페이스북)', widget: image, required: false, choose_url: true, hint: '📱 1200x630 권장. 미지정 시 대표 이미지 자동 사용' }
 
   # =================== 포트폴리오 ===================
   - name: portfolio
