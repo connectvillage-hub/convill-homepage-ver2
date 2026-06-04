@@ -1,22 +1,87 @@
 import { defineCollection, z } from 'astro:content';
 
+// 매거진 본문 블록 — Decap CMS에서 한 블록씩 추가하는 단위
+const magazineSection = z.discriminatedUnion('type', [
+  z.object({
+    type: z.literal('heading'),
+    level: z.enum(['h2', 'h3']).default('h2'),
+    text: z.string(),
+  }),
+  z.object({
+    type: z.literal('paragraph'),
+    text: z.string(), // <br> 사용 가능
+  }),
+  z.object({
+    type: z.literal('list'),
+    style: z.enum(['ul', 'ol']).default('ul'),
+    items: z.array(z.string()),
+  }),
+  z.object({
+    type: z.literal('figure'),
+    src: z.string(),
+    alt: z.string(),           // SEO 필수
+    caption: z.string().optional(),
+  }),
+  z.object({
+    type: z.literal('ba'),
+    beforeSrc: z.string(),
+    beforeAlt: z.string(),     // SEO 필수
+    afterSrc: z.string(),
+    afterAlt: z.string(),      // SEO 필수
+  }),
+  z.object({
+    type: z.literal('quote'),
+    text: z.string(),
+  }),
+  z.object({
+    type: z.literal('link'),
+    text: z.string(),
+    href: z.string(),
+    title: z.string().optional(),
+  }),
+  // 템플릿 2 전용: 설명+이미지 한 묶음
+  z.object({
+    type: z.literal('text-image'),
+    text: z.string(),
+    src: z.string(),
+    alt: z.string(),           // SEO 필수
+    caption: z.string().optional(),
+  }),
+]);
+
 const magazine = defineCollection({
   type: 'content',
   schema: z.object({
+    // 시스템
     id: z.string().regex(/^\d{2}$/), // "01", "02", ... — 내부 정렬용 (URL은 파일명이 slug로 자동 사용됨)
-    title: z.string(),
-    description: z.string(),
-    keywords: z.string().optional(),
-    dek: z.string(), // 부제목(서브헤드라인) — 제목 아래 큰 글씨
-    lead: z.string(), // 첫 단락 (lead paragraph) — 본문에서 분리되어 강조 처리
+
+    // 페이지 상단 메타 (eyebrow)
     category: z.string(), // 예: "CHURCH SPACE"
     publishDate: z.date(),
     readingTime: z.string(), // 예: "6분 읽기"
-    heroImage: z.string(), // 글 상세 페이지 상단 메인 이미지
+
+    // 헤더
+    title: z.string(),
+    dek: z.string(), // 부제목(서브헤드라인) — 제목 아래 큰 글씨
+
+    // 대표 이미지
+    heroImage: z.string(),
     heroImageAlt: z.string(),
-    coverImage: z.string().optional(), // 매거진 리스트 카드용 썸네일 (미지정 시 heroImage 사용)
-    ogImage: z.string().optional(), // SNS 공유용 이미지 — 미지정 시 heroImage 사용
+
+    // 본문
+    lead: z.string(), // 첫 단락 — 본문에서 분리되어 강조 처리
+    sections: z.array(magazineSection).default([]),
+
+    // 페이지 하단
     tags: z.array(z.string()),
+
+    // 화면에 안 보이는 SEO/공유용
+    seo: z.object({
+      description: z.string(), // 검색 결과 회색 설명 텍스트
+      keywords: z.string().optional(),
+      coverImage: z.string().optional(), // 매거진 목록 페이지 카드 썸네일 (미지정 시 heroImage)
+      ogImage: z.string().optional(),    // 카카오톡/페이스북 공유 미리보기 (미지정 시 heroImage)
+    }),
   }),
 });
 

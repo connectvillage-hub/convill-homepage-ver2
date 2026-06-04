@@ -54,7 +54,7 @@ const entries = (await getCollection('magazine')).sort(
               data-mag-item
               aria-label={entry.data.title}
             >
-              <div class="mag-thumb" style={`background-image:url('${entry.data.coverImage ?? entry.data.heroImage}')`}></div>
+              <div class="mag-thumb" style={`background-image:url('${entry.data.seo.coverImage ?? entry.data.heroImage}')`}></div>
             </a>
           ))}
         </div>

@@ -12,10 +12,11 @@ const data = entry.data;
 const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
 const canonicalPath = `/${entry.slug}`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
-const ogImage = data.ogImage ?? data.heroImage;
+const ogImage = data.seo.ogImage ?? data.heroImage;
 
-// <br>은 화면에서 줄바꿈, 텍스트 메타에는 공백으로 치환
 const stripBr = (s: string) => s.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+// 엔터(\n)를 <br>로 변환 — 사용자가 admin에서 엔터만 쳐도 줄바꿈되게
+const nl2br = (s: string | undefined | null) => (s ?? '').replace(/\r\n|\r|\n/g, '<br>');
 const plainTitle = stripBr(data.title);
 const plainDek = stripBr(data.dek);
 
@@ -27,13 +28,25 @@ const formattedDate = data.publishDate.toLocaleDateString('ko-KR', {
 
 const isoPublishDate = data.publishDate.toISOString().split('T')[0];
 
+// sections 안의 모든 이미지를 모음 (Schema.org image array, SEO 강화용)
+const sections = data.sections ?? [];
+const hasSections = sections.length > 0;
+
+const sectionImages: string[] = [];
+for (const s of sections) {
+  if (s.type === 'figure' || s.type === 'text-image') sectionImages.push(s.src);
+  else if (s.type === 'ba') { sectionImages.push(s.afterSrc); sectionImages.push(s.beforeSrc); }
+}
+const toAbsUrl = (src: string) => (src.startsWith('http') ? src : `${SITE_URL}${src}`);
+const allImageUrls = [data.heroImage, ...sectionImages].map(toAbsUrl);
+
 // Article Schema (JSON-LD) — for Google + AI
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: plainTitle,
-  description: data.description,
-  image: data.heroImage,
+  description: data.seo.description,
+  image: allImageUrls,
   datePublished: isoPublishDate,
   dateModified: isoPublishDate,
   author: {
@@ -68,16 +81,16 @@ const breadcrumbSchema = {
 ---
 <BaseLayout
   title={`${plainTitle} — 컨빌디자인 매거진`}
-  description={data.description}
-  keywords={data.keywords}
+  description={data.seo.description}
+  keywords={data.seo.keywords}
   canonical={canonicalPath}
   ogTitle={plainTitle}
-  ogDescription={data.description}
+  ogDescription={data.seo.description}
   ogImage={ogImage}
   ogType="article"
   activeNav="sns"
+  pageJs="portfolio.js"
 >
-  <!-- Article Schema (body 안에 둬도 Google이 인식함) -->
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
@@ -99,8 +112,8 @@ const breadcrumbSchema = {
       <div class="mag-eyebrow">
         {data.category} <span>·</span> {formattedDate} <span>·</span> {data.readingTime}
       </div>
-      <h1 set:html={data.title} />
-      <p class="mag-dek" set:html={data.dek} />
+      <h1 set:html={nl2br(data.title)} />
+      <p class="mag-dek" set:html={nl2br(data.dek)} />
     </header>
 
     <div class="mag-hero-image">
@@ -108,9 +121,69 @@ const breadcrumbSchema = {
     </div>
 
     <div class="mag-body">
-      <p class="lead" set:html={data.lead} />
+      <p class="lead" set:html={nl2br(data.lead)} />
 
-      <slot />
+      {hasSections ? sections.map(section => {
+        if (section.type === 'heading') {
+          return section.level === 'h3'
+            ? <h3 set:html={nl2br(section.text)} />
+            : <h2 set:html={nl2br(section.text)} />;
+        }
+        if (section.type === 'paragraph') {
+          return <p set:html={nl2br(section.text)} />;
+        }
+        if (section.type === 'list') {
+          return section.style === 'ol'
+            ? <ol>{section.items.map(item => <li set:html={nl2br(item)} />)}</ol>
+            : <ul>{section.items.map(item => <li set:html={nl2br(item)} />)}</ul>;
+        }
+        if (section.type === 'figure') {
+          return (
+            <figure>
+              <img src={section.src} alt={section.alt} loading="lazy" />
+              {section.caption && <figcaption set:html={nl2br(section.caption)} />}
+            </figure>
+          );
+        }
+        if (section.type === 'ba') {
+          return (
+            <div class="ba-slider">
+              <img class="ba-after" src={section.afterSrc} alt={section.afterAlt} />
+              <img class="ba-before" src={section.beforeSrc} alt={section.beforeAlt} />
+              <div class="ba-divider">
+                <div class="ba-handle">
+                  <svg viewBox="0 0 10 16"><polygon points="10,0 0,8 10,16" /></svg>
+                  <svg viewBox="0 0 10 16"><polygon points="0,0 10,8 0,16" /></svg>
+                </div>
+              </div>
+              <span class="ba-tag ba-tag-before">BEFORE</span>
+              <span class="ba-tag ba-tag-after">AFTER</span>
+            </div>
+          );
+        }
+        if (section.type === 'quote') {
+          return <blockquote set:html={nl2br(section.text)} />;
+        }
+        if (section.type === 'link') {
+          return (
+            <p>
+              <a href={section.href} title={section.title}>{section.text}</a>
+            </p>
+          );
+        }
+        if (section.type === 'text-image') {
+          return (
+            <Fragment>
+              <p set:html={nl2br(section.text)} />
+              <figure>
+                <img src={section.src} alt={section.alt} loading="lazy" />
+                {section.caption && <figcaption set:html={nl2br(section.caption)} />}
+              </figure>
+            </Fragment>
+          );
+        }
+        return null;
+      }) : <slot />}
     </div>
 
     <div class="mag-tags">
@@ -138,4 +211,3 @@ const breadcrumbSchema = {
 </BaseLayout>
 
 <!-- 매거진 스타일은 public/css/common.css 에 통합됨 -->
-
