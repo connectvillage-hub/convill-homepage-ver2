@@ -197,6 +197,19 @@ const breadcrumbSchema = {
           const borderStyle = section.style === 'dashed' ? 'dashed' : (section.style === 'dotted' ? 'dotted' : 'solid');
           return <hr style={`border: none; border-top: 1px ${borderStyle} #ddd; margin: 32px 0;`} />;
         }
+        if (section.type === 'gallery') {
+          const cols = section.cols ?? 2;
+          return (
+            <div style={`display: grid; grid-template-columns: repeat(${cols}, 1fr); gap: 12px; margin: 24px 0;`}>
+              {section.images.map(img => (
+                <figure style="margin: 0;">
+                  <img src={img.src} alt={img.alt} loading="lazy" style="width: 100%; display: block;" />
+                  {img.caption && <figcaption style="font-size: 13px; color: #888; text-align: center; margin-top: 6px;" set:html={nl2br(img.caption)} />}
+                </figure>
+              ))}
+            </div>
+          );
+        }
         return null;
       }) : <slot />}
     </div>
