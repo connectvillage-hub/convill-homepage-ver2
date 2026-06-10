@@ -184,7 +184,16 @@ collections:
             collapsed: false
             summary: '갤러리 {{fields.images.length}}장 ({{fields.cols}}열)'
             fields:
-              - { name: cols, label: 한 줄당 이미지 수, widget: select, options: [2, 3, 4], default: 2, value_type: int, hint: '2=반/반 (2열), 3=3열, 4=4열. 이미지를 4장 넣고 2열로 하면 자동으로 2x2 그리드가 됨' }
+              - name: cols
+                label: 한 줄당 이미지 수
+                widget: select
+                default: 2
+                value_type: int
+                hint: '2=반/반 (2열), 3=3열, 4=4열. 이미지를 4장 넣고 2열로 하면 자동으로 2x2 그리드가 됨'
+                options:
+                  - { label: '2열 (반/반)', value: 2 }
+                  - { label: '3열', value: 3 }
+                  - { label: '4열', value: 4 }
               - name: images
                 label: 이미지 목록
                 widget: list
