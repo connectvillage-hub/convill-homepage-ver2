@@ -14,6 +14,7 @@
     "dev:all": "concurrently --names \"astro,cms\" --prefix-colors \"cyan,magenta\" \"npm:dev\" \"npm:dev:cms\""
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^4.16.18",
     "marked": "^18.0.4"
