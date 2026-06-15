@@ -162,7 +162,7 @@ section{padding:110px 0}
 .num small.why{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:14px;letter-spacing:.02em;color:var(--muted);text-transform:none;line-height:1.5;margin-top:18px;}
 .about-photo{position:relative}
 .about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;box-shadow:0 22px 50px -20px rgba(20,40,68,.35);}
-.about-photo .badge{position:absolute;right:-18px;bottom:-35px;background:var(--navy);color:#fff;padding:22px 24px;max-width:300px;font-size:12px;line-height:1.65;}
+.about-photo .badge{position:absolute;right:-18px;bottom:-45px;background:var(--navy);color:#fff;padding:22px 24px;max-width:300px;font-size:12px;line-height:1.65;}
 .about-photo .badge p{margin:0 0 12px;color:rgba(255,255,255,.88);font-size:11.5px;line-height:1.7;}
 .about-photo .badge p em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-size:11px;}
 .about-photo .badge-sign{color:var(--gold);font-size:12px;font-family:"Noto Serif KR",serif;font-weight:600;padding-top:10px;border-top:1px solid rgba(255,255,255,.15);}
