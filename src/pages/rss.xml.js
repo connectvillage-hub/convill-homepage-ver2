@@ -6,8 +6,25 @@ const SITE_DESCRIPTION = '교회 인테리어 비용, 예배당 디자인 트렌
 
 const stripBr = (s) => String(s || '').replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
 
+const getImageMime = (src) => {
+  const ext = String(src || '').toLowerCase().split('.').pop();
+  if (ext === 'png') return 'image/png';
+  if (ext === 'gif') return 'image/gif';
+  if (ext === 'webp') return 'image/webp';
+  return 'image/jpeg';
+};
+
+const escapeXml = (s) =>
+  String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+
 export async function GET(context) {
   const magazine = await getCollection('magazine');
+  const feedUrl = new URL('rss.xml', context.site).toString();
 
   const items = magazine
     .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
@@ -18,7 +35,7 @@ export async function GET(context) {
       link: `/${entry.slug}.html`,
       categories: entry.data.tags || [],
       customData: entry.data.heroImage
-        ? `<enclosure url="${context.site}${entry.data.heroImage.replace(/^\//, '')}" type="image/jpeg" />`
+        ? `<enclosure url="${escapeXml(new URL(entry.data.heroImage.replace(/^\//, ''), context.site).toString())}" type="${getImageMime(entry.data.heroImage)}" length="0" />`
         : '',
     }));
 
@@ -26,8 +43,18 @@ export async function GET(context) {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
+    xmlns: {
+      atom: 'http://www.w3.org/2005/Atom',
+    },
     items,
-    customData: `<language>ko</language><copyright>© 컨빌디자인</copyright>`,
+    customData: [
+      `<language>ko</language>`,
+      `<copyright>© 컨빌디자인</copyright>`,
+      `<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
+      `<ttl>60</ttl>`,
+      `<generator>Astro</generator>`,
+      `<atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />`,
+    ].join(''),
     stylesheet: false,
   });
 }
