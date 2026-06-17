@@ -55,7 +55,51 @@ collections:
     fields:
       # ━━━━━━━━━━ 시스템 ━━━━━━━━━━
       - { name: id, label: '글 번호 (정렬용)', widget: string, hint: '⚠️ 좌측 목록에서 마지막 항목 [번호]를 확인 → +1 입력. 예: 마지막이 [09]면 "10". 두 자리 숫자', pattern: ['^\d{2}$', '두 자리 숫자만 (예: 02, 10, 99)'] }
-      - { name: urlSlug, label: 'URL 슬러그 (영문, SEO용)', widget: string, hint: '🔍 영문 소문자 + 하이픈(-)만 사용. 글 주제를 영문 키워드로. 예: church-interior-cost, youth-cafe-design, magazine-tip. ⚠️ 한 번 정하면 변경 금지 (검색엔진 색인 깨짐)', pattern: ['^[a-z0-9][a-z0-9-]*$', '영문 소문자, 숫자, 하이픈만. 첫 글자는 영문/숫자'] }
+      - name: urlSlug
+        label: 'URL 슬러그 (SEO 키워드)'
+        widget: select
+        hint: '🔍 글 주제에 맞는 영문 키워드 선택. URL이 https://도메인.com/{선택값}.html 이 됨. ⚠️ 한 번 정하면 변경 금지 (검색엔진 색인 깨짐). 같은 키워드를 두 번 쓸 수 없음 (파일명 중복)'
+        options:
+          # 핵심 키워드
+          - { label: '🏛️ 교회 인테리어 디자인 — church-interior-design', value: church-interior-design }
+          - { label: '💰 교회 인테리어 비용 — church-interior-cost', value: church-interior-cost }
+          - { label: '🔨 교회 리모델링 가이드 — church-renovation-guide', value: church-renovation-guide }
+          - { label: '⛪ 예배당 리모델링 — sanctuary-renovation', value: sanctuary-renovation }
+
+          # 공간별 디자인
+          - { label: '🎤 강대상 디자인 — pulpit-design', value: pulpit-design }
+          - { label: '🚪 교회 로비 디자인 — church-lobby-design', value: church-lobby-design }
+          - { label: '☕ 청년부 카페 디자인 — youth-cafe-design', value: youth-cafe-design }
+          - { label: '☕ 교회 카페 디자인 — church-cafe-design', value: church-cafe-design }
+          - { label: '🧑‍💼 목양실 인테리어 — pastor-office-interior', value: pastor-office-interior }
+          - { label: '👶 어린이부 디자인 — childrens-church-design', value: childrens-church-design }
+          - { label: '🏠 교회 다목적실 — church-multipurpose-room', value: church-multipurpose-room }
+
+          # 디자인 요소
+          - { label: '💡 교회 조명 디자인 — church-lighting-design', value: church-lighting-design }
+          - { label: '🎨 교회 컬러 팔레트 — church-color-palette', value: church-color-palette }
+          - { label: '🪑 교회 좌석 배치 — church-seating-layout', value: church-seating-layout }
+          - { label: '📐 교회 평면 설계 — church-floor-plan', value: church-floor-plan }
+          - { label: '🌳 체리원목 교체 — cherry-wood-makeover', value: cherry-wood-makeover }
+          - { label: '🆕 모던 교회 인테리어 — modern-church-interior', value: modern-church-interior }
+
+          # 규모별
+          - { label: '🏠 소형 교회 리모델링 — small-church-renovation', value: small-church-renovation }
+          - { label: '🏢 대형 교회 인테리어 — large-church-interior', value: large-church-interior }
+
+          # 지역 (지역 SEO 강함)
+          - { label: '📍 서울 교회 인테리어 — seoul-church-interior', value: seoul-church-interior }
+          - { label: '📍 부산 교회 인테리어 — busan-church-interior', value: busan-church-interior }
+          - { label: '📍 광주 교회 인테리어 — gwangju-church-interior', value: gwangju-church-interior }
+          - { label: '📍 인천 교회 인테리어 — incheon-church-interior', value: incheon-church-interior }
+          - { label: '📍 대전 교회 인테리어 — daejeon-church-interior', value: daejeon-church-interior }
+
+          # 트렌드/팁
+          - { label: '✨ 교회 디자인 트렌드 — church-design-trend', value: church-design-trend }
+          - { label: '🎯 교회 인테리어 팁 — church-interior-tip', value: church-interior-tip }
+          - { label: '📚 교회 인테리어 사례 — church-interior-case-study', value: church-interior-case-study }
+          - { label: '💼 교회 인테리어 업체 — church-interior-company', value: church-interior-company }
+          - { label: '🤝 교회 인테리어 상담 — church-interior-consultation', value: church-interior-consultation }
 
       # ━━━━━━━━━━ ① 페이지 상단 작은 글씨 (eyebrow) ━━━━━━━━━━
       - { name: category, label: '① 카테고리', widget: string, hint: '🔝 페이지 최상단 작은 글씨 좌측. 예: "CHURCH SPACE", "CHURCH INTERIOR"' }
