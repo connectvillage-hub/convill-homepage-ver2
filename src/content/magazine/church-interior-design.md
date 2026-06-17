@@ -1,5 +1,6 @@
 ---
 id: "01"
+urlSlug: church-interior-design
 
 # ① 페이지 상단 메타
 category: CHURCH INTERIOR

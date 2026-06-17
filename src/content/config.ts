@@ -66,7 +66,8 @@ const magazine = defineCollection({
   type: 'content',
   schema: z.object({
     // 시스템
-    id: z.string().regex(/^\d{2}$/), // "01", "02", ... — 내부 정렬용 (URL은 파일명이 slug로 자동 사용됨)
+    id: z.string().regex(/^\d{2}$/), // "01", "02", ... — 내부 정렬용
+    urlSlug: z.string().regex(/^[a-z0-9][a-z0-9-]*$/).optional(), // URL용 영문 슬러그 (파일명과 동일, Decap CMS가 파일명 생성용으로 사용)
 
     // 페이지 상단 메타 (eyebrow)
     category: z.string(), // 예: "CHURCH SPACE"

@@ -46,15 +46,16 @@ collections:
     create: true
     extension: md
     format: yaml-frontmatter
-    slug: "{{fields.id}}"
+    slug: "{{fields.urlSlug}}"
     identifier_field: title
-    summary: "[{{id}}] {{title}}"
+    summary: "[{{id}}] {{title}} ({{urlSlug}})"
     sortable_fields: [publishDate, id, title]
     editor:
       preview: true
     fields:
       # ━━━━━━━━━━ 시스템 ━━━━━━━━━━
-      - { name: id, label: '글 번호 (좌측 목록의 마지막 [번호] +1)', widget: string, hint: '⚠️ 새로 만들 때: 왼쪽 매거진 목록에서 마지막 항목의 [번호]를 확인 → +1 입력. 예: 마지막이 [09]면 "10" 입력. 두 자리 숫자 필수', pattern: ['^\d{2}$', '두 자리 숫자만 (예: 02, 10, 99)'] }
+      - { name: id, label: '글 번호 (정렬용)', widget: string, hint: '⚠️ 좌측 목록에서 마지막 항목 [번호]를 확인 → +1 입력. 예: 마지막이 [09]면 "10". 두 자리 숫자', pattern: ['^\d{2}$', '두 자리 숫자만 (예: 02, 10, 99)'] }
+      - { name: urlSlug, label: 'URL 슬러그 (영문, SEO용)', widget: string, hint: '🔍 영문 소문자 + 하이픈(-)만 사용. 글 주제를 영문 키워드로. 예: church-interior-cost, youth-cafe-design, magazine-tip. ⚠️ 한 번 정하면 변경 금지 (검색엔진 색인 깨짐)', pattern: ['^[a-z0-9][a-z0-9-]*$', '영문 소문자, 숫자, 하이픈만. 첫 글자는 영문/숫자'] }
 
       # ━━━━━━━━━━ ① 페이지 상단 작은 글씨 (eyebrow) ━━━━━━━━━━
       - { name: category, label: '① 카테고리', widget: string, hint: '🔝 페이지 최상단 작은 글씨 좌측. 예: "CHURCH SPACE", "CHURCH INTERIOR"' }
