@@ -96,9 +96,59 @@
     setTimeout(tryFill, 500);
   }
 
+  // 새 entry 화면에서 발행일 = 오늘 자동 입력
+  function autoFillPublishDate() {
+    const m = location.hash.match(/^#\/collections\/([^/?]+)\/new$/);
+    if (!m) return;
+
+    // 오늘 날짜 (YYYY-MM-DD, 로컬 시간 기준)
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    let attempts = 0;
+    const tryFill = () => {
+      attempts++;
+      if (attempts > 30) return;
+
+      // datetime widget의 실제 input은 type="date"
+      const dateInputs = document.querySelectorAll('input[type="date"]');
+      let filled = false;
+
+      for (const input of dateInputs) {
+        if (input.value) continue;
+
+        // label 확인 — '발행일' 포함이면 자동 채움
+        const wrapper = input.closest('div[class*="control"], div[class*="Control"], div[class*="field"], div[class*="Field"]');
+        const labelText = wrapper ? (wrapper.textContent || '') : '';
+
+        if (labelText.includes('발행일')) {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            window.HTMLInputElement.prototype,
+            'value'
+          ).set;
+          nativeInputValueSetter.call(input, todayStr);
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+
+          console.log('[auto-publishDate] 발행일 자동 입력: ' + todayStr);
+          filled = true;
+          break;
+        }
+      }
+
+      if (!filled) setTimeout(tryFill, 200);
+    };
+
+    setTimeout(tryFill, 500);
+  }
+
   function handleRouteChange() {
     rememberMaxId();
     autoFillNewId();
+    autoFillPublishDate();
   }
 
   // 페이지 첫 로드 + hash 변경 시 동작
