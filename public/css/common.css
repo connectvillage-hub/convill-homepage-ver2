@@ -500,7 +500,7 @@ details p{color:var(--muted);font-size:13px;line-height:1.8;margin:14px 0 0;padd
 .yt-info .meta{font-size:12px;color:var(--muted);font-family:"Cormorant Garamond",serif;font-style:italic;letter-spacing:.02em;}
 
 .mag-section{padding:0 0 110px}
-.mag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.mag-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;}
 .mag-card{position:relative;aspect-ratio:4/5;background:#1a1a1a;border-radius:4px;overflow:hidden;box-shadow:0 18px 40px -30px rgba(20,40,68,.35);cursor:pointer;transition:transform .35s ease, box-shadow .35s ease;}
 .mag-card:hover{transform:translateY(-6px);box-shadow:0 30px 55px -25px rgba(20,40,68,.5);}
 .mag-card .mag-thumb{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s ease;}
