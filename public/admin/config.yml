@@ -46,9 +46,9 @@ collections:
     create: true
     extension: md
     format: yaml-frontmatter
-    slug: "{{fields.urlSlug}}"
+    slug: "{{fields.urlSlug}}-{{fields.id}}"
     identifier_field: title
-    summary: "[{{id}}] {{title}} ({{urlSlug}})"
+    summary: "[{{id}}] {{title}} ({{urlSlug}}-{{id}})"
     sortable_fields: [publishDate, id, title]
     editor:
       preview: true
@@ -58,7 +58,7 @@ collections:
       - name: urlSlug
         label: 'URL 슬러그 (SEO 키워드)'
         widget: select
-        hint: '🔍 글 주제에 맞는 영문 키워드 선택. URL이 https://도메인.com/{선택값}.html 이 됨. ⚠️ 한 번 정하면 변경 금지 (검색엔진 색인 깨짐). 같은 키워드를 두 번 쓸 수 없음 (파일명 중복)'
+        hint: '🔍 글 주제에 맞는 영문 키워드 선택. URL: https://도메인.com/{키워드}-{글번호}.html (예: church-interior-design-05.html). 같은 키워드 여러 글에 사용 가능 (글번호로 구분). ⚠️ 한 번 정하면 변경 금지 (검색엔진 색인 깨짐)'
         options:
           # 핵심 키워드
           - { label: '🏛️ 교회 인테리어 디자인 — church-interior-design', value: church-interior-design }
