@@ -122,18 +122,9 @@ collections:
         label: '⑤ 본문 블록'
         widget: list
         collapsed: true
-        hint: '📝 새 글에는 기본 구조 9개 블록이 미리 채워져 있습니다. 각 블록을 클릭해서 펼쳐서 입력. 우측 X로 삭제, 위/아래 화살표로 순서 조정, "+ ADD"로 추가'
+        hint: '📝 "+ ADD" 버튼을 눌러 블록 종류를 선택하면서 본문 작성. 위/아래 화살표로 순서 조정, 우측 X로 삭제'
         summary: '{{fields.type}} — {{fields.text}}{{fields.alt}}{{fields.afterAlt}}'
-        default:
-          - { type: heading, level: h2, text: '' }
-          - { type: paragraph, text: '' }
-          - { type: ba, beforeSrc: '', beforeAlt: '', afterSrc: '', afterAlt: '' }
-          - { type: heading, level: h2, text: '' }
-          - { type: paragraph, text: '' }
-          - { type: figure, src: '', alt: '' }
-          - { type: heading, level: h2, text: '' }
-          - { type: paragraph, text: '' }
-          - { type: quote, text: '' }
+        default: []
         types:
           # ── 제목 ──
           - name: heading
