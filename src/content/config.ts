@@ -1,42 +1,43 @@
 import { defineCollection, z } from 'astro:content';
 
 // 매거진 본문 블록 — Decap CMS에서 한 블록씩 추가하는 단위
+// 모든 string 필드는 빈 값 허용 (admin에서 빈 블록 저장 가능)
 const magazineSection = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('heading'),
     level: z.enum(['h2', 'h3']).default('h2'),
-    text: z.string(),
+    text: z.string().default(''),
   }),
   z.object({
     type: z.literal('paragraph'),
-    text: z.string(), // <br> 사용 가능
+    text: z.string().default(''),
   }),
   z.object({
     type: z.literal('list'),
     style: z.enum(['ul', 'ol']).default('ul'),
-    items: z.array(z.string()),
+    items: z.array(z.string()).default([]),
   }),
   z.object({
     type: z.literal('figure'),
-    src: z.string(),
-    alt: z.string(),           // SEO 필수
+    src: z.string().default(''),
+    alt: z.string().default(''),
     caption: z.string().optional(),
   }),
   z.object({
     type: z.literal('ba'),
-    beforeSrc: z.string(),
-    beforeAlt: z.string(),     // SEO 필수
-    afterSrc: z.string(),
-    afterAlt: z.string(),      // SEO 필수
+    beforeSrc: z.string().default(''),
+    beforeAlt: z.string().default(''),
+    afterSrc: z.string().default(''),
+    afterAlt: z.string().default(''),
   }),
   z.object({
     type: z.literal('quote'),
-    text: z.string(),
+    text: z.string().default(''),
   }),
   z.object({
     type: z.literal('link'),
-    text: z.string(),
-    href: z.string(),
+    text: z.string().default(''),
+    href: z.string().default(''),
     title: z.string().optional(),
   }),
   z.object({
@@ -47,17 +48,16 @@ const magazineSection = z.discriminatedUnion('type', [
     type: z.literal('gallery'),
     cols: z.union([z.literal(2), z.literal(3), z.literal(4)]).default(2),
     images: z.array(z.object({
-      src: z.string(),
-      alt: z.string(),
+      src: z.string().default(''),
+      alt: z.string().default(''),
       caption: z.string().optional(),
     })).default([]),
   }),
-  // 템플릿 2 전용: 설명+이미지 한 묶음
   z.object({
     type: z.literal('text-image'),
-    text: z.string(),
-    src: z.string(),
-    alt: z.string(),           // SEO 필수
+    text: z.string().default(''),
+    src: z.string().default(''),
+    alt: z.string().default(''),
     caption: z.string().optional(),
   }),
 ]);
