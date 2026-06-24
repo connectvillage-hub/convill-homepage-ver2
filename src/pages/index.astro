@@ -306,13 +306,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <p>약속한 일정대로, 약속한 품질로 진행합니다. 컨빌프로 어플리케이션을 통해 현장 진행 상황을 실시간으로 공유받으실 수 있습니다.</p>
             <span class="step-meta">컨빌프로 앱 실시간 공유</span>
           </article>
-          <article class="step reveal">
+          <a href="/church-branding.html" class="step reveal step-linked nav-link" aria-label="교회 브랜딩 관리 — 자세히 보기">
             <div class="step-top"><div class="step-number">05</div></div>
             <div class="step-divider"></div>
-            <h4>교회 브랜딩 관리</h4>
+            <h4>교회 브랜딩 관리 <span class="step-arrow" aria-hidden="true">→</span></h4>
             <p>부활절 · 성탄절 · 송구영신예배 · 추수감사 등 절기마다 어울리는 현수막을 디자인해 드리고, 우리 교회만의 로고 제작까지 — 교회의 브랜드를 함께 가꾸어 갑니다.</p>
             <span class="step-meta">절기별 디자인 제공</span>
-          </article>
+          </a>
         </div>
         <div class="process-cta">
           <p>여기까지 읽으셨다면, 이미 <em>첫 걸음</em>을 떼신 겁니다.</p>
@@ -396,3 +396,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   </div><!-- /page-main -->
 </BaseLayout>
+
+<style>
+  /* OUR PROCESS 05번 카드만 링크로 동작 — article 시각은 그대로, 클릭 영역 + hover 피드백만 추가 */
+  .step-linked {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .step-linked .step-arrow {
+    display: inline-block;
+    margin-left: 6px;
+    color: #c19a4a;
+    transition: transform 0.2s ease;
+  }
+  .step-linked:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(40, 35, 25, 0.10);
+  }
+  .step-linked:hover .step-arrow {
+    transform: translateX(4px);
+  }
+  .step-linked:focus-visible {
+    outline: 2px solid #c19a4a;
+    outline-offset: 4px;
+  }
+</style>
