@@ -1,0 +1,868 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
+const PAGE_URL = `${SITE_URL}/church-branding.html`;
+
+// 빵부스러기 (Google 검색 결과에 "Home > 교회 브랜딩" 표시)
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: '교회 브랜딩', item: PAGE_URL },
+  ],
+};
+
+// 서비스 정의 — 컨빌이 제공하는 "교회 브랜딩" 서비스로 식별
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${PAGE_URL}#service`,
+  name: '교회 브랜딩',
+  alternateName: ['교회 BI', '교회 CI', '교회 디자인 시스템'],
+  description: '우리 교회만의 정체성을 시각으로 정리합니다. 로고 디자인, 컬러 시스템, 공간 적용, 주보·현수막·굿즈 등 응용 디자인까지 일관된 브랜드 시스템을 설계합니다.',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  serviceType: 'Church Branding',
+  category: 'Graphic Design',
+  url: PAGE_URL,
+  areaServed: [{ '@type': 'Country', name: '대한민국' }],
+  audience: { '@type': 'Audience', audienceType: '교회 · 종교 단체' },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'TYPE A · 단건 패키지',
+      description: '우리 교회 전용 로고 디자인, 브랜드 가이드, 주보 디자인 템플릿 1종, 현수막 디자인 1종 제작.',
+    },
+    {
+      '@type': 'Offer',
+      name: 'TYPE B · 1년 패키지',
+      description: '전용 로고와 브랜드 가이드, 절기별 현수막, 주보 템플릿, 응용 디자인 및 굿즈 제작 + 무상 수정 2회 포함의 1년 단위 패키지.',
+    },
+  ],
+};
+---
+<BaseLayout
+  title="교회 브랜딩 — 로고·공간·인쇄물을 하나의 언어로 | 컨빌디자인"
+  description="우리 교회만의 정체성을 시각으로 정리합니다. 로고, 컬러 시스템, 공간 디자인, 주보·굿즈까지 — 컨빌디자인의 교회 브랜딩 서비스."
+  keywords="교회 브랜딩, 교회 로고, 교회 CI, 교회 BI, 교회 디자인, 교회 주보 디자인, 교회 굿즈, 컨빌디자인 브랜딩"
+  canonical="/church-branding.html"
+  ogTitle="교회 브랜딩 — 로고·공간·인쇄물을 하나의 언어로"
+  ogDescription="우리 교회만의 정체성을 시각으로 정리합니다. 로고, 컬러, 공간, 주보, 굿즈까지 일관된 브랜드 시스템."
+  ogImage="https://convill-homepage-ver2.vercel.app/images/branding/brand-identity-system.jpg"
+  activeNav="branding"
+>
+  <div class="page active page-branding" id="page-branding">
+
+    <!-- JSON-LD: BreadcrumbList + Service -->
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+    <!-- PAGE HEAD -->
+    <section class="page-head">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/index.html" class="nav-link">Home</a>
+          <span class="sep">/</span>
+          Church Branding
+        </div>
+        <div class="page-eyebrow">— CHURCH BRANDING</div>
+        <h1>교회의 정체성을<br />하나의 이미지로 정리합니다</h1>
+        <p class="lead">로고 하나가 아니라, 공간·주보·굿즈까지 — <br />우리 교회다움이 자연스럽게 흐르는 브랜드 시스템을 만들어 드립니다.</p>
+      </div>
+    </section>
+
+    <!-- WHY BRANDING -->
+    <section class="features reveal">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow-row">— WHY BRANDING</div>
+          <h2>왜 지금,<br />교회 브랜딩이 필요할까요?</h2>
+          <p>로고·공간·인쇄물이 서로 다른 언어로 말하면, 교회의 정체성도 흐려집니다.<br />브랜딩은 흩어진 시각 요소를 하나의 이야기로 정리하는 일입니다.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card reveal">
+            <div class="why-num">01</div>
+            <h3>첫인상의 정리</h3>
+            <p>흩어진 시각 요소를 하나의 이미지로 정돈해, 처음 방문하는 분께도 교회의 분위기가 또렷이 전달됩니다.</p>
+          </div>
+          <div class="why-card reveal">
+            <div class="why-num">02</div>
+            <h3>시각적 일관성</h3>
+            <p>로고·공간·인쇄물이 같은 언어로 말합니다. 어디서 마주쳐도<br> "우리 교회다"라는 느낌이 흔들리지 않습니다.</p>
+          </div>
+          <div class="why-card reveal">
+            <div class="why-num">03</div>
+            <h3>공간과 디자인의 연결</h3>
+            <p>건물의 정체성이 주보·현수막·굿즈까지 자연스럽게 이어집니다. 공간과 디자인이 한 호흡으로 묶입니다.</p>
+          </div>
+          <div class="why-card reveal">
+            <div class="why-num">04</div>
+            <h3>예배의 분위기</h3>
+            <p>교회의 신앙과 정서를 시각으로 담아내, 성도님이 공간 안에서 예배의 감격을 다시 한 번 느끼시도록 돕습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE INTRO -->
+    <section class="case-intro reveal">
+      <div class="container">
+        <div class="eyebrow-row">— BRAND CASE —</div>
+        <h2>"예배의 감격이 있는 교회"</h2>
+        <p class="case-lead">교회의 목회 철학을 하나의 이미지로 연결하는 브랜딩 제안.<br />서광주교회 사례를 중심으로 컨빌이 어떻게 교회 브랜딩을 풀어가는지 보여드립니다.</p>
+        <figure class="brand-system-figure">
+          <img
+            src="/images/branding/brand-identity-system.jpg"
+            alt="서광주교회 브랜드 아이덴티티 시스템 — 메인 로고, 컬러 시스템, 타이포그래피, 아이콘, 브랜드 키워드, 슬로건, 응용 이미지"
+            loading="lazy"
+          />
+          <figcaption>SEOGWANGJU CHURCH · Brand Identity System v1.0</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- LOGO CONCEPT -->
+    <section class="brand-section reveal">
+      <div class="container">
+        <div class="bs-head">
+          <span class="bs-num">02</span>
+          <span class="bs-tag">LOGO Concept</span>
+        </div>
+        <h2 class="bs-h2">교회의 정체성을 가장 잘 보여주는<br />시각 언어를 찾습니다</h2>
+        <div class="logo-hero">
+          <img src="/images/branding/logo-horizontal.png" alt="서광주교회 가로형 메인 로고 — 예배의 감격이 있는 교회" loading="lazy" />
+        </div>
+        <p class="bs-desc">교회 외관의 스테인드글라스에서 비치는 빛을 바탕으로,<br /><strong>서광주교회의 정체성을 가장 잘 보여줄 수 있는 시각 언어로 표현</strong>했습니다.</p>
+      </div>
+    </section>
+
+    <!-- LOGO SYSTEM -->
+    <section class="brand-section alt reveal">
+      <div class="container">
+        <div class="bs-head">
+          <span class="bs-num">03</span>
+          <span class="bs-tag">Logo System</span>
+        </div>
+        <h2 class="bs-h2">다양한 상황에 대응하는<br />로고 시스템</h2>
+        <p class="bs-desc">한 가지 로고만으로는 모든 매체를 담을 수 없습니다.<br />매체와 비율, 출력 환경에 맞춰 일관된 인상을 유지하는 로고 시스템을 함께 설계합니다.</p>
+        <div class="logo-grid">
+          <div class="logo-card reveal">
+            <div class="logo-card-tag">기본형 로고</div>
+            <div class="logo-thumb"><img src="/images/branding/logo-default.png" alt="서광주교회 기본형 로고 (세로형 컬러)" loading="lazy" /></div>
+            <p class="logo-card-desc">가장 표준적인 형태. 주보·문서·안내문·홈페이지 등 기본 매체에 사용합니다.</p>
+          </div>
+          <div class="logo-card reveal">
+            <div class="logo-card-tag">가로형 로고</div>
+            <div class="logo-thumb"><img src="/images/branding/logo-horizontal.png" alt="서광주교회 가로형 로고" loading="lazy" /></div>
+            <p class="logo-card-desc">현수막·배너·온라인 썸네일 등 가로 비율이 긴 매체에 적합합니다.</p>
+          </div>
+          <div class="logo-card reveal">
+            <div class="logo-card-tag">라인형 / 단색형</div>
+            <div class="logo-thumb"><img src="/images/branding/logo-line.png" alt="서광주교회 라인형 단색 로고" loading="lazy" /></div>
+            <p class="logo-card-desc">머그컵·티셔츠·각인·자수·사인물 등 절제된 분위기의 응용에 적합합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR & MOOD -->
+    <section class="brand-section reveal">
+      <div class="container">
+        <div class="bs-head">
+          <span class="bs-num">04</span>
+          <span class="bs-tag">Color &amp; Mood</span>
+        </div>
+        <h2 class="bs-h2">브랜드 컬러와 분위기</h2>
+        <p class="bs-desc">강하고 자극적인 색보다 부드럽고 정돈된 컬러를 중심으로 운영하여,<br />교회의 품격과 편안함을 동시에 전달합니다.</p>
+        <div class="color-grid">
+          <div class="color-card reveal">
+            <div class="swatch" style="background:#F2E9D8; color:#8a7a55;">#F2E9D8</div>
+            <h4>Warm Beige</h4>
+            <p>전체 배경의 따뜻한 기본</p>
+          </div>
+          <div class="color-card reveal">
+            <div class="swatch" style="background:#282828; color:#f1f1f1;">#282828</div>
+            <h4>Church Black</h4>
+            <p>로고·제목의 메인 컬러</p>
+          </div>
+          <div class="color-card reveal">
+            <div class="swatch" style="background:#E8B95F; color:#5e451c;">#E8B95F</div>
+            <h4>Soft Gold</h4>
+            <p>예배의 감격과 빛의 포인트</p>
+          </div>
+          <div class="color-card reveal">
+            <div class="swatch" style="background:#326A83; color:#dfeaf0;">#326A83</div>
+            <h4>Glass Blue</h4>
+            <p>스테인드글라스 보조</p>
+          </div>
+          <div class="color-card reveal">
+            <div class="swatch" style="background:#78AA87; color:#f3f8f4;">#78AA87</div>
+            <h4>Glass Green</h4>
+            <p>생동감과 상징성의 보조</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPACE -->
+    <section class="brand-section alt reveal">
+      <div class="container">
+        <div class="bs-head">
+          <span class="bs-num">05</span>
+          <span class="bs-tag">Space</span>
+        </div>
+        <h2 class="bs-h2">공간에서도 느껴지는<br />교회의 정체성</h2>
+        <p class="bs-desc">브랜딩이 잘 정리된 교회는 로고와 주보만 예쁜 것이 아닙니다.<br />성도님들이 실제로 머무는 예배당·로비·복도·안내 공간에서도 같은 분위기와 메시지가 자연스럽게 느껴집니다.</p>
+        <p class="bs-desc">'예배의 감격이 있는 교회'라는 슬로건이 시각적으로도 경험되도록 공간을 정돈합니다.</p>
+
+        <div class="ba-slider" aria-label="브랜딩 적용 전후 비교 슬라이더">
+          <img class="ba-after"  src="/images/case01/a_1.jpg" alt="브랜딩 적용 후 공간" />
+          <img class="ba-before" src="/images/case01/b_1.jpg" alt="브랜딩 적용 전 공간" />
+          <div class="ba-divider">
+            <div class="ba-handle">
+              <svg viewBox="0 0 10 16"><polygon points="10,0 0,8 10,16"/></svg>
+              <svg viewBox="0 0 10 16"><polygon points="0,0 10,8 0,16"/></svg>
+            </div>
+          </div>
+          <span class="ba-tag ba-tag-before">BEFORE</span>
+          <span class="ba-tag ba-tag-after">AFTER</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKLY BULLETIN -->
+    <section class="brand-section reveal">
+      <div class="container">
+        <div class="bs-head">
+          <span class="bs-num">06</span>
+          <span class="bs-tag">Weekly Bulletin</span>
+        </div>
+        <h2 class="bs-h2">매주 가장 자주 만나는<br />교회 주보 디자인</h2>
+        <p class="bs-desc">주보는 단순한 정보 인쇄물이 아니라,<br />성도님들이 가장 자주 접하는 교회의 대표 디자인입니다.</p>
+        <div class="bulletin-grid">
+          <figure class="bulletin-card">
+            <img src="/images/branding/bulletin-01.png" alt="서광주교회 주일예배 주보 (파란 톤) — 복음으로 다시 세워지는 교회" loading="lazy" />
+          </figure>
+          <figure class="bulletin-card">
+            <img src="/images/branding/bulletin-02.png" alt="서광주교회 주일예배 주보 (베이지 톤) — 예배의 감격이 있는 교회" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section class="brand-section alt reveal">
+      <div class="container">
+        <div class="bs-head">
+          <span class="bs-num">07</span>
+          <span class="bs-tag">Applications</span>
+        </div>
+        <h2 class="bs-h2">로고는 일상 속에서도<br />교회를 기억하게 합니다</h2>
+        <p class="bs-desc">티셔츠·머그컵·텀블러·스티커·명찰 같은 응용 디자인은<br />교회의 이미지를 자연스럽게 확장하는 도구가 됩니다.</p>
+        <div class="apps-grid">
+          <figure class="apps-card">
+            <img src="/images/branding/app-01.png" alt="서광주교회 로고 응용 — 티셔츠 (성도와 자녀)" loading="lazy" />
+          </figure>
+          <figure class="apps-card">
+            <img src="/images/branding/app-02.png" alt="서광주교회 로고 응용 — 텀블러" loading="lazy" />
+          </figure>
+          <figure class="apps-card">
+            <img src="/images/branding/app-03.png" alt="서광주교회 로고 응용 — 티셔츠" loading="lazy" />
+          </figure>
+          <figure class="apps-card">
+            <img src="/images/branding/app-04.png" alt="서광주교회 로고 응용 — 머그컵" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPECTED IMPACT -->
+    <section class="impact reveal">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow-row">— EXPECTED IMPACT</div>
+          <h2>브랜딩을 통해<br />기대할 수 있는 변화</h2>
+        </div>
+        <div class="impact-grid">
+          <div class="impact-item reveal">
+            <span class="impact-num">01</span>
+            <h4>교회의 첫인상 개선</h4>
+            <p>처음 방문하는 분들에게 정돈되고 따뜻한 교회 이미지를 전달합니다.</p>
+          </div>
+          <div class="impact-item reveal">
+            <span class="impact-num">02</span>
+            <h4>성도들의 소속감 강화</h4>
+            <p>교회만의 로고와 응용 디자인으로 공동체의 정체성을 함께 공유합니다.</p>
+          </div>
+          <div class="impact-item reveal">
+            <span class="impact-num">03</span>
+            <h4>시각물의 통일감 형성</h4>
+            <p>주보·공간·포스터·굿즈가 하나의 분위기로 연결됩니다.</p>
+          </div>
+          <div class="impact-item reveal">
+            <span class="impact-num">04</span>
+            <h4>친근한 이미지 전달</h4>
+            <p>무겁거나 낡지 않은, 따뜻하고 세련된 교회 이미지를 형성합니다.</p>
+          </div>
+          <div class="impact-item reveal">
+            <span class="impact-num">05</span>
+            <h4>디자인 운영 효율 향상</h4>
+            <p>반복 작업을 일관된 기준 안에서 더 효율적으로 제작합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="packages reveal">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow-row">— PACKAGES</div>
+          <h2>두 가지 방식으로<br />교회 브랜딩을 시작합니다</h2>
+          <p>한 번에 끝내는 단건 패키지, 절기마다 함께 가꾸는 1년 패키지 중 선택하실 수 있습니다.</p>
+        </div>
+        <div class="pkg-grid">
+          <article class="pkg-card reveal">
+            <div class="pkg-head">
+              <div class="pkg-meta">
+                <span class="pkg-tag tag-amber">단건 패키지</span>
+                <span class="pkg-pay">1회 결제</span>
+              </div>
+              <h3 class="pkg-title">TYPE A</h3>
+              <p class="pkg-sub">한 번에 끝내는 우리 교회 브랜드 기본 세트</p>
+            </div>
+            <ul class="pkg-list">
+              <li><span class="ck ck-amber">✓</span><span>우리 교회 전용 로고 디자인 제작</span></li>
+              <li><span class="ck ck-amber">✓</span><span>로고 의미 및 활용 방향이 담긴 브랜드 가이드 제공</span></li>
+              <li><span class="ck ck-amber">✓</span><span>주보 디자인 템플릿 1종 제작</span></li>
+              <li><span class="ck ck-amber">✓</span><span>현수막 디자인 1종 제작</span></li>
+            </ul>
+            <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="pkg-btn pkg-btn-amber nav-link">단건 패키지 상담하기 →</a>
+          </article>
+          <article class="pkg-card featured reveal">
+            <span class="pkg-badge">대표 패키지</span>
+            <div class="pkg-head">
+              <div class="pkg-meta">
+                <span class="pkg-tag tag-navy">1년 패키지</span>
+                <span class="pkg-pay">년 단위</span>
+              </div>
+              <h3 class="pkg-title">TYPE B</h3>
+              <p class="pkg-sub">절기마다 함께 가꾸는 우리 교회 브랜드 운영</p>
+            </div>
+            <ul class="pkg-list">
+              <li><span class="ck ck-navy">✓</span><span>우리 교회 전용 로고 디자인 제작</span></li>
+              <li><span class="ck ck-navy">✓</span><span>로고 의미 및 활용 방향이 담긴 브랜드 가이드 제공</span></li>
+              <li><span class="ck ck-navy">✓</span><span>절기별 현수막 디자인 제공 (부활절·성탄절·추수감사 등)</span></li>
+              <li><span class="ck ck-navy">✓</span><span>주보 디자인 템플릿 제공</span></li>
+              <li><span class="ck ck-navy">✓</span><span>교회 로고를 활용한 응용 디자인 및 굿즈 주문 제작</span></li>
+              <li><span class="ck ck-navy">✓</span><span>무상 수정 2회 포함</span></li>
+            </ul>
+            <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="pkg-btn pkg-btn-navy nav-link">1년 패키지 상담하기 →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-strip">
+      <div class="container">
+        <span class="eyebrow">— LET'S WORK TOGETHER</span>
+        <h2>우리 교회의 <span class="ws">정체성</span>을 함께 정리해 드립니다.</h2>
+        <p>로고 하나부터, 교회 전체의 시각 언어까지.<br />어디서부터 시작해야 할지 함께 고민하겠습니다.</p>
+        <a href="https://zrr.kr/BEsbko" target="_blank" rel="noopener" class="nav-link">무료 상담 신청하기 →</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var activeSlider = null;
+    document.querySelectorAll('.ba-slider').forEach(function (slider) {
+      var before  = slider.querySelector('.ba-before');
+      var divider = slider.querySelector('.ba-divider');
+      if (!before || !divider) return;
+      function setPos(clientX) {
+        var rect = slider.getBoundingClientRect();
+        var pct  = Math.min(Math.max((clientX - rect.left) / rect.width * 100, 0), 100);
+        before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        divider.style.left = pct + '%';
+      }
+      slider.addEventListener('mousedown', function (e) {
+        activeSlider = { setPos: setPos };
+        setPos(e.clientX);
+        e.preventDefault();
+      });
+      slider.addEventListener('touchstart', function (e) {
+        activeSlider = { setPos: setPos };
+        setPos(e.touches[0].clientX);
+      }, { passive: true });
+    });
+    document.addEventListener('mousemove', function (e) { if (activeSlider) activeSlider.setPos(e.clientX); });
+    document.addEventListener('touchmove', function (e) { if (activeSlider) activeSlider.setPos(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('mouseup',  function () { activeSlider = null; });
+    document.addEventListener('touchend', function () { activeSlider = null; });
+  })();
+</script>
+
+<style>
+  /* === 공통 placeholder 이미지 자리 === */
+  .ph-image {
+    background: linear-gradient(135deg, #efe9dc 0%, #e3dac6 100%);
+    border: 1px dashed #c8b894;
+    border-radius: 6px;
+    min-height: 220px;
+    position: relative;
+  }
+  .ph-image::after {
+    content: '이미지';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b09b6a;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+
+  /* === Why Branding === */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .why-card {
+    background: #fff;
+    border: 1px solid #ebe4d3;
+    border-radius: 8px;
+    padding: 20px 20px;
+  }
+  .why-num {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    color: #c19a4a;
+    letter-spacing: 0.05em;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  .why-card h3 {
+    font-size: 19px;
+    margin-bottom: 14px;
+    color: #1e1e1e;
+  }
+  .why-card p {
+    color: #555;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  @media (max-width: 900px) {
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .why-grid { grid-template-columns: 1fr; }
+  }
+
+  /* === Case Intro === */
+  .case-intro {
+    background: #f7f1e3;
+    padding: 96px 0 80px;
+    text-align: center;
+  }
+  .case-intro .eyebrow-row {
+    color: #c19a4a;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .case-intro h2 {
+    font-size: 38px;
+    margin-bottom: 18px;
+    color: #1e1e1e;
+  }
+  .case-lead {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .case-cover {
+    min-height: 360px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .brand-system-figure {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .brand-system-figure img {
+    width: 60%;
+    margin: 0 auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 12px 36px rgba(40, 35, 25, 0.08);
+    display: block;
+  }
+  .brand-system-figure figcaption {
+    margin-top: 14px;
+    color: #b09b6a;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  /* === Brand Section (LOGO / COLOR / SPACE / BULLETIN / APPS) === */
+  .brand-section {
+    padding: 96px 0;
+  }
+  .brand-section.alt {
+    background: #faf6ec;
+  }
+  .bs-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .bs-num {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: #c19a4a;
+    font-weight: 600;
+  }
+  .bs-tag {
+    font-style: italic;
+    color: #c19a4a;
+    letter-spacing: 0.04em;
+  }
+  .bs-h2 {
+    font-size: 34px;
+    margin-bottom: 22px;
+    line-height: 1.3;
+    color: #1e1e1e;
+  }
+  .bs-desc {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 24px;
+  }
+  .bs-quote {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin: 32px 0 14px;
+    color: #1e1e1e;
+  }
+
+  /* Logo Concept */
+  .logo-hero {
+    min-height: 230px;
+    margin: 32px 0;
+    background: #fbf6e8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 24px;
+  }
+  .logo-hero img {
+    max-width: 490px;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Logo System */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 36px;
+  }
+  .logo-card {
+    background: #fff;
+    border: 1px solid #ebe4d3;
+    border-radius: 8px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .logo-card-tag {
+    display: inline-block;
+    background: #f1e7c8;
+    color: #8a6f30;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .logo-thumb {
+    min-height: 220px;
+    flex: 1;
+    margin-bottom: 14px;
+    background: #fbf6e8;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-thumb img {
+    max-width: 100%;
+    max-height: 240px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .logo-card-desc {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  @media (max-width: 960px) {
+    .logo-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .logo-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Color & Mood */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-top: 40px;
+  }
+  .color-card {
+    text-align: left;
+  }
+  .swatch {
+    height: 160px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .color-card h4 {
+    font-size: 17px;
+    color: #1e1e1e;
+    margin-bottom: 6px;
+  }
+  .color-card p {
+    color: #777;
+    font-size: 13.5px;
+  }
+  @media (max-width: 900px) {
+    .color-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Space — BA slider 위 여백 */
+  .ba-slider {
+    margin-top: 36px;
+  }
+
+  /* Bulletin */
+  .bulletin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 36px auto 0;
+    max-width: 820px;
+  }
+  .bulletin-card {
+    margin: 0;
+  }
+  .bulletin-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 10px 28px rgba(40, 35, 25, 0.10);
+    display: block;
+  }
+  @media (max-width: 720px) {
+    .bulletin-grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      gap: 28px;
+    }
+  }
+
+  /* Applications */
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .apps-card {
+    margin: 0;
+  }
+  .apps-card img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(40, 35, 25, 0.08);
+    display: block;
+  }
+  @media (max-width: 960px) {
+    .apps-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .apps-grid { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; }
+  }
+
+  /* === Expected Impact === */
+  .impact {
+    background: #faf6ec;
+    padding: 96px 0;
+  }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 36px;
+    margin-top: 48px;
+  }
+  .impact-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 4px 18px;
+    align-items: start;
+  }
+  .impact-num {
+    grid-row: 1 / 3;
+    font-family: 'Georgia', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #c19a4a;
+    line-height: 1;
+  }
+  .impact-item h4 {
+    font-size: 18px;
+    color: #1e1e1e;
+    margin-bottom: 8px;
+  }
+  .impact-item p {
+    color: #666;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  @media (max-width: 900px) {
+    .impact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* === Packages === */
+  .packages {
+    padding: 96px 0;
+  }
+  .pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+  .pkg-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #ebe4d3;
+    border-radius: 10px;
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pkg-card.featured {
+    background: #1e2a44;
+    color: #f7f1e3;
+    border-color: #1e2a44;
+  }
+  .pkg-badge {
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: #c19a4a;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+  .pkg-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .pkg-tag {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .tag-amber { background: #f1e7c8; color: #8a6f30; }
+  .tag-navy  { background: #364669; color: #f1e7c8; }
+  .pkg-pay {
+    font-size: 12px;
+    opacity: 0.6;
+    letter-spacing: 0.04em;
+  }
+  .pkg-title {
+    font-family: 'Georgia', serif;
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+  .pkg-sub {
+    font-size: 14.5px;
+    opacity: 0.75;
+    margin-bottom: 22px;
+  }
+  .pkg-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    display: grid;
+    gap: 10px;
+  }
+  .pkg-list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 8px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .ck {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .ck-amber { background: #f1e7c8; color: #8a6f30; }
+  .ck-navy  { background: #c19a4a; color: #fff; }
+  .pkg-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+  }
+  .pkg-btn-amber { background: #c19a4a; color: #fff; }
+  .pkg-btn-navy  { background: #c19a4a; color: #fff; }
+  @media (max-width: 900px) {
+    .pkg-grid { grid-template-columns: 1fr; }
+  }
+</style>

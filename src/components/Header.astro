@@ -1,6 +1,6 @@
 ---
 interface Props {
-  activeNav?: 'about' | 'portfolio' | 'paths' | 'process' | 'sns' | 'faq' | null;
+  activeNav?: 'about' | 'portfolio' | 'paths' | 'branding' | 'process' | 'sns' | 'faq' | null;
 }
 
 const { activeNav = null } = Astro.props;
@@ -17,6 +17,7 @@ const isActive = (key: string) => activeNav === key ? 'nav-link nav-active' : 'n
       <li><a href="/index.html#about" class={isActive('about')}>소개</a></li>
       <li><a href="/portfolio_list.html" class={isActive('portfolio')}>포트폴리오</a></li>
       <li><a href="/index.html#paths" class={isActive('paths')}>서비스</a></li>
+      <li><a href="/church-branding.html" class={isActive('branding')}>교회 브랜딩</a></li>
       <li><a href="/index.html#process" class={isActive('process')}>프로세스</a></li>
       <li><a href="/youtube.html" class={isActive('sns')}>SNS</a></li>
       <li><a href="/index.html#faq" class={isActive('faq')}>FAQ</a></li>
