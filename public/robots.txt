@@ -19,4 +19,4 @@ User-agent: Bingbot
 Allow: /
 
 # 사이트맵 위치
-Sitemap: https://convill-homepage-ver2.vercel.app/sitemap.xml
+Sitemap: https://www.xn--9d0bk8u9ljvwbpxvmuh.com/sitemap.xml

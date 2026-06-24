@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://convill-homepage-ver2.vercel.app',
+  site: 'https://www.xn--9d0bk8u9ljvwbpxvmuh.com',
   output: 'static',
   trailingSlash: 'never',
   build: {

@@ -35,7 +35,7 @@ seo:
   keywords: 교회 디자인, 성당 설계, 교회 인테리어, 교회 인테리어 리모델링, 예배당 인테리어, 교회 인테리어 업체, 교회 간접조명,
     성당 인테리어 설계, 컨빌디자인
   coverImage: /images/01_cover.png
-  ogImage: https://convill-homepage-ver2.vercel.app/images/case01/1.jpg
+  ogImage: https://www.xn--9d0bk8u9ljvwbpxvmuh.com/images/case01/1.jpg
 sections:
   - type: heading
     level: h2
