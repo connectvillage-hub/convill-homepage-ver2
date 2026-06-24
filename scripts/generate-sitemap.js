@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const SITE_URL = 'https://convill-homepage-ver2.vercel.app';
+const SITE_URL = 'https://www.xn--9d0bk8u9ljvwbpxvmuh.com';
 const DIST = join(__dirname, '..', 'dist');
 
 const PRIORITY_RULES = [
